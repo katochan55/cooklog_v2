@@ -1,0 +1,19 @@
+<% provide(:title, "ログイン") %>
+<h1>ログイン</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(:session, url: login_path, local: true) do |f| %>
+      <div class = 'form-group'>
+        <%= f.label 'メールアドレス' %>
+        <%= f.email_field :email, class: 'form-control', id: 'user_email' %>
+      </div>
+      <div class = 'form-group'>
+        <%= f.label 'パスワード' %>
+        <%= f.password_field :password, class: 'form-control', id: 'user_password' %>
+      </div>
+      <%= f.submit 'ログイン', class: 'btn btn-primary' %>
+    <% end %>
+    <br>ユーザー登録されていない方は<%= link_to 'こちら', signup_path %><br>
+    パスワードをお忘れの方は<%= link_to 'こちら', '#' %>
+  </div>
+</div>
