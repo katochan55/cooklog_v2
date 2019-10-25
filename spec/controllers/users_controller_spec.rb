@@ -1,26 +1,37 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-
-  describe "GET #new" do
-    it "returns http success" do
+  describe "ユーザー登録ページ" do
+    before do
       get :new
-      expect(response).to have_http_status(:success)
+    end
+
+    it "レスポンスが正常である" do
+      expect(response).to be_successful
+    end
+
+    it "ユーザー登録ページが表示される" do
+      expect(response).to render_template :new
     end
   end
 
-  describe "GET #show" do
-    it "returns http success" do
-      get :show
-      expect(response).to have_http_status(:success)
+  describe "マイ(ユーザー個別)ページ" do
+    let!(:user) { create(:user) }
+
+    before do
+      get :show, params: { id: user.id }
+    end
+
+    it "レスポンスが正常である" do
+      expect(response).to be_successful
+    end
+
+    it "ユーザー登録ページが表示される" do
+      expect(response).to render_template :show
+    end
+
+    it "@userがアサインされる" do
+      expect(assigns(:user)).to eq user
     end
   end
-
-  describe "GET #index" do
-    it "returns http success" do
-      get :index
-      expect(response).to have_http_status(:success)
-    end
-  end
-
 end
