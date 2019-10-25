@@ -1,2 +1,26 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<% provide(:title, "ユーザー登録") %>
+<h1>ユーザー登録</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_with model: @user, local: true do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <div class = 'form-group'>
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control', id: 'user_name' %>
+      </div>
+      <div class = 'form-group'>
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control', id: 'user_email' %>
+      </div>
+      <div class = 'form-group'>
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control', id: 'user_password' %>
+      </div>
+      <div class = 'form-group'>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: 'form-control', id: 'user_password_confirmation' %>
+      </div>
+      <%= f.submit nil, class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
