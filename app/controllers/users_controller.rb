@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  # before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :correct_user,   only: [:edit, :update]
+
   def index
   end
 
@@ -25,10 +28,34 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def update
+    if @user.update_attributes(user_params_update)
+      flash[:success] = "プロフィールが保存されました！"
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+  end
+
   private
 
-  def user_params
-    params.require(:user).permit(:name, :email, :password,
-                                 :password_confirmation)
-  end
+    # ユーザー新規作成時に許可する属性
+    def user_params
+      params.require(:user).permit(:name, :email, :password,
+                                   :password_confirmation)
+    end
+
+    # プロフィール編集時に許可する属性
+    def user_params_update
+      params.require(:user).permit(:name, :email, :introduction, :sex)
+    end
+
+    # 正しいユーザーかどうか確認
+    def correct_user
+      @user = User.find(params[:id])
+      # redirect_to(root_url) unless current_user?(@user)
+    end
 end

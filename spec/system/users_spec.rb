@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :system do
+  let!(:user) { create(:user) }
+
   describe "ユーザー登録ページ" do
     before do
       visit signup_path
@@ -56,6 +58,31 @@ RSpec.describe "Users", type: :system do
     end
   end
 
+  describe "プロフィール編集ページ" do
+    before do
+      visit edit_user_path(user)
+    end
+
+    it "有効なプロフィール更新を行うと、更新成功のフラッシュが表示されること" do
+      fill_in "ユーザー名", with: "Example User"
+      fill_in "メールアドレス", with: "user@example.com"
+      fill_in "自己紹介", with: "初めまして"
+      fill_in "性別", with: "男性"
+      click_button "更新する"
+      expect(page).to have_content "プロフィールが保存されました！"
+    end
+
+    it "無効なプロフィール更新をしようとすると、適切なエラーメッセージが表示されること" do
+      fill_in "ユーザー名", with: ""
+      fill_in "メールアドレス", with: ""
+      click_button "更新する"
+      expect(page).to have_content 'ユーザー名を入力してください'
+      expect(page).to have_content 'メールアドレスを入力してください'
+      expect(page).to have_content 'メールアドレスは不正な値です'
+    end
+  end
+
+
   describe "マイ(ユーザー個別)ページ" do
     let!(:user) { create(:user) }
 
@@ -73,7 +100,6 @@ RSpec.describe "Users", type: :system do
 
     it "ユーザー情報が表示されることを確認" do
       expect(page).to have_content user.name
-      expect(page).to have_content user.email
       expect(page).to have_content user.introduction
       expect(page).to have_content user.sex
     end

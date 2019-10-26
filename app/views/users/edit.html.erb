@@ -27,9 +27,10 @@
     </div>
     <div class = 'form-group'>
       <%= f.label :sex %>
-      <%= select_tag(:select_sex, options_for_select([ ['未選択', 0], ['男性', 1], ['女性', 2] ]) ) %>
+      <%= f.text_field :sex, class: 'form-control', id: 'user_sex' %>
+      <!-- select_tag(:select_sex, options_for_select([ ['未選択', 0], ['男性', 1], ['女性', 2] ]) ) -->
     </div>
-    <%= f.submit "送信する", class: "btn btn-primary" %>
+    <%= f.submit "更新する", class: "btn btn-primary" %>
     <p></p>
     <%= link_to "アカウントを削除する", user_path(@user), method: :delete,
                                 data: { confirm: "本当にこのアカウントを削除してよろしいですか？" } %>
