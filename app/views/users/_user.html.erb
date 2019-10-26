@@ -1,4 +1,6 @@
 <li>
   <%= gravatar_for user, size: 50 %>
   <%= link_to user.name, user %>
+  | <%= link_to "削除", user_path(user), method: :delete,
+                                data: { confirm: "本当に削除しますか？" } %>
 </li>

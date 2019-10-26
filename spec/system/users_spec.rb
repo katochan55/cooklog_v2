@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "Users", type: :system do
   let!(:user) { create(:user) }
+  let!(:admin_user) { create(:user, :admin) }
 
   describe "ユーザー一覧ページ" do
     it "ページネーションが表示されること" do
       create_list(:user, 31)
-      login_for_system(user)
+      login_for_system(admin_user)
       visit users_path
       expect(page).to have_css "div.pagination"
       User.paginate(page: 1).each do |u|
