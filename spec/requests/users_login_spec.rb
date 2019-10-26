@@ -11,6 +11,9 @@ RSpec.describe "ログイン", type: :request do
     follow_redirect!
     expect(response).to render_template('users/show')
     expect(is_logged_in?).to be_truthy
+    delete logout_path
+    expect(is_logged_in?).to_not be_truthy
+    redirect_to root_url
   end
 
   example "無効なユーザーでログイン" do
