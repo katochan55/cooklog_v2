@@ -1,6 +1,15 @@
 <% provide(:title, "マイページ") %>
 <h1>マイページ</h1>
-<%= gravatar_for @user %><br>
-<%= @user.id %>, <%= @user.name %>, <%= @user.email %>, <%= @user.sex %><br>
-<%= @user.introduction %><br>
-<%= @user.created_at %>, <%= @user.updated_at %><br>
+<div class="row">
+  <aside class="col-md-4">
+    <%= gravatar_for @user, size: 100 %>
+  </aside>
+  <div class="col-md-8">
+    <section class="user_name_info">
+      <%= @user.name %>
+    </section>
+    <%= link_to "プロフィールを編集", edit_user_path(@user) %>
+    <%= @user.introduction %>
+    <%= @user.sex %>
+  </div>
+</div>
