@@ -3,6 +3,18 @@ require 'rails_helper'
 RSpec.describe "Users", type: :system do
   let!(:user) { create(:user) }
 
+  describe "ユーザー一覧ページ" do
+    it "ページネーションが表示されること" do
+      create_list(:user, 31)
+      login_for_system(user)
+      visit users_path
+      expect(page).to have_css "div.pagination"
+      User.paginate(page: 1).each do |u|
+        expect(page).to have_link u.name, href: user_path(u)
+      end
+    end
+  end
+
   describe "ユーザー登録ページ" do
     before do
       visit signup_path
