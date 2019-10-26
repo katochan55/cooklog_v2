@@ -33,8 +33,18 @@ RSpec.describe "プロフィール編集", type: :request do
     end
   end
 
-  context "アカウントが違うユーザーの場合" do
+  context "別アカウントのユーザーの場合" do
     it "ホーム画面にリダイレクトすること" do
+      # 編集
+      login_for_request(other_user)
+      get edit_user_path(user)
+      expect(response).to have_http_status "302"
+      expect(response).to redirect_to root_path
+      # 更新
+      patch user_path(user), params: { user: { name: user.name,
+                                              email: user.email } }
+      expect(response).to have_http_status "302"
+      expect(response).to redirect_to root_path
     end
   end
 end
