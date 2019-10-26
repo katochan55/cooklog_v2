@@ -1,8 +1,16 @@
 require "rails_helper"
 
 RSpec.describe "ユーザー登録", type: :request do
-  example "有効なユーザーで登録" do
+  before do
     get signup_path
+  end
+
+  it "正常なレスポンスを返すこと" do
+    expect(response).to be_success
+    expect(response).to have_http_status "200"
+  end
+
+  it "有効なユーザーで登録" do
     expect {
       post users_path, params: { user: { name:  "Example User",
                                          email: "user@example.com",
@@ -15,8 +23,7 @@ RSpec.describe "ユーザー登録", type: :request do
     expect(is_logged_in?).to be_truthy
   end
 
-  example "無効なユーザーで登録" do
-    get signup_path
+  it "無効なユーザーで登録" do
     expect {
       post users_path, params: { user: { name:  "",
                                          email: "user@example.com",
