@@ -24,4 +24,24 @@ RSpec.describe "ログイン", type: :request do
                                        password: user.password } }
     expect(is_logged_in?).to_not be_truthy
   end
+
+  example "「ログインしたままにする」にチェックしてログイン" do
+    post login_path, params: { session: { email: user.email,
+                                    password: user.password,
+                                    remember_me: '1'} }
+    expect(response.cookies['remember_token']).to_not eq nil
+  end
+
+  example "「ログインしたままにする」にチェックせずにログイン" do
+    # クッキーを保存してログイン
+    post login_path, params: { session: { email: user.email,
+                                    password: user.password,
+                                    remember_me: '1'} }
+    delete logout_path
+    # クッキーを保存せずにログイン
+    post login_path, params: { session: { email: user.email,
+                                    password: user.password,
+                                    remember_me: '0'} }
+    expect(response.cookies['remember_token']).to eq nil
+  end
 end
