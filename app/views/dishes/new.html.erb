@@ -1,2 +1,38 @@
 <% provide(:title, "お料理登録") %>
 <h1>お料理登録</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_with model: @dish, local: true do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <div class = 'form-group'>
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control', id: 'dish_name' %>
+      </div>
+      <div class = 'form-group'>
+        <%= f.label :description %>
+        <%= f.text_field :description, size: "60x4", class: 'form-control', id: 'dish_description' %>
+      </div>
+      <div class = 'form-group'>
+        <%= f.label :portion %> [人分]
+        <%= f.text_field :portion, class: 'form-control', id: 'dish_portion' %>
+      </div>
+      <div class = 'form-group'>
+        <%= f.label :tips %>
+        <%= f.text_field :tips, size: "30x4", class: 'form-control', id: 'dish_tips' %>
+      </div>
+      <div class = 'form-group'>
+        <%= f.label :reference %>
+        <%= f.text_field :reference, class: 'form-control', id: 'dish_reference' %>
+      </div>
+      <div class = 'form-group'>
+        <%= f.label :required_time %> [分]
+        <%= f.text_field :reference, class: 'form-control', id: 'dish_required_time' %>
+      </div>
+      <div class = 'form-group'>
+        <%= f.label :popularity %> [1~5]
+        <%= f.text_field :reference, class: 'form-control', id: 'dish_popularity' %>
+      </div>
+      <%= f.submit nil, class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

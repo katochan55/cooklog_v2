@@ -5,6 +5,7 @@ before_action :logged_in_user, only: [:show, :new, :create, :edit, :update, :des
   end
 
   def new
+    @dish = Dish.new
   end
 
   def create

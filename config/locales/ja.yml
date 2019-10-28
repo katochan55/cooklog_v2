@@ -24,7 +24,7 @@ ja:
         id: ID
         name: 料理名
         description: 説明
-        portion: 人分
+        portion: 分量
         tips: コツ・ポイント
         reference: 作り方の参照URL
         cook_times: 作った回数
