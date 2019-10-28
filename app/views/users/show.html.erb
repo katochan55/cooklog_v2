@@ -14,4 +14,13 @@
     <%= @user.introduction %>
     <%= @user.sex %>
   </div>
+  <div class="col-md-8">
+    <% if @user.dishes.any? %>
+      <h3>料理 <%= @user.dishes.count %>件</h3>
+      <ol class="dishes">
+        <%= render @dishes %>
+      </ol>
+      <%= will_paginate @dishes %>
+    <% end %>
+  </div>
 </div>

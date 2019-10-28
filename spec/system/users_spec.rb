@@ -101,6 +101,7 @@ RSpec.describe "Users", type: :system do
   describe "マイ(ユーザー個別)ページ" do
     context "ページレイアウト" do
       before do
+        create_list(:dish, 10, user: user)
         visit user_path(user)
       end
 
@@ -124,6 +125,25 @@ RSpec.describe "Users", type: :system do
 
       it "アカウントの削除リンクが表示されていることを確認" do
         expect(page).to have_link 'アカウントを削除する', href: user_path(user)
+      end
+
+      it "料理の件数が表示されていることを確認" do
+        expect(page).to have_content "料理 #{user.dishes.count}件"
+      end
+
+      it "料理の情報が表示されていることを確認" do
+        Dish.take(5).each do |dish|
+          expect(page).to have_link dish.name
+          expect(page).to have_content dish.description
+          expect(page).to have_content dish.cook_times
+          expect(page).to have_content dish.required_time
+          expect(page).to have_content dish.popularity
+          expect(page).to have_link "作り方", href: dish.reference
+        end
+      end
+
+      it "料理のページネーションが表示されていることを確認" do
+        expect(page).to have_css "div.pagination"
       end
     end
   end

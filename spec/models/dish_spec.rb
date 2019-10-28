@@ -24,10 +24,10 @@ RSpec.describe Dish, type: :model do
       expect(dish.errors[:name]).to include("は30文字以内で入力してください")
     end
 
-    it "説明が50文字以内であること" do
-      dish = build(:dish, description: "あ"*51)
+    it "説明が140文字以内であること" do
+      dish = build(:dish, description: "あ"*141)
       dish.valid?
-      expect(dish.errors[:description]).to include("は50文字以内で入力してください")
+      expect(dish.errors[:description]).to include("は140文字以内で入力してください")
     end
 
     it "コツ・ポイントが50文字以内であること" do
