@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe "ユーザーの削除", type: :request do
   let!(:user) { create(:user) }
   let!(:admin_user) { create(:user, :admin) }
+  let!(:dish) { create(:dish, user: user) }
 
   context "管理者ユーザーの場合" do
     it "ユーザーを削除後、ユーザー一覧ページにリダイレクト" do
@@ -13,6 +14,13 @@ RSpec.describe "ユーザーの削除", type: :request do
       redirect_to users_url
       follow_redirect!
       expect(response).to render_template('users/index')
+    end
+
+    it "ユーザーが削除されたとき、そこに紐づく料理も一緒に削除される" do
+      login_for_request(admin_user)
+      expect {
+        delete user_path(user)
+      }.to change(Dish, :count).by(-1)
     end
   end
 

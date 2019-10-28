@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Dish, type: :model do
-  let(:dish) { create(:dish) }
+  let!(:dish_yesterday) { create(:dish, :yesterday) }
+  let!(:dish_one_week_ago) { create(:dish, :one_week_ago) }
+  let!(:dish_one_month_ago) { create(:dish, :one_month_ago) }
+  let!(:dish) { create(:dish) }
 
   context "バリデーション" do
     it "有効な状態であること" do
@@ -37,6 +40,12 @@ RSpec.describe Dish, type: :model do
       dish = build(:dish, user_id: nil)
       dish.valid?
       expect(dish.errors[:user_id]).to include("を入力してください")
+    end
+  end
+
+  context "並び順" do
+    it "最も最近の投稿が最初の投稿になっていること" do
+      expect(dish).to eq Dish.first
     end
   end
 end
