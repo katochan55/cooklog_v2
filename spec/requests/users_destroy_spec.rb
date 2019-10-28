@@ -1,8 +1,9 @@
 require "rails_helper"
 
 RSpec.describe "ユーザーの削除", type: :request do
-  let!(:user) { create(:user) }
   let!(:admin_user) { create(:user, :admin) }
+  let!(:user) { create(:user) }
+  let!(:other_user) { create(:user) }
   let!(:dish) { create(:dish, user: user) }
 
   context "管理者ユーザーの場合" do
@@ -15,20 +16,22 @@ RSpec.describe "ユーザーの削除", type: :request do
       follow_redirect!
       expect(response).to render_template('users/index')
     end
-
-    it "ユーザーが削除されたとき、そこに紐づく料理も一緒に削除される" do
-      login_for_request(admin_user)
-      expect {
-        delete user_path(user)
-      }.to change(Dish, :count).by(-1)
-    end
   end
 
   context "管理者以外のユーザーの場合" do
-    it "トップページへリダイレクトすること" do
+    it "自分のアカウントを削除できること" do
       login_for_request(user)
       expect {
-        delete user_path(admin_user)
+        delete user_path(user)
+      }.to change(User, :count).by(-1)
+      redirect_to root_url
+      follow_redirect!
+    end
+
+    it "自分以外のユーザーを削除しようとすると、トップページへリダイレクトすること" do
+      login_for_request(user)
+      expect {
+        delete user_path(other_user)
       }.to_not change(User, :count)
       expect(response).to have_http_status "302"
       expect(response).to redirect_to root_path
@@ -42,6 +45,15 @@ RSpec.describe "ユーザーの削除", type: :request do
       }.to_not change(User, :count)
       expect(response).to have_http_status "302"
       expect(response).to redirect_to login_path
+    end
+  end
+
+  context "料理が紐づくユーザーを削除した場合" do
+    it "ユーザーと同時に紐づく料理も削除される" do
+      login_for_request(user)
+      expect {
+        delete user_path(user)
+      }.to change(Dish, :count).by(-1)
     end
   end
 end

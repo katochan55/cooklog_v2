@@ -8,7 +8,9 @@
     <section class="user_name_info">
       <%= @user.name %>
     </section>
-    <%= link_to "プロフィール編集", edit_user_path(@user) %>
+    <%= link_to "プロフィールを編集する", edit_user_path(@user) %>
+    <%= link_to "アカウントを削除する", user_path(@user), method: :delete,
+                                  data: { confirm: "本当に削除しますか？" } %>
     <%= @user.introduction %>
     <%= @user.sex %>
   </div>

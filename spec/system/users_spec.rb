@@ -34,24 +34,6 @@ RSpec.describe "Users", type: :system do
       it "ヘッダーにユーザー登録ページへのリンクがあることを確認" do
         expect(page).to have_link 'ユーザー登録(無料)', href: signup_path
       end
-
-      # it "ユーザー登録フォームのラベルが正しく表示される" do
-      #   expect(page).to have_content 'ユーザー名'
-      #   expect(page).to have_content 'メールアドレス'
-      #   expect(page).to have_content 'パスワード'
-      #   expect(page).to have_content 'パスワード(確認)'
-      # end
-      #
-      # it "ユーザー登録フォームが正しく表示される" do
-      #   expect(page).to have_css 'input#user_name'
-      #   expect(page).to have_css 'input#user_email'
-      #   expect(page).to have_css 'input#user_password'
-      #   expect(page).to have_css 'input#user_password_confirmation'
-      # end
-      #
-      # it "ユーザー登録ボタンが表示される" do
-      #   expect(page).to have_button '登録する'
-      # end
     end
 
     context "ユーザー登録処理" do
@@ -80,7 +62,7 @@ RSpec.describe "Users", type: :system do
     before do
       login_for_system(user)
       visit user_path(user)
-      click_link "プロフィール編集"
+      click_link "プロフィールを編集する"
     end
 
     context "ページレイアウト" do
@@ -134,6 +116,14 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_content user.name
         expect(page).to have_content user.introduction
         expect(page).to have_content user.sex
+      end
+
+      it "プロフィール編集ページへのリンクが表示されていることを確認" do
+        expect(page).to have_link 'プロフィールを編集する', href: edit_user_path(user)
+      end
+
+      it "アカウントの削除リンクが表示されていることを確認" do
+        expect(page).to have_link 'アカウントを削除する', href: user_path(user)
       end
     end
   end
