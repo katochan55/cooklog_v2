@@ -17,6 +17,17 @@ RSpec.describe "StaticPages", type: :system do
     it "ヘッダーに「クックログとは？」ページへのリンクがあることを確認" do
       expect(page).to have_link 'クックログとは？', href: about_path
     end
+
+    # it "料理のぺージネーション、削除ボタンが表示されること" do
+    #   create_list(:user, 31)
+    #   login_for_system(admin_user)
+    #   visit users_path
+    #   expect(page).to have_css "div.pagination"
+    #   User.paginate(page: 1).each do |u|
+    #     expect(page).to have_link u.name, href: user_path(u)
+    #     expect(page).to have_content "削除"
+    #   end
+    # end
   end
 
   describe "ヘルプページ" do

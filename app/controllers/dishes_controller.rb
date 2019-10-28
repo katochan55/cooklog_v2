@@ -2,6 +2,7 @@ class DishesController < ApplicationController
 before_action :logged_in_user, only: [:show, :new, :create, :edit, :update, :destroy]
 
   def show
+    @dish = Dish.find(params[:id])
   end
 
   def new
@@ -12,10 +13,10 @@ before_action :logged_in_user, only: [:show, :new, :create, :edit, :update, :des
     @dish = current_user.dishes.build(dish_params)
     if @dish.save
       flash[:success] = "お料理が登録されました！"
-      redirect_to root_url
+      redirect_to dish_url(@dish)
     else
       @feed_items = []
-      render 'static_pages/home'
+      render 'dishes/new'
     end
   end
 
@@ -31,6 +32,7 @@ before_action :logged_in_user, only: [:show, :new, :create, :edit, :update, :des
   private
 
     def dish_params
-      params.require(:dish).permit(:name, :discription, :portion, :tips, :reference, :required_time, :popularity)
+      params.require(:dish).permit(:name, :discription, :portion, :tips,
+                                   :reference, :required_time, :popularity)
     end
 end
