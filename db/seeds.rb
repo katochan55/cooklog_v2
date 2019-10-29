@@ -1,3 +1,4 @@
+# ユーザー
 User.create!(name:  "山田 太郎",
              email: "sample@example.com",
              password:              "foobar",
@@ -14,6 +15,7 @@ User.create!(name:  "山田 太郎",
                password_confirmation: password)
 end
 
+# 料理
 10.times do |n|
   Dish.create!(name: Faker::Food.dish,
                description: "冬に食べたくなる、身体が温まる料理です",
@@ -25,3 +27,11 @@ end
                popularity: 5,
                user_id: 1)
 end
+
+# リレーションシップ
+users = User.all
+user  = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }

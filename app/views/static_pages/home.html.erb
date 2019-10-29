@@ -8,6 +8,9 @@
   <center>
     <%= link_to "お料理を登録する", record_dish_path %>
   </center>
+  <section class="stats">
+    <%= render 'shared/stats' %>
+  </section>
   <div class="col-md-8">
     <h3>みんなの料理</h3>
     <%= render 'shared/feed' %>
