@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "お料理登録", type: :request do
   let!(:user) { create(:user) }
   let!(:other_user) { create(:user) }
-  let(:picture_path) { File.join(Rails.root, 'spec/fixtures/dish1.jpg') }
+  let(:picture_path) { File.join(Rails.root, 'spec/fixtures/test_dish.jpg') }
   let(:picture) { Rack::Test::UploadedFile.new(picture_path) }
   let!(:dish) { create(:dish, user: user) }
 

@@ -2,7 +2,7 @@
   <%= link_to gravatar_for(dish.user, size: 50), dish.user %>
   <span class="name"><%= link_to dish.name, dish_path(dish) %></span>
   <span class="picture">
-    <%= link_to((image_tag dish.picture.url), dish_path(dish.id)) if dish.picture? %>
+    <%= link_to((image_tag dish.picture.thumb200.url), dish_path(dish.id)) if dish.picture.url.present? %>
   </span>
   <span class="description"><%= dish.description %></span><br>
   <span class="cook_times">作った回数：<%= dish.cook_times %>回　</span>

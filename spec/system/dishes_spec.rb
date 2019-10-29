@@ -33,9 +33,15 @@ RSpec.describe "Dishes", type: :system do
         fill_in "作り方の参照URL", with: "https://cookpad.com/recipe/2798655"
         fill_in "所要時間", with: 30
         fill_in "人気度", with: 5
-        attach_file "dish[picture]", "#{Rails.root}/spec/fixtures/dish1.jpg"
+        attach_file "dish[picture]", "#{Rails.root}/spec/fixtures/test_dish.jpg"
         click_button "登録する"
         expect(page).to have_content "お料理が登録されました！"
+        expect(page).to have_link(href: dish_path(Dish.first))
+      end
+
+      it "画像無しで登録すると、デフォルト画像が割り当てられること" do
+        fill_in "料理名", with: "イカの塩焼き"
+        click_button "登録する"
         expect(page).to have_link(href: dish_path(Dish.first))
       end
 

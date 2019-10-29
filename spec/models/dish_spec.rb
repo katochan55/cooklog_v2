@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Dish, type: :model do
+  include CarrierWave::Test::Matchers
+
   let!(:dish_yesterday) { create(:dish, :yesterday) }
   let!(:dish_one_week_ago) { create(:dish, :one_week_ago) }
   let!(:dish_one_month_ago) { create(:dish, :one_month_ago) }
