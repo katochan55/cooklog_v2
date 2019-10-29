@@ -12,7 +12,7 @@ class Dish < ApplicationRecord
   # アップロードされた画像のサイズを制限する
   def picture_size
     if picture.size > 5.megabytes
-      errors.add(:picture, "5MBより大きい画像はアップロードできません。")
+      errors.add(:picture, "：5MBより大きい画像はアップロードできません。")
     end
   end
 end
