@@ -11,6 +11,9 @@
     <%= link_to "お料理情報を編集する", edit_dish_path(@dish) %>
     <%= link_to "お料理情報を削除する", dish_path(@dish), method: :delete,
                                   data: { confirm: "本当に削除しますか？" } %><br><br>
+    <span class="picture">
+      <%= link_to((image_tag @dish.picture.url), dish_path(@dish.id)) if @dish.picture? %>
+    </span>
     <%= @dish.description %><br>
     分量：<%= @dish.portion %>人分<br>
     コツ・ポイント：<%= @dish.tips %><br>

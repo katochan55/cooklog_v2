@@ -1,6 +1,9 @@
 <li id="dish-<%= dish.id %>">
   <%= link_to gravatar_for(dish.user, size: 50), dish.user %>
   <span class="name"><%= link_to dish.name, dish_path(dish) %></span>
+  <span class="picture">
+    <%= link_to((image_tag dish.picture.url), dish_path(dish.id)) if dish.picture? %>
+  </span>
   <span class="description"><%= dish.description %></span><br>
   <span class="cook_times">作った回数：<%= dish.cook_times %>回　</span>
   <span class="required_time">所要時間：<%= dish.required_time %>分　</span>

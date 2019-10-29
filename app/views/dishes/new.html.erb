@@ -4,6 +4,10 @@
   <div class="col-md-6 col-md-offset-3">
     <%= form_with model: @dish, local: true do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
+      <span class="picture">
+        <%= f.label :picture %>
+        <%= f.file_field :picture, accept: 'image/jpeg,image/png', class: 'form-control', id: 'dish_picture' %>
+      </span>
       <div class = 'form-group'>
         <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control', id: 'dish_name' %>

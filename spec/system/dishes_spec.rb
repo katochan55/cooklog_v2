@@ -18,6 +18,10 @@ RSpec.describe "Dishes", type: :system do
       it "正しいタイトルが表示されることを確認" do
         expect(page).to have_title full_title('お料理登録')
       end
+
+      it "画像アップロード部分が表示されることを確認" do
+        expect(page).to have_css 'input[type=file]'
+      end
     end
 
     context "お料理登録処理" do
@@ -29,8 +33,10 @@ RSpec.describe "Dishes", type: :system do
         fill_in "作り方の参照URL", with: "https://cookpad.com/recipe/2798655"
         fill_in "所要時間", with: 30
         fill_in "人気度", with: 5
+        attach_file "dish[picture]", "#{Rails.root}/spec/fixtures/dish1.jpg"
         click_button "登録する"
         expect(page).to have_content "お料理が登録されました！"
+        expect(page).to have_link(href: dish_path(Dish.first))
       end
 
       it "無効な情報でお料理登録を行うとお料理登録失敗のフラッシュが表示されること" do

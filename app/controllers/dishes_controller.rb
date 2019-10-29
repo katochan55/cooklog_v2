@@ -44,7 +44,7 @@ before_action :correct_user,   only: [:edit, :update, :destroy]
 
     def dish_params
       params.require(:dish).permit(:name, :description, :portion, :tips,
-                                   :reference, :required_time, :popularity)
+                                   :reference, :required_time, :popularity, :picture)
     end
 
     def correct_user

@@ -10,6 +10,7 @@ FactoryBot.define do
     popularity { 5 }
     association :user
     created_at { Time.current }
+    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/dish1.jpg')) }
 
     trait :yesterday do
       created_at { 1.day.ago }
