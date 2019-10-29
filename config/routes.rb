@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   end
   get :record_dish,  to: 'dishes#new'
   resources :dishes, only: [:show, :new, :create, :edit, :update, :destroy]
+  resources :relationships, only: [:create, :destroy]
 end
