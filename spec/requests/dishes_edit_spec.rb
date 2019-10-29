@@ -6,11 +6,10 @@ RSpec.describe "お料理編集", type: :request do
   let!(:dish) { create(:dish, user: user) }
 
   context "認可されたユーザーの場合" do
-    it "レスポンスが正常に表示されること" do # 後でフレンドリーフォワーディングのテストも追加
-      login_for_request(user)
+    it "レスポンスが正常に表示されること(+フレンドリーフォワーディング)" do
       get edit_dish_path(dish)
-      expect(response).to have_http_status "200"
-      expect(response).to render_template('dishes/edit')
+      login_for_request(user)
+      expect(response).to redirect_to edit_dish_url(dish)
       patch dish_path(dish), params: { dish: { name:  "イカの塩焼き",
                                                description: "冬に食べたくなる、身体が温まる料理です",
                                                portion: 1.5,

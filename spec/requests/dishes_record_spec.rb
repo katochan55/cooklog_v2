@@ -7,13 +7,12 @@ RSpec.describe "お料理登録", type: :request do
 
   context "ログインしているユーザーの場合" do
     before do
-      login_for_request(user)
       get record_dish_path
+      login_for_request(user)
     end
 
-    it "レスポンスが正常に表示されること" do
-      expect(response).to have_http_status "200"
-      expect(response).to render_template('dishes/new')
+    it "レスポンスが正常に表示されること(+フレンドリーフォワーディング)" do
+      expect(response).to redirect_to record_dish_url
     end
 
     it "有効なデータを持つ料理が登録できること" do
