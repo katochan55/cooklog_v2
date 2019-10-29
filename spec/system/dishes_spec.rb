@@ -87,53 +87,38 @@ RSpec.describe "Dishes", type: :system do
   #   end
   # end
 
-  # describe "お料理個別ページ" do
-  #   context "ページレイアウト" do
-  #     before do
-  #       create_list(:dish, 10, user: user)
-  #       visit user_path(user)
-  #     end
-  #
-  #     it "「マイページ」の文字列が存在することを確認" do
-  #       expect(page).to have_content 'マイページ'
-  #     end
-  #
-  #     it "正しいタイトルが表示されることを確認" do
-  #       expect(page).to have_title full_title('マイページ')
-  #     end
-  #
-  #     it "ユーザー情報が表示されることを確認" do
-  #       expect(page).to have_content user.name
-  #       expect(page).to have_content user.introduction
-  #       expect(page).to have_content user.sex
-  #     end
-  #
-  #     it "プロフィール編集ページへのリンクが表示されていることを確認" do
-  #       expect(page).to have_link 'プロフィールを編集する', href: edit_user_path(user)
-  #     end
-  #
-  #     it "アカウントの削除リンクが表示されていることを確認" do
-  #       expect(page).to have_link 'アカウントを削除する', href: user_path(user)
-  #     end
-  #
-  #     it "料理の件数が表示されていることを確認" do
-  #       expect(page).to have_content "料理 #{user.dishes.count}件"
-  #     end
-  #
-  #     it "料理の情報が表示されていることを確認" do
-  #       Dish.take(5).each do |dish|
-  #         expect(page).to have_link dish.name
-  #         expect(page).to have_content dish.description
-  #         expect(page).to have_content dish.cook_times
-  #         expect(page).to have_content dish.required_time
-  #         expect(page).to have_content dish.popularity
-  #         expect(page).to have_link "作り方", href: dish.reference
-  #       end
-  #     end
-  #
-  #     it "料理のページネーションが表示されていることを確認" do
-  #       expect(page).to have_css "div.pagination"
-  #     end
-  #   end
-  # end
+  describe "お料理個別ページ" do
+    context "ページレイアウト" do
+      before do
+        login_for_system(user)
+        visit dish_path(dish)
+      end
+
+      it "「お料理情報」の文字列が存在することを確認" do
+        expect(page).to have_content 'お料理情報'
+      end
+
+      it "正しいタイトルが表示されることを確認" do
+        expect(page).to have_title full_title('お料理情報')
+      end
+
+      it "料理情報が表示されることを確認" do
+        expect(page).to have_content dish.name
+        expect(page).to have_content dish.description
+        expect(page).to have_content dish.portion
+        expect(page).to have_content dish.tips
+        expect(page).to have_content dish.reference
+        expect(page).to have_content dish.required_time
+        expect(page).to have_content dish.popularity
+      end
+
+      it "料理の編集リンクが表示されていることを確認" do
+        expect(page).to have_link 'お料理情報を編集する', href: edit_dish_path(dish)
+      end
+
+      it "料理の削除リンクが表示されていることを確認" do
+        expect(page).to have_link 'お料理情報を削除する', href: dish_path(dish)
+      end
+    end
+  end
 end

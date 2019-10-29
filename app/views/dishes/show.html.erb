@@ -1,0 +1,21 @@
+<% provide(:title, "お料理情報") %>
+<h1>お料理情報</h1>
+<div class="row">
+  <aside class="col-md-4">
+    <%= gravatar_for @dish.user, size: 100 %>
+  </aside>
+  <div class="col-md-8">
+    <section class="dish_name_info">
+      <%= @dish.name %>
+    </section>
+    <%= link_to "お料理情報を編集する", edit_dish_path(@dish) %>
+    <%= link_to "お料理情報を削除する", dish_path(@dish), method: :delete,
+                                  data: { confirm: "本当に削除しますか？" } %><br><br>
+    <%= @dish.description %><br>
+    分量：<%= @dish.portion %>人分<br>
+    コツ・ポイント：<%= @dish.tips %><br>
+    参照URL：<%= @dish.reference %><br>
+    所要時間：<%= @dish.required_time %><br>
+    人気度：<%= @dish.popularity %>
+  </div>
+</div>
