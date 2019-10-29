@@ -1,8 +1,0 @@
-<li id="dish-<%= dish.id %>">
-  <%= link_to gravatar_for(dish.user, size: 50), dish.user %>
-  <span class="user"><%= link_to dish.user.name, dish.user %></span>
-  <span class="content"><%= dish.content %></span>
-  <span class="timestamp">
-    Posted <%= time_ago_in_words(dish.created_at) %> ago.
-  </span>
-</li>

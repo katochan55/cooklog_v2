@@ -47,45 +47,47 @@ RSpec.describe "Dishes", type: :system do
     end
   end
 
-  # describe "お料理編集ページ" do
-  #   before do
-  #     login_for_system(user)
-  #     visit user_path(user)
-  #     click_link "プロフィールを編集する"
-  #   end
-  #
-  #   context "ページレイアウト" do
-  #     it "「プロフィール編集」の文字列が存在することを確認" do
-  #       expect(page).to have_content 'プロフィール編集'
-  #     end
-  #
-  #     it "正しいタイトルが表示されることを確認" do
-  #       expect(page).to have_title full_title('プロフィール編集')
-  #     end
-  #   end
-  #
-  #   context "プロフィール更新処理" do
-  #     it "有効なプロフィール更新" do
-  #       fill_in "ユーザー名", with: "Example User"
-  #       fill_in "メールアドレス", with: "user@example.com"
-  #       fill_in "自己紹介", with: "初めまして"
-  #       fill_in "性別", with: "男性"
-  #       click_button "更新する"
-  #       expect(page).to have_content "プロフィールが保存されました！"
-  #       expect(user.reload.email).to eq "user@example.com"
-  #     end
-  #
-  #     it "無効なプロフィール更新" do
-  #       fill_in "ユーザー名", with: ""
-  #       fill_in "メールアドレス", with: ""
-  #       click_button "更新する"
-  #       expect(page).to have_content 'ユーザー名を入力してください'
-  #       expect(page).to have_content 'メールアドレスを入力してください'
-  #       expect(page).to have_content 'メールアドレスは不正な値です'
-  #       expect(user.reload.email).to_not eq ""
-  #     end
-  #   end
-  # end
+  describe "お料理編集ページ" do
+    before do
+      login_for_system(user)
+      visit dish_path(dish)
+      click_link "お料理情報を編集する"
+    end
+
+    context "ページレイアウト" do
+      it "正しいタイトルが表示されることを確認" do
+        expect(page).to have_title full_title('料理情報の編集')
+      end
+    end
+
+    context "料理情報更新処理" do
+      it "有効な更新" do
+        fill_in "料理名", with: "編集：イカの塩焼き"
+        fill_in "説明", with: "編集：冬に食べたくなる、身体が温まる料理です"
+        fill_in "分量", with: 3
+        fill_in "コツ・ポイント", with: "編集：ピリッと辛めに味付けするのがオススメ"
+        fill_in "作り方の参照URL", with: "henshu-https://cookpad.com/recipe/2798655"
+        fill_in "所要時間", with: 60
+        fill_in "人気度", with: 1
+        click_button "更新する"
+        expect(page).to have_content "お料理情報が更新されました！"
+        expect(dish.reload.name).to eq "編集：イカの塩焼き"
+        expect(dish.reload.description).to eq "編集：冬に食べたくなる、身体が温まる料理です"
+        expect(dish.reload.portion).to eq 3
+        expect(dish.reload.tips).to eq "編集：ピリッと辛めに味付けするのがオススメ"
+        expect(dish.reload.reference).to eq "henshu-https://cookpad.com/recipe/2798655"
+        expect(dish.reload.required_time).to eq 60
+        expect(dish.reload.popularity).to eq 1
+      end
+
+      it "無効な更新" do
+        fill_in "料理名", with: ""
+        click_button "更新する"
+        expect(page).to have_content '料理名を入力してください'
+        expect(dish.reload.name).to_not eq ""
+      end
+    end
+  end
 
   describe "お料理個別ページ" do
     context "ページレイアウト" do

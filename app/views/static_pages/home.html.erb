@@ -2,10 +2,14 @@
   <h1>クックログへようこそ！</h1>
   <h2>あなたのお料理(クック)ログ、作りませんか？</h2>
   <p>今日のレシピ、もう迷わない！</p>
-  <%= link_to "お料理を登録する", record_dish_path %>
 </center>
 
-<div class="col-md-8">
-  <h3>みんなの料理</h3>
-  <%= render 'shared/feed' %>
-</div>
+<% if logged_in? %>
+  <center>
+    <%= link_to "お料理を登録する", record_dish_path %>
+  </center>
+  <div class="col-md-8">
+    <h3>みんなの料理</h3>
+    <%= render 'shared/feed' %>
+  </div>
+<% end %>

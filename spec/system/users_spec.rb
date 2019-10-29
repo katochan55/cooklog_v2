@@ -77,13 +77,16 @@ RSpec.describe "Users", type: :system do
 
     context "プロフィール更新処理" do
       it "有効なプロフィール更新" do
-        fill_in "ユーザー名", with: "Example User"
-        fill_in "メールアドレス", with: "user@example.com"
-        fill_in "自己紹介", with: "初めまして"
-        fill_in "性別", with: "男性"
+        fill_in "ユーザー名", with: "Edit Example User"
+        fill_in "メールアドレス", with: "edit-user@example.com"
+        fill_in "自己紹介", with: "編集：初めまして"
+        fill_in "性別", with: "編集：男性"
         click_button "更新する"
-        expect(page).to have_content "プロフィールが保存されました！"
-        expect(user.reload.email).to eq "user@example.com"
+        expect(page).to have_content "プロフィールが更新されました！"
+        expect(user.reload.name).to eq "Edit Example User"
+        expect(user.reload.email).to eq "edit-user@example.com"
+        expect(user.reload.introduction).to eq "編集：初めまして"
+        expect(user.reload.sex).to eq "編集：男性"
       end
 
       it "無効なプロフィール更新" do

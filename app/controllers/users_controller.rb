@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(user_params_update)
-      flash[:success] = "プロフィールが保存されました！"
+      flash[:success] = "プロフィールが更新されました！"
       redirect_to @user
     else
       render 'edit'
