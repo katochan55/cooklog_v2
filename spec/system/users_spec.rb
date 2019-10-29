@@ -149,5 +149,17 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_css "div.pagination"
       end
     end
+
+    context "料理の削除処理", js: true do
+      let!(:dish) { create(:dish, user: user) }
+
+      it "削除成功のフラッシュが表示されることを確認" do
+        login_for_system(user)
+        visit user_path(user)
+        click_on '削除する'
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content 'お料理が削除されました'
+      end
+    end
   end
 end

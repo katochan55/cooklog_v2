@@ -2,32 +2,48 @@ require 'rails_helper'
 
 RSpec.describe "StaticPages", type: :system do
   describe "トップページ" do
-    before do
-      visit root_path
+    context "ヘッダー" do
+      before do
+        visit root_path
+      end
+
+      it "クックログの文字列が存在することを確認" do
+        expect(page).to have_content 'クックログ'
+      end
+
+      it "正しいタイトルが表示されることを確認" do
+        expect(page).to have_title full_title
+      end
+
+      it "ヘッダーに「クックログとは？」ページへのリンクがあることを確認" do
+        expect(page).to have_link 'クックログとは？', href: about_path
+      end
     end
 
-    it "クックログの文字列が存在することを確認" do
-      expect(page).to have_content 'クックログ'
-    end
+    context "料理フィード", js: true do
+      let!(:user) { create(:user) }
+      let!(:dish) { create(:dish, user: user) }
 
-    it "正しいタイトルが表示されることを確認" do
-      expect(page).to have_title full_title
-    end
+      before do
+        login_for_system(user)
+      end
 
-    it "ヘッダーに「クックログとは？」ページへのリンクがあることを確認" do
-      expect(page).to have_link 'クックログとは？', href: about_path
-    end
+      it "料理のぺージネーションが表示されること" do
+        create_list(:dish, 6, user: user)
+        visit root_path
+        expect(page).to have_css "div.pagination"
+        Dish.take(5).each do |d|
+          expect(page).to have_link d.name, href: dish_path(d)
+        end
+      end
 
-    # it "料理のぺージネーション、削除ボタンが表示されること" do
-    #   create_list(:user, 31)
-    #   login_for_system(admin_user)
-    #   visit users_path
-    #   expect(page).to have_css "div.pagination"
-    #   User.paginate(page: 1).each do |u|
-    #     expect(page).to have_link u.name, href: user_path(u)
-    #     expect(page).to have_content "削除"
-    #   end
-    # end
+      it "料理を削除後、削除成功のフラッシュが表示されること" do
+        visit root_path
+        click_on '削除する'
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content 'お料理が削除されました'
+      end
+    end
   end
 
   describe "ヘルプページ" do

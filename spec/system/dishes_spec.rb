@@ -60,7 +60,7 @@ RSpec.describe "Dishes", type: :system do
       end
     end
 
-    context "料理情報更新処理" do
+    context "料理の更新処理" do
       it "有効な更新" do
         fill_in "料理名", with: "編集：イカの塩焼き"
         fill_in "説明", with: "編集：冬に食べたくなる、身体が温まる料理です"
@@ -87,15 +87,23 @@ RSpec.describe "Dishes", type: :system do
         expect(dish.reload.name).to_not eq ""
       end
     end
+
+    context "料理の削除処理", js: true do
+      it "削除成功のフラッシュが表示されることを確認" do
+        click_on '料理を削除する'
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content 'お料理が削除されました'
+      end
+    end
   end
 
   describe "お料理個別ページ" do
-    context "ページレイアウト" do
-      before do
-        login_for_system(user)
-        visit dish_path(dish)
-      end
+    before do
+      login_for_system(user)
+      visit dish_path(dish)
+    end
 
+    context "ページレイアウト" do
       it "「お料理情報」の文字列が存在することを確認" do
         expect(page).to have_content 'お料理情報'
       end
@@ -117,9 +125,13 @@ RSpec.describe "Dishes", type: :system do
       it "料理の編集リンクが表示されていることを確認" do
         expect(page).to have_link 'お料理情報を編集する', href: edit_dish_path(dish)
       end
+    end
 
-      it "料理の削除リンクが表示されていることを確認" do
-        expect(page).to have_link 'お料理情報を削除する', href: dish_path(dish)
+    context "料理の削除処理", js: true do
+      it "削除成功のフラッシュが表示されることを確認" do
+        click_on 'お料理情報を削除する'
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content 'お料理が削除されました'
       end
     end
   end
