@@ -8,7 +8,6 @@ RSpec.describe Dish, type: :model do
 
   context "バリデーション" do
     it "有効な状態であること" do
-      puts dish.name
       expect(dish).to be_valid
     end
 

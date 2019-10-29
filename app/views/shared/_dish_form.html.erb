@@ -1,0 +1,45 @@
+<%= form_with model: @dish, local: true do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <span class="picture">
+    <%= f.label :picture %>
+    <%= f.file_field :picture, accept: 'image/jpeg,image/png', class: 'form-control', id: 'dish_picture' %>
+  </span>
+  <div class = 'form-group'>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control', id: 'dish_name' %>
+  </div>
+  <div class = 'form-group'>
+    <%= f.label :description %>
+    <%= f.text_field :description, size: "60x4", class: 'form-control', id: 'dish_description' %>
+  </div>
+  <div class = 'form-group'>
+    <%= f.label :portion %> [人分]
+    <%= f.text_field :portion, class: 'form-control', id: 'dish_portion' %>
+  </div>
+  <div class = 'form-group'>
+    <%= f.label :tips %>
+    <%= f.text_field :tips, size: "30x4", class: 'form-control', id: 'dish_tips' %>
+  </div>
+  <div class = 'form-group'>
+    <%= f.label :reference %>
+    <%= f.text_field :reference, class: 'form-control', id: 'dish_reference' %>
+  </div>
+  <div class = 'form-group'>
+    <%= f.label :required_time %> [分]
+    <%= f.text_field :required_time, class: 'form-control', id: 'dish_required_time' %>
+  </div>
+  <div class = 'form-group'>
+    <%= f.label :popularity %> [1~5]
+    <%= f.text_field :popularity, class: 'form-control', id: 'dish_popularity' %>
+  </div>
+  <%= f.submit nil, class: 'btn btn-primary' %>
+<% end %>
+
+<script type="text/javascript">
+  $('#dish_picture').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('アップロードできる写真の最大サイズは5MBです。5MB以下の画像を選択してください');
+    }
+  });
+</script>
