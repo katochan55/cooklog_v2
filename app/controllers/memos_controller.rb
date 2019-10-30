@@ -17,6 +17,14 @@ class MemosController < ApplicationController
   end
 
   def destroy
-    # 料理の投稿者のみ、自由にコメントの削除ができるようにする
+    @memo = Memo.find(params[:id])
+    @dish = Dish.find(@memo.dish_id)
+    if current_user.id == @memo.user_id
+      @memo.destroy
+      flash[:success] = "メモを削除しました"
+      redirect_to dish_url(@dish)
+    else
+      redirect_to dish_url(@dish)
+    end
   end
 end

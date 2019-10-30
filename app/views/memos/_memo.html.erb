@@ -4,5 +4,9 @@
     <%= link_to gravatar_for(memo_user, size: 30), memo_user %>
     <span class="user"><%= link_to memo_user.name, memo_user %></span>
     <%= memo.content %>
+    <% if current_user.id == memo.user_id %>
+      <%= link_to "削除", memo_path(memo), method: :delete,
+                                    data: { confirm: "本当に削除しますか？" } %>
+    <% end %>
   </div>
 </li>
