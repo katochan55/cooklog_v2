@@ -12,6 +12,8 @@ module CooklogV2
     config.load_defaults 5.2
 
     config.generators do |g|
+      g.javascripts false
+      g.stylesheets false
       g.test_framework :rspec,
         controller_specs: false,
         view_specs: false,

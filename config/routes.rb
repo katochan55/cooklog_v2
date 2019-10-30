@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   get :record_dish,  to: 'dishes#new'
   resources :dishes, only: [:show, :new, :create, :edit, :update, :destroy]
   resources :relationships, only: [:create, :destroy]
+  post   "favorites/:dish_id/create"  => "favorites#create"
+  delete "favorites/:dish_id/destroy" => "favorites#destroy"
 end
