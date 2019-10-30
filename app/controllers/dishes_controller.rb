@@ -1,6 +1,6 @@
 class DishesController < ApplicationController
-before_action :logged_in_user, only: [:show, :new, :create, :edit, :update, :destroy]
-before_action :correct_user,   only: [:edit, :update, :destroy]
+  before_action :logged_in_user, only: [:show, :new, :create, :edit, :update, :destroy]
+  before_action :correct_user,   only: [:edit, :update, :destroy]
 
   def show
     @dish = Dish.find(params[:id])

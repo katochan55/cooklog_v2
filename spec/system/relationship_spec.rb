@@ -73,7 +73,7 @@ RSpec.describe "Sessions", type: :system do
 
       it "フォロワーが表示されていること" do
         within find('.users') do
-          expect(page).to have_css 'li',count: user.followers.count
+          expect(page).to have_css 'li', count: user.followers.count
           user.followers.each do |u|
             expect(page).to have_link u.name, href: user_path(u)
           end

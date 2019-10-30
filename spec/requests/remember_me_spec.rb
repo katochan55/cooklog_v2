@@ -25,8 +25,8 @@ RSpec.describe "永続セッション機能", type: :request do
       delete logout_path
       # クッキーを保存せずにログイン
       post login_path, params: { session: { email: user.email,
-                                      password: user.password,
-                                      remember_me: '0'} }
+                                            password: user.password,
+                                            remember_me: '0' } }
       expect(response.cookies['remember_token']).to eq nil
     end
   end
