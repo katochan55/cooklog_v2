@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "Users", type: :system do
   let!(:user) { create(:user) }
   let!(:admin_user) { create(:user, :admin) }
+  let!(:other_user) { create(:user) }
 
   describe "ユーザー一覧ページ" do
     it "ぺージネーション、削除ボタンが表示されること" do
@@ -159,6 +160,18 @@ RSpec.describe "Users", type: :system do
         click_on '削除する'
         page.driver.browser.switch_to.alert.accept
         expect(page).to have_content 'お料理が削除されました'
+      end
+    end
+
+    context "ユーザーのフォロー/アンフォロー処理", js: true do
+      it "ユーザーのフォロー/アンフォローができること" do
+        login_for_system(user)
+        visit user_path(other_user)
+        expect(page).to have_button 'フォローする'
+        click_button 'フォローする'
+        expect(page).to have_button 'フォロー中'
+        click_button 'フォロー中'
+        expect(page).to have_button 'フォローする'
       end
     end
   end
