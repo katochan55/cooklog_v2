@@ -9,6 +9,11 @@ class Dish < ApplicationRecord
   validates :tips, length: { maximum: 50 }
   validate  :picture_size
 
+  # 引数のdish_idを持つメモを集めてくる
+  def feed_memo(dish_id)
+    Memo.where("dish_id = ?", dish_id)
+  end
+
   private
   # アップロードされた画像のサイズを制限する
   def picture_size
