@@ -51,9 +51,12 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
-  # フィード一覧を取得
+  # ユーザーのステータスフィードを返す
   def feed
-    Dish.where("user_id = ?", id)
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE follower_id = :user_id"
+    Dish.where("user_id IN (#{following_ids})
+                     OR user_id = :user_id", user_id: id)
   end
 
   # ユーザーをフォローする
