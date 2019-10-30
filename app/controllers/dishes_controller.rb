@@ -4,6 +4,7 @@ class DishesController < ApplicationController
 
   def show
     @dish = Dish.find(params[:id])
+    @memo = Memo.new
   end
 
   def new
@@ -12,6 +13,7 @@ class DishesController < ApplicationController
 
   def create
     @dish = current_user.dishes.build(dish_params)
+    @memo = Memo.new
     if @dish.save
       flash[:success] = "お料理が登録されました！"
       redirect_to dish_url(@dish)

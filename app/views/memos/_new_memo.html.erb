@@ -1,0 +1,12 @@
+<%= form_for(@memo) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= hidden_field_tag :dish_id, @dish.id %>
+  <div class="row">
+    <div class="field">
+      <%= f.label :content %>（ <%= "#{@dish.memos.count}" %> ）
+      <%= f.text_area :content, placeholder: "メモを追加..." %>
+    </div>
+  <div class="col-md-3">
+    <%= f.submit "メモを投稿", class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,8 @@
+<li id="memo-<%= memo.id %>">
+  <div>
+    <%  memo_user = User.find(memo.user_id) %>
+    <%= link_to gravatar_for(memo_user, size: 30), memo_user %>
+    <span class="user"><%= link_to memo_user.name, memo_user %></span>
+    <%= memo.content %>
+  </div>
+</li>
