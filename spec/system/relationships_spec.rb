@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Sessions", type: :system do
+RSpec.describe "Relationships", type: :system do
   let!(:user) { create(:user) }
   let!(:user2) { create(:user) }
   let!(:user3) { create(:user) }
@@ -36,7 +36,7 @@ RSpec.describe "Sessions", type: :system do
 
       it "フォロー中のユーザーが表示されていること" do
         within find('.users') do
-          expect(page).to have_css 'li',count: user.following.count
+          expect(page).to have_css 'li', count: user.following.count
           user.following.each do |u|
             expect(page).to have_link u.name, href: user_path(u)
           end

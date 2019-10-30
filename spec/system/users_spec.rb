@@ -103,7 +103,7 @@ RSpec.describe "Users", type: :system do
     end
   end
 
-  describe "マイ(ユーザー個別)ページ" do
+  describe "マイ(ユーザー詳細)ページ" do
     context "ページレイアウト" do
       before do
         create_list(:dish, 10, user: user)

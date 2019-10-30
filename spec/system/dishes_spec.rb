@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "Dishes", type: :system do
   let!(:user) { create(:user) }
+  let!(:other_user) { create(:user) }
   let!(:dish) { create(:dish, user: user) }
+  let!(:memo) { create(:memo, dish: dish, user_id: user.id) }
 
   describe "お料理登録ページ" do
     before do
@@ -11,15 +13,15 @@ RSpec.describe "Dishes", type: :system do
     end
 
     context "ページレイアウト" do
-      it "「お料理登録」の文字列が存在することを確認" do
+      it "「お料理登録」の文字列が存在すること" do
         expect(page).to have_content 'お料理登録'
       end
 
-      it "正しいタイトルが表示されることを確認" do
+      it "正しいタイトルが表示されること" do
         expect(page).to have_title full_title('お料理登録')
       end
 
-      it "画像アップロード部分が表示されることを確認" do
+      it "画像アップロード部分が表示されること" do
         expect(page).to have_css 'input[type=file]'
       end
     end
@@ -67,7 +69,7 @@ RSpec.describe "Dishes", type: :system do
     end
 
     context "ページレイアウト" do
-      it "正しいタイトルが表示されることを確認" do
+      it "正しいタイトルが表示されること" do
         expect(page).to have_title full_title('料理情報の編集')
       end
     end
@@ -106,7 +108,7 @@ RSpec.describe "Dishes", type: :system do
     end
 
     context "料理の削除処理", js: true do
-      it "削除成功のフラッシュが表示されることを確認" do
+      it "削除成功のフラッシュが表示されること" do
         click_on '料理を削除する'
         page.driver.browser.switch_to.alert.accept
         expect(page).to have_content 'お料理が削除されました'
@@ -114,22 +116,22 @@ RSpec.describe "Dishes", type: :system do
     end
   end
 
-  describe "お料理個別ページ" do
-    before do
-      login_for_system(user)
-      visit dish_path(dish)
-    end
-
+  describe "お料理詳細ページ" do
     context "ページレイアウト" do
-      it "「お料理情報」の文字列が存在することを確認" do
+      before do
+        login_for_system(user)
+        visit dish_path(dish)
+      end
+
+      it "「お料理情報」の文字列が存在すること" do
         expect(page).to have_content 'お料理情報'
       end
 
-      it "正しいタイトルが表示されることを確認" do
+      it "正しいタイトルが表示されること" do
         expect(page).to have_title full_title('お料理情報')
       end
 
-      it "料理情報が表示されることを確認" do
+      it "料理情報が表示されること" do
         expect(page).to have_content dish.name
         expect(page).to have_content dish.description
         expect(page).to have_content dish.portion
@@ -139,13 +141,42 @@ RSpec.describe "Dishes", type: :system do
         expect(page).to have_content dish.popularity
       end
 
-      it "料理の編集リンクが表示されていることを確認" do
+      it "料理の編集リンクが表示されていること" do
         expect(page).to have_link 'お料理情報を編集する', href: edit_dish_path(dish)
       end
     end
 
-    context "料理の削除処理", js: true do
-      it "削除成功のフラッシュが表示されることを確認" do
+    context "メモの登録＆削除" do
+      it "自分の料理に対するメモの登録＆削除が正常に完了すること" do
+        login_for_system(user)
+        visit dish_path(dish)
+        fill_in "メモ", with: "今日の味付けは大成功"
+        click_button "メモを投稿"
+        within find("#memo-#{Memo.last.id}") do
+          expect(page).to have_selector 'span', text: user.name
+          expect(page).to have_selector 'span', text: '今日の味付けは大成功'
+        end
+        expect(page).to have_content "メモを追加しました！"
+        click_link "削除", href: memo_path(Memo.last)
+        expect(page).to_not have_selector 'span', text: '今日の味付けは大成功'
+        expect(page).to have_content "メモを削除しました"
+      end
+
+      it "別ユーザーの料理のコメントには削除リンクが無いこと" do
+        login_for_system(other_user)
+        visit dish_path(dish)
+        within find("#memo-#{memo.id}") do
+          expect(page).to have_selector 'span', text: user.name
+          expect(page).to have_selector 'span', text: memo.content
+          expect(page).to_not have_link '削除', href: dish_path(dish)
+        end
+      end
+    end
+
+    context "料理の削除", js: true do
+      it "削除成功のフラッシュが表示されること" do
+        login_for_system(user)
+        visit dish_path(dish)
         click_on 'お料理情報を削除する'
         page.driver.browser.switch_to.alert.accept
         expect(page).to have_content 'お料理が削除されました'
