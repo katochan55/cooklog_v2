@@ -9,7 +9,7 @@ RSpec.describe "永続セッション機能", type: :request do
     end
 
     it "remember_tokenが空でないことを確認" do
-      expect(response.cookies['remember_token']).to_not eq nil
+      expect(response.cookies['remember_token']).not_to eq nil
     end
 
     it "セッションがnilのときでもcurrent_userが正しいユーザーを指すことを確認" do

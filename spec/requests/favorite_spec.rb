@@ -40,14 +40,14 @@ RSpec.describe "お気に入り登録機能", type: :request do
     it "createアクションは実行できず、ログインページへリダイレクトすること" do
       expect {
         post "/favorites/#{dish.id}/create"
-      }.to_not change(Favorite, :count)
+      }.not_to change(Favorite, :count)
       expect(response).to redirect_to login_path
     end
 
     it "destroyアクションは実行できず、ログインページへリダイレクトすること" do
       expect {
         delete "/favorites/#{dish.id}/destroy"
-      }.to_not change(Favorite, :count)
+      }.not_to change(Favorite, :count)
       expect(response).to redirect_to login_path
     end
   end

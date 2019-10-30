@@ -98,7 +98,7 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_content 'ユーザー名を入力してください'
         expect(page).to have_content 'メールアドレスを入力してください'
         expect(page).to have_content 'メールアドレスは不正な値です'
-        expect(user.reload.email).to_not eq ""
+        expect(user.reload.email).not_to eq ""
       end
     end
   end

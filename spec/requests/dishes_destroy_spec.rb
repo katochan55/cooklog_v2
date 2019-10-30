@@ -22,7 +22,7 @@ RSpec.describe "料理の削除", type: :request do
       login_for_request(other_user)
       expect {
         delete dish_path(dish)
-      }.to_not change(Dish, :count)
+      }.not_to change(Dish, :count)
       expect(response).to have_http_status "302"
       expect(response).to redirect_to root_path
     end
@@ -32,7 +32,7 @@ RSpec.describe "料理の削除", type: :request do
     it "ログインページへリダイレクトすること" do
       expect {
         delete dish_path(dish)
-      }.to_not change(Dish, :count)
+      }.not_to change(Dish, :count)
       expect(response).to have_http_status "302"
       expect(response).to redirect_to login_path
     end

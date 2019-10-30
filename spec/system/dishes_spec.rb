@@ -103,7 +103,7 @@ RSpec.describe "Dishes", type: :system do
         fill_in "料理名", with: ""
         click_button "更新する"
         expect(page).to have_content '料理名を入力してください'
-        expect(dish.reload.name).to_not eq ""
+        expect(dish.reload.name).not_to eq ""
       end
     end
 
@@ -158,7 +158,7 @@ RSpec.describe "Dishes", type: :system do
         end
         expect(page).to have_content "メモを追加しました！"
         click_link "削除", href: memo_path(Memo.last)
-        expect(page).to_not have_selector 'span', text: '今日の味付けは大成功'
+        expect(page).not_to have_selector 'span', text: '今日の味付けは大成功'
         expect(page).to have_content "メモを削除しました"
       end
 
@@ -168,7 +168,7 @@ RSpec.describe "Dishes", type: :system do
         within find("#memo-#{memo.id}") do
           expect(page).to have_selector 'span', text: user.name
           expect(page).to have_selector 'span', text: memo.content
-          expect(page).to_not have_link '削除', href: dish_path(dish)
+          expect(page).not_to have_link '削除', href: dish_path(dish)
         end
       end
     end

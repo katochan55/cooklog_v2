@@ -9,11 +9,11 @@ RSpec.describe Relationship, type: :model do
 
   it "follower_idがnilの場合、関係性が無効であること" do
     relationship.follower_id = nil
-    expect(relationship).to_not be_valid
+    expect(relationship).not_to be_valid
   end
 
   it "followed_idがnilの場合、関係性が無効であること" do
     relationship.followed_id = nil
-    expect(relationship).to_not be_valid
+    expect(relationship).not_to be_valid
   end
 end

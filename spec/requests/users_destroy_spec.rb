@@ -32,7 +32,7 @@ RSpec.describe "ユーザーの削除", type: :request do
       login_for_request(user)
       expect {
         delete user_path(other_user)
-      }.to_not change(User, :count)
+      }.not_to change(User, :count)
       expect(response).to have_http_status "302"
       expect(response).to redirect_to root_path
     end
@@ -42,7 +42,7 @@ RSpec.describe "ユーザーの削除", type: :request do
     it "ログインページへリダイレクトすること" do
       expect {
         delete user_path(user)
-      }.to_not change(User, :count)
+      }.not_to change(User, :count)
       expect(response).to have_http_status "302"
       expect(response).to redirect_to login_path
     end

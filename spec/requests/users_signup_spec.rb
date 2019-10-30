@@ -29,7 +29,7 @@ RSpec.describe "ユーザー登録", type: :request do
                                          email: "user@example.com",
                                          password:              "password",
                                          password_confirmation: "pass" } }
-    }.to_not change(User, :count)
-    expect(is_logged_in?).to_not be_truthy
+    }.not_to change(User, :count)
+    expect(is_logged_in?).not_to be_truthy
   end
 end

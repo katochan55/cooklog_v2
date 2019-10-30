@@ -44,7 +44,7 @@ RSpec.describe "お料理登録", type: :request do
                                            cook_times: 1,
                                            required_time: 30,
                                            popularity: 5 } }
-      }.to_not change(Dish, :count)
+      }.not_to change(Dish, :count)
       expect(response).to render_template('dishes/new')
     end
   end

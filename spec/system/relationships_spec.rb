@@ -97,7 +97,7 @@ RSpec.describe "Relationships", type: :system do
     end
 
     it "フィードにフォローしていないユーザーの投稿が含まれていないこと" do
-      expect(user.feed).to_not include dish3
+      expect(user.feed).not_to include dish3
     end
   end
 end

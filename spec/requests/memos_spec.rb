@@ -23,7 +23,7 @@ RSpec.describe "メモ機能", type: :request do
         expect {
           post memos_path, params: { dish_id: dish.id,
                                      memo: { content: "" } }
-        }.to_not change(dish.memos, :count)
+        }.not_to change(dish.memos, :count)
       end
     end
 
@@ -32,7 +32,7 @@ RSpec.describe "メモ機能", type: :request do
         expect {
           post memos_path, params: { dish_id: dish.id,
                                      memo: { content: "最高です！" } }
-        }.to_not change(dish.memos, :count)
+        }.not_to change(dish.memos, :count)
         expect(response).to redirect_to login_path
       end
     end
@@ -53,7 +53,7 @@ RSpec.describe "メモ機能", type: :request do
         login_for_request(other_user)
         expect {
           delete memo_path(memo)
-        }.to_not change(dish.memos, :count)
+        }.not_to change(dish.memos, :count)
       end
     end
 
@@ -61,7 +61,7 @@ RSpec.describe "メモ機能", type: :request do
       it "メモの削除はできず、ログインページへリダイレクトすること" do
         expect {
           delete memo_path(memo)
-        }.to_not change(dish.memos, :count)
+        }.not_to change(dish.memos, :count)
       end
     end
   end

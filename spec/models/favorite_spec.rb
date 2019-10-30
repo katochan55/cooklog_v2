@@ -9,11 +9,11 @@ RSpec.describe Favorite, type: :model do
 
   it "user_idがnilの場合、無効であること" do
     favorite.user_id = nil
-    expect(favorite).to_not be_valid
+    expect(favorite).not_to be_valid
   end
 
   it "dish_idがnilの場合、無効であること" do
     favorite.dish_id = nil
-    expect(favorite).to_not be_valid
+    expect(favorite).not_to be_valid
   end
 end

@@ -49,14 +49,14 @@ RSpec.describe "Sessions", type: :system do
         expect(page).to have_content 'メールアドレスとパスワードの組み合わせが誤っています'
 
         visit root_path
-        expect(page).to_not have_content "メールアドレスとパスワードの組み合わせが誤っています"
+        expect(page).not_to have_content "メールアドレスとパスワードの組み合わせが誤っています"
       end
 
       it "有効なユーザーでログインする前後でヘッダーが正しく表示されていることを確認" do
         expect(page).to have_content 'クックログとは？'
         expect(page).to have_content 'ユーザー登録(無料)'
         expect(page).to have_content 'ログイン'
-        expect(page).to_not have_content 'ログアウト'
+        expect(page).not_to have_content 'ログアウト'
 
         fill_in "user_email", with: user.email
         fill_in "user_password", with: user.password
@@ -67,7 +67,7 @@ RSpec.describe "Sessions", type: :system do
         expect(page).to have_content 'リスト'
         expect(page).to have_content 'マイページ'
         expect(page).to have_content 'ログアウト'
-        expect(page).to_not have_content 'ログイン'
+        expect(page).not_to have_content 'ログイン'
       end
     end
   end

@@ -52,14 +52,14 @@ RSpec.describe "ユーザーフォロー機能", type: :request do
     it "createアクションは実行できず、ログインページへリダイレクトすること" do
       expect {
         post relationships_path
-      }.to_not change(Relationship, :count)
+      }.not_to change(Relationship, :count)
       expect(response).to redirect_to login_path
     end
 
     it "destroyアクションは実行できず、ログインページへリダイレクトすること" do
       expect {
         delete relationship_path(user)
-      }.to_not change(Relationship, :count)
+      }.not_to change(Relationship, :count)
       expect(response).to redirect_to login_path
     end
   end

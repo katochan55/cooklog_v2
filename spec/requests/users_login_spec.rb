@@ -18,7 +18,7 @@ RSpec.describe "ログイン", type: :request do
     expect(response).to render_template('users/show')
     expect(is_logged_in?).to be_truthy
     delete logout_path
-    expect(is_logged_in?).to_not be_truthy
+    expect(is_logged_in?).not_to be_truthy
     redirect_to root_url
     delete logout_path
     follow_redirect!
@@ -28,6 +28,6 @@ RSpec.describe "ログイン", type: :request do
     get login_path
     post login_path, params: { session: { email: "xxx@example.com",
                                        password: user.password } }
-    expect(is_logged_in?).to_not be_truthy
+    expect(is_logged_in?).not_to be_truthy
   end
 end
