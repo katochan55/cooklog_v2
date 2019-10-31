@@ -8,7 +8,7 @@
         <% if current_user.notification == true %>
           <li class="new_notification"><%= link_to "通知", notifications_path %></li>
         <% else %>
-          <li><%= link_to "通知", notifications_path %></li>
+          <li class="no_notification"><%= link_to "通知", notifications_path %></li>
         <% end %>
           <li><%= link_to 'お気に入り', '#' %></li>
           <li><%= link_to 'リスト', '#' %></li>
