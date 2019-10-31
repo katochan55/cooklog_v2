@@ -11,7 +11,7 @@
         「<%= notification.content %>」
         <br><%= notification.created_at.strftime("%Y/%m/%d(%a) %H:%M") %>
       <% end %>
-      </div>
+    </div>
     <div class ="notificated-dish">
       <%= link_to((image_tag dish.picture.url, size: 150), dish_path(dish)) %>
       <%= link_to dish.name, dish_path(dish) %>

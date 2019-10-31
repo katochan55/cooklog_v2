@@ -1,0 +1,10 @@
+<% dish = Dish.find(favorite.dish_id) %>
+<% user = User.find(dish.user_id) %>
+<li id="favorite-<%= favorite.id %>">
+  <div class ="favorite-dish">
+    <%= link_to((image_tag dish.picture.url, size: 150), dish_path(dish)) %>
+    <%= link_to dish.name, dish_path(dish) %>
+    <%= dish.description %> <br>
+    cooked_by <%= link_to user.name, user_path(user) %>
+  </div>
+</li>

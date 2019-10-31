@@ -196,6 +196,14 @@ span.picture {
   color: grey;
 }
 
+.favorites {
+  list-style: none;
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+}
+
 //通知
 .notifications {
   list-style: none;
@@ -209,7 +217,7 @@ span.picture {
   }
 }
 
-/* 新しい通知があるとき($NOTIFICATION_FLAG == 1のとき)は赤文字 */
+/* 新しい通知があるときは赤文字 */
 .navbar-nav > li.new_notification > a {
   color: red;
 }
