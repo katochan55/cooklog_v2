@@ -9,11 +9,12 @@ class MemosController < ApplicationController
       flash[:success] = "メモを追加しました！"
       # 自分以外のユーザーからコメントがあったときのみ通知を作成
       if @user != current_user
-        @user.notifications.create(dish_id: @dish.id, variety: 2, from_user_id: current_user.id, content: @memo.content) # コメントは通知種別2
+        @user.notifications.create(dish_id: @dish.id, variety: 2,
+                                   from_user_id: current_user.id, content: @memo.content) # コメントは通知種別2
         @user.update_attribute(:notification, true)
       end
     else
-      flash[:danger]  = "空のメモは投稿できません。"
+      flash[:danger] = "空のメモは投稿できません。"
     end
     redirect_to request.referrer || root_url
   end
