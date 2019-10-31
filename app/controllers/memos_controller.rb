@@ -7,8 +7,7 @@ class MemosController < ApplicationController
     @memo = @dish.memos.build(user_id: current_user.id, content: params[:memo][:content])
     if !@dish.nil? && @memo.save
       flash[:success] = "メモを追加しました！"
-      @user.notifications.create(dish_id: @dish.id,
-                                 content: "あなたの投稿に#{current_user.name}さんがコメントしました。")
+      @user.notifications.create(dish_id: @dish.id, variety: 2) # コメントは通知種別2
       $NOTIFICATION_FLAG = 1
     else
       flash[:danger]  = "空のメモは投稿できません。"
