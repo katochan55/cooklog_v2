@@ -6,6 +6,7 @@
       あなたの料理が<%= link_to user.name, user_path(user) %>さんにお気に入り登録されました。
     <% elsif notification.variety == 2 %>
       あなたの料理に<%= link_to user.name, user_path(user) %>さんがコメントしました。
+      「<%= notification.content %>」
     <% end %>
     <br>
     <%= link_to((image_tag dish.picture.url, size: 150), dish_path(dish)) %>

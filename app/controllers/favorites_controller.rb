@@ -9,8 +9,11 @@ class FavoritesController < ApplicationController
       format.html { redirect_to request.referrer || root_url }
       format.js
     end
-    @user.notifications.create(dish_id: @dish.id, variety: 1) # お気に入り登録は通知種別1
-    $NOTIFICATION_FLAG = 1
+    # 自分以外のユーザーからお気に入り登録があったときのみ通知を作成
+    if @user != current_user
+      @user.notifications.create(dish_id: @dish.id, variety: 1) # お気に入り登録は通知種別1
+      $NOTIFICATION_FLAG = 1
+    end
   end
 
   def destroy

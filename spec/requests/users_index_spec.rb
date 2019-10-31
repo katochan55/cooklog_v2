@@ -12,14 +12,14 @@ RSpec.describe "ユーザー一覧ページ", type: :request do
     end
   end
 
-  context "管理者以外のユーザーの場合" do
-    it "トップページへリダイレクトすること" do
-      login_for_request(user)
-      get users_path
-      expect(response).to have_http_status "302"
-      expect(response).to redirect_to root_path
-    end
-  end
+  # context "管理者以外のユーザーの場合" do
+  #   it "トップページへリダイレクトすること" do
+  #     login_for_request(user)
+  #     get users_path
+  #     expect(response).to have_http_status "302"
+  #     expect(response).to redirect_to root_path
+  #   end
+  # end
 
   context "ログインしていないユーザーの場合" do
     it "ログインページへリダイレクトすること" do
