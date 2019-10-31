@@ -5,7 +5,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to 'クックログとは？', about_path %></li>
         <% if logged_in? %>
-        <% if $NOTIFICATION_FLAG == 1 %>
+        <% if current_user.notification == true %>
           <li class="new_notification"><%= link_to "通知", notifications_path %></li>
         <% else %>
           <li><%= link_to "通知", notifications_path %></li>

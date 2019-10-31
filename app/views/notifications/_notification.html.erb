@@ -1,14 +1,21 @@
-<% user = User.find(notification.user_id) %>
+<% user = User.find(notification.from_user_id) %>
 <% dish = Dish.find(notification.dish_id) %>
 <li id="notification-<%= notification.id %>">
   <div>
-    <% if notification.variety == 1 %>
-      あなたの料理が<%= link_to user.name, user_path(user) %>さんにお気に入り登録されました。
-    <% elsif notification.variety == 2 %>
-      あなたの料理に<%= link_to user.name, user_path(user) %>さんがコメントしました。
-      「<%= notification.content %>」
-    <% end %>
-    <br>
-    <%= link_to((image_tag dish.picture.url, size: 150), dish_path(dish)) %>
+    <div class="notification-message">
+      <% if notification.variety == 1 %>
+        あなたの料理が<%= link_to user.name, user_path(user) %>さんにお気に入り登録されました。
+        <br><%= notification.created_at.strftime("%Y/%m/%d(%a) %H:%M") %>
+      <% elsif notification.variety == 2 %>
+        あなたの料理に<%= link_to user.name, user_path(user) %>さんがコメントしました。
+        「<%= notification.content %>」
+        <br><%= notification.created_at.strftime("%Y/%m/%d(%a) %H:%M") %>
+      <% end %>
+      </div>
+    <div class ="notificated-dish">
+      <%= link_to((image_tag dish.picture.url, size: 150), dish_path(dish)) %>
+      <%= link_to dish.name, dish_path(dish) %>
+      <%= dish.description %>
+    </div>
   </div>
 </li>
