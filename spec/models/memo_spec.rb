@@ -10,20 +10,17 @@ RSpec.describe Memo, type: :model do
 
     it "user_idがなければ無効な状態であること" do
       memo = build(:memo, user_id: nil)
-      memo.valid?
-      expect(memo.errors[:user_id]).to include("を入力してください")
+      expect(memo).not_to be_valid
     end
 
     it "dish_idがなければ無効な状態であること" do
       memo = build(:memo, dish_id: nil)
-      memo.valid?
-      expect(memo.errors[:dish_id]).to include("を入力してください")
+      expect(memo).not_to be_valid
     end
 
     it "内容がなければ無効な状態であること" do
       memo = build(:memo, content: nil)
-      memo.valid?
-      expect(memo.errors[:content]).to include("を入力してください")
+      expect(memo).not_to be_valid
     end
 
     it "内容が50文字以内であること" do

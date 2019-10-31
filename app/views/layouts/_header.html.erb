@@ -5,6 +5,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to 'クックログとは？', about_path %></li>
         <% if logged_in? %>
+          <li><%= link_to '通知', notifications_path %></li>
           <li><%= link_to 'お気に入り', '#' %></li>
           <li><%= link_to 'リスト', '#' %></li>
           <li class="dropdown">
