@@ -1,0 +1,10 @@
+<li id="notification-<%= notification.id %>">
+  <div>
+    <%= notification.content %>
+    <br>
+    <% unless (notification.dish_id.nil? ||
+               (notification_dish = Dish.find(notification.dish_id)).picture.blank?)%>
+        <%= link_to( (image_tag notification_dish.picture.url, size: 150), dish_path(notification.dish_id) ) %>
+    <% end %>
+  </div>
+</li>

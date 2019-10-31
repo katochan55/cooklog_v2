@@ -1,2 +1,5 @@
-<h1>Notifications#index</h1>
-<p>Find me in app/views/notifications/index.html.erb</p>
+<% if @notifications.any? %>
+  <ol class="notifications">
+    <%= render @notifications %>
+  </ol>
+<% end %>

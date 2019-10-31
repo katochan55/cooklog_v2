@@ -9,6 +9,9 @@ class FavoritesController < ApplicationController
       format.html { redirect_to request.referrer || root_url }
       format.js
     end
+    @user.notifications.create(dish_id: @dish.id,
+                               content: "あなたの投稿が#{current_user.name}さんにお気に入り登録されました。")
+    $NOTIFICATION_FLAG = 1
   end
 
   def destroy
