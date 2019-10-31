@@ -5,6 +5,6 @@
     <%= link_to((image_tag dish.picture.url, size: 150), dish_path(dish)) %>
     <%= link_to dish.name, dish_path(dish) %>
     <%= dish.description %> <br>
-    cooked_by <%= link_to user.name, user_path(user) %>
+    cooked by <%= link_to user.name, user_path(user) %>
   </div>
 </li>
