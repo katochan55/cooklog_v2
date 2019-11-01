@@ -1,0 +1,6 @@
+<%= link_to "/lists/#{@dish.id}/destroy",
+            method: :delete,
+            id: 'unlist',
+            remote: true do %>
+  リストに追加済み
+<% end %>

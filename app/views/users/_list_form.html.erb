@@ -1,0 +1,7 @@
+<div id="list-<%= @dish.id %>">
+  <% if !current_user.nil? && current_user.list?(@dish) %>
+    <%= render 'users/unlist' %>
+  <% else %>
+    <%= render 'users/list' %>
+  <% end %>
+</div>
