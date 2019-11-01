@@ -320,4 +320,76 @@ RSpec.describe "Users", type: :system do
       end
     end
   end
+
+  context "リスト登録/解除" do
+    before do
+      login_for_system(user)
+    end
+
+    it "料理のお気に入り登録/解除ができること" do
+      expect(user.list?(dish)).to be_falsey
+      user.list(dish)
+      expect(user.list?(dish)).to be_truthy
+      user.unlist(dish)
+      expect(user.list?(dish)).to be_falsey
+    end
+
+    it "トップページからリスト登録/解除ができること", js: true do
+      visit root_path
+      link = find('#list')
+      expect(link[:href]).to include "/lists/#{dish.id}/create"
+      link.click
+      link = find('#unlist')
+      expect(link[:href]).to include "/lists/#{List.first.id}/destroy"
+      link.click
+      link = find('#list')
+      expect(link[:href]).to include "/lists/#{dish.id}/create"
+    end
+
+    it "ユーザー個別ページからリスト登録/解除ができること", js: true do
+      visit user_path(user)
+      link = find('#list')
+      expect(link[:href]).to include "/lists/#{dish.id}/create"
+      link.click
+      link = find('#unlist')
+      expect(link[:href]).to include "/lists/#{List.first.id}/destroy"
+      link.click
+      link = find('#list')
+      expect(link[:href]).to include "/lists/#{dish.id}/create"
+    end
+
+    it "料理個別ページからリスト登録/解除ができること", js: true do
+      link = find('#list')
+      expect(link[:href]).to include "/lists/#{dish.id}/create"
+      link.click
+      link = find('#unlist')
+      expect(link[:href]).to include "/lists/#{List.first.id}/destroy"
+      link.click
+      link = find('#list')
+      expect(link[:href]).to include "/lists/#{dish.id}/create"
+    end
+
+    it "リスト一覧ページが期待通り表示され、リストから削除することもできること" do
+      visit lists_path
+      expect(page).not_to have_css ".list-dish"
+      user.list(dish)
+      dish_2 = create(:dish, user: user)
+      user.list(dish_2)
+      visit lists_path
+      expect(page).to have_css ".list-dish", count: 2
+      expect(page).to have_content dish.name
+      expect(page).to have_content dish.description
+      expect(page).to have_content "#{user.name}がこの料理をリストに追加しました。", count: 2
+      expect(page).to have_link user.name, href: user_path(user), count: 2
+      expect(page).to have_content dish_2.name
+      expect(page).to have_content dish_2.description
+      user.unlist(dish_2)
+      visit lists_path
+      expect(page).to have_css ".list-dish", count: 1
+      expect(page).to have_content dish.name
+      find('#unlist').click
+      visit lists_path
+      expect(page).not_to have_css ".list-dish"
+    end
+  end
 end

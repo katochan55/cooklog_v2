@@ -104,12 +104,12 @@ class User < ApplicationRecord
 
   # 料理をリストから解除する
   def unlist(dish)
-    List.find_by(user_id: self.id, dish_id: dish.id, from_user_id: self.id).destroy
+    List.find_by(dish_id: dish.id, from_user_id: self.id).destroy
   end
 
   # 現在のユーザーがリスト登録してたらtrueを返す
   def list?(dish)
-    !List.find_by(user_id: self.id, dish_id: dish.id, from_user_id: self.id).nil?
+    !List.find_by(dish_id: dish.id, from_user_id: self.id).nil?
   end
 
   private

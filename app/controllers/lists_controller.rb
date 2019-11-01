@@ -16,8 +16,9 @@ class ListsController < ApplicationController
   end
 
   def destroy
-    @dish = Dish.find(params[:dish_id])
-    current_user.lists.find_by(dish_id: @dish.id).destroy
+    list = List.find(params[:list_id])
+    @dish = Dish.find(list.dish_id)
+    list.destroy
     respond_to do |format|
       format.html { redirect_to request.referrer || root_url }
       format.js

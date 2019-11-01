@@ -1,4 +1,5 @@
-<%= link_to "/lists/#{@dish.id}/destroy",
+<% list = List.find_by(dish_id: @dish.id) %>
+<%= link_to "/lists/#{list.id}/destroy",
             method: :delete,
             id: 'unlist',
             remote: true do %>

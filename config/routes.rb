@@ -21,5 +21,5 @@ Rails.application.routes.draw do
   resources :notifications, only: :index
   get :lists, to: 'lists#index'
   post   "lists/:dish_id/create"  => "lists#create"
-  delete "lists/:dish_id/destroy" => "lists#destroy"
+  delete "lists/:list_id/destroy" => "lists#destroy"
 end
