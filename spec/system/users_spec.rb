@@ -330,7 +330,7 @@ RSpec.describe "Users", type: :system do
       expect(user.list?(dish)).to be_falsey
       user.list(dish)
       expect(user.list?(dish)).to be_truthy
-      user.unlist(dish)
+      user.unlist(List.first)
       expect(user.list?(dish)).to be_falsey
     end
 
@@ -374,16 +374,19 @@ RSpec.describe "Users", type: :system do
       expect(page).not_to have_css ".list-dish"
       user.list(dish)
       dish_2 = create(:dish, user: user)
-      user.list(dish_2)
+      other_user.list(dish_2)
       visit lists_path
       expect(page).to have_css ".list-dish", count: 2
       expect(page).to have_content dish.name
       expect(page).to have_content dish.description
-      expect(page).to have_content "#{user.name}がこの料理をリストに追加しました。", count: 2
-      expect(page).to have_link user.name, href: user_path(user), count: 2
+      expect(page).to have_content List.last.created_at.strftime("%Y/%m/%d(%a) %H:%M")
+      expect(page).to have_content "この料理を作る予定リストに追加しました。"
       expect(page).to have_content dish_2.name
       expect(page).to have_content dish_2.description
-      user.unlist(dish_2)
+      expect(page).to have_content List.first.created_at.strftime("%Y/%m/%d(%a) %H:%M")
+      expect(page).to have_content "#{other_user.name}がこの料理を「食べたい！」と言っています。"
+      expect(page).to have_link other_user.name, href: user_path(other_user)
+      user.unlist(List.first)
       visit lists_path
       expect(page).to have_css ".list-dish", count: 1
       expect(page).to have_content dish.name

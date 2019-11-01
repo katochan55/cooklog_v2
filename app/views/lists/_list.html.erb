@@ -2,7 +2,12 @@
 <% user = User.find(list.from_user_id) %>
 <li id="list-<%= dish.id %>">
   <div class ="list-dish">
-    <%= link_to user.name, user_path(user) %>がこの料理をリストに追加しました。<br>
+    <%= list.created_at.strftime("%Y/%m/%d(%a) %H:%M") %> <br>
+    <% if list.user_id == list.from_user_id %>
+      この料理を作る予定リストに追加しました。
+    <% else %>
+      <%= link_to user.name, user_path(user) %>がこの料理を「食べたい！」と言っています。
+    <% end %> <br>
     <%= link_to((image_tag dish.picture.url, size: 150), dish_path(dish)) %>
     <%= link_to dish.name, dish_path(dish) %>
     <%= dish.description %> <br>

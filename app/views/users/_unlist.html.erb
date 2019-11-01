@@ -3,5 +3,5 @@
             method: :delete,
             id: 'unlist',
             remote: true do %>
-  リストに追加済み
+  <% current_user == @dish.user ? "作る予定リストにから削除" : "食べたい！リクエストを取り消す" %>
 <% end %>

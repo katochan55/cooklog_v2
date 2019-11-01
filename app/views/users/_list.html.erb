@@ -2,5 +2,5 @@
             method: :post,
             id: 'list',
             remote: true do %>
-  リストに追加する
+  <% current_user == @dish.user ? "作る予定リストに追加" : "食べたい！リクエストを送る" %>
 <% end %>
