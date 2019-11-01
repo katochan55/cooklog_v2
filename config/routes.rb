@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'notifications/index'
   root 'static_pages#home'
   get :about,        to: 'static_pages#about'
   get :use_of_terms, to: 'static_pages#terms'
@@ -20,4 +19,5 @@ Rails.application.routes.draw do
   delete "favorites/:dish_id/destroy" => "favorites#destroy"
   resources :memos, only: [:create, :destroy]
   resources :notifications, only: :index
+  resources :lists, only: [:index, :create, :destroy]
 end
