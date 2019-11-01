@@ -1,0 +1,11 @@
+<% dish = Dish.find(list.dish_id) %>
+<% user = User.find(list.from_user_id) %>
+<li id="list-<%= list.id %>">
+  <div class ="list-dish">
+    <%= link_to user.name, user_path(user) %>がこの料理をリストに追加しました。<br>
+    <%= link_to((image_tag dish.picture.url, size: 150), dish_path(dish)) %>
+    <%= link_to dish.name, dish_path(dish) %>
+    <%= dish.description %> <br>
+    
+  </div>
+</li>

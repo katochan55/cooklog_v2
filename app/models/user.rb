@@ -99,17 +99,17 @@ class User < ApplicationRecord
 
   # 料理をリストに登録する
   def list(dish)
-    List.create!(user_id: self.id, dish_id: dish.id)
+    List.create!(user_id: dish.user_id, dish_id: dish.id, from_user_id: self.id)
   end
 
   # 料理をリストから解除する
   def unlist(dish)
-    List.find_by(user_id: self.id, dish_id: dish.id).destroy
+    List.find_by(user_id: self.id, dish_id: dish.id, from_user_id: self.id).destroy
   end
 
   # 現在のユーザーがリスト登録してたらtrueを返す
   def list?(dish)
-    !List.find_by(user_id: self.id, dish_id: dish.id).nil?
+    !List.find_by(user_id: self.id, dish_id: dish.id, from_user_id: self.id).nil?
   end
 
   private

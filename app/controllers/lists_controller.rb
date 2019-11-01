@@ -2,11 +2,7 @@ class ListsController < ApplicationController
   before_action :logged_in_user
 
   def index
-    @dishes = Dish.where(user_id: current_user.id)
-    @lists = []
-    @dishes.each do |dish|
-      @lists << List.where("dish_id = ?", dish.id)
-    end
+    @lists = List.where("user_id = ?", current_user.id)
   end
 
   def create

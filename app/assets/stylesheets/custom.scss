@@ -221,3 +221,12 @@ span.picture {
 .navbar-nav > li.new_notification > a {
   color: red;
 }
+
+// リスト
+.lists {
+  list-style: none;
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+}

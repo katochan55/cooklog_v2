@@ -6,6 +6,5 @@ class CreateLists < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :lists, [:user_id, :dish_id], unique: true
   end
 end
