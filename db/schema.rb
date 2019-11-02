@@ -21,14 +21,12 @@ ActiveRecord::Schema.define(version: 2019_11_01_113336) do
     t.float "portion"
     t.text "tips"
     t.text "reference"
-    t.integer "cook_times"
     t.integer "required_time"
     t.integer "popularity"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "picture"
-    t.index ["user_id", "cook_times"], name: "index_dishes_on_user_id_and_cook_times"
     t.index ["user_id", "created_at"], name: "index_dishes_on_user_id_and_created_at"
     t.index ["user_id", "popularity"], name: "index_dishes_on_user_id_and_popularity"
     t.index ["user_id", "required_time"], name: "index_dishes_on_user_id_and_required_time"
