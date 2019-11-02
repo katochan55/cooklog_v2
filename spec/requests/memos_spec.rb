@@ -39,21 +39,23 @@ RSpec.describe "メモ機能", type: :request do
   end
 
   context "メモの削除" do
-    context "メモを作成したユーザーである場合" do
-      it "メモの削除ができること" do
-        login_for_request(user)
-        expect {
-          delete memo_path(memo)
-        }.to change(dish.memos, :count).by(-1)
+    context "ログインしている場合" do
+      context "メモを作成したユーザーである場合" do
+        it "メモの削除ができること" do
+          login_for_request(user)
+          expect {
+            delete memo_path(memo)
+          }.to change(dish.memos, :count).by(-1)
+        end
       end
-    end
 
-    context "メモを作成したユーザーでない場合" do
-      it "メモの削除はできないこと" do
-        login_for_request(other_user)
-        expect {
-          delete memo_path(memo)
-        }.not_to change(dish.memos, :count)
+      context "メモを作成したユーザーでない場合" do
+        it "メモの削除はできないこと" do
+          login_for_request(other_user)
+          expect {
+            delete memo_path(memo)
+          }.not_to change(dish.memos, :count)
+        end
       end
     end
 
