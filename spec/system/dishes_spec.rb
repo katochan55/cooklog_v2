@@ -5,6 +5,7 @@ RSpec.describe "Dishes", type: :system do
   let!(:other_user) { create(:user) }
   let!(:dish) { create(:dish, user: user) }
   let!(:memo) { create(:memo, dish: dish, user_id: user.id) }
+  let!(:log) { create(:log, dish: dish) }
 
   describe "お料理登録ページ" do
     before do
@@ -146,6 +147,16 @@ RSpec.describe "Dishes", type: :system do
       end
     end
 
+    context "料理の削除", js: true do
+      it "削除成功のフラッシュが表示されること" do
+        login_for_system(user)
+        visit dish_path(dish)
+        click_on 'お料理情報を削除する'
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content 'お料理が削除されました'
+      end
+    end
+
     context "メモの登録＆削除" do
       it "自分の料理に対するメモの登録＆削除が正常に完了すること" do
         login_for_system(user)
@@ -173,13 +184,75 @@ RSpec.describe "Dishes", type: :system do
       end
     end
 
-    context "料理の削除", js: true do
-      it "削除成功のフラッシュが表示されること" do
-        login_for_system(user)
-        visit dish_path(dish)
-        click_on 'お料理情報を削除する'
-        page.driver.browser.switch_to.alert.accept
-        expect(page).to have_content 'お料理が削除されました'
+    context "ログ登録＆削除" do
+      context "料理詳細ページから" do
+        it "自分の料理に対するログ登録＆削除が正常に完了すること" do
+          login_for_system(user)
+          visit dish_path(dish)
+          fill_in "クックログ", with: "ログ投稿テスト"
+          click_button "クックログを追加"
+          within find("#log-#{Log.first.id}") do
+            expect(page).to have_selector 'span', text: "#{dish.logs.count}回目"
+            expect(page).to have_selector 'span', text: %Q{#{Log.last.created_at.strftime("%Y/%m/%d(%a)")}}
+            expect(page).to have_selector 'span', text: 'ログ投稿テスト'
+          end
+          expect(page).to have_content "クックログを追加しました！"
+          click_link "削除", href: log_path(Log.first)
+          expect(page).not_to have_selector 'span', text: 'ログ投稿テスト'
+          expect(page).to have_content "クックログを削除しました"
+        end
+
+        it "別ユーザーの料理ログにはログ登録フォームが無いこと" do
+          login_for_system(other_user)
+          visit dish_path(dish)
+          expect(page).not_to have_button "クックログを追加"
+        end
+      end
+
+      context "トップページから" do
+        it "自分の料理に対するログ登録が正常に完了すること" do
+          login_for_system(user)
+          visit root_path
+          fill_in "log_content", with: "ログ投稿テスト"
+          click_button "クックログを追加"
+          expect(Log.first.content).to eq 'ログ投稿テスト'
+          expect(page).to have_content "クックログを追加しました！"
+        end
+
+        it "別ユーザーの料理にはログ登録フォームがないこと" do
+          create(:dish, user: other_user)
+          login_for_system(user)
+          user.follow(other_user)
+          visit root_path
+          within find("#dish-#{Dish.first.id}") do
+            expect(page).not_to have_button "クックログを追加"
+          end
+        end
+      end
+
+      context "マイページから" do
+        it "自分の料理に対するログ登録が正常に完了すること" do
+          login_for_system(user)
+          visit user_path(user)
+          fill_in "log_content", with: "ログ投稿テスト"
+          click_button "クックログを追加"
+          expect(Log.first.content).to eq 'ログ投稿テスト'
+          expect(page).to have_content "クックログを追加しました！"
+        end
+      end
+
+      context "リスト一覧ページから" do
+        it "自分の料理に対するログ登録が正常に完了し、リストから料理が削除されること" do
+          login_for_system(user)
+          user.list(dish)
+          visit lists_path
+          expect(page).to have_content dish.name
+          fill_in "log_content", with: "ログ投稿テスト"
+          click_button "クックログを追加"
+          expect(Log.first.content).to eq 'ログ投稿テスト'
+          expect(page).to have_content "クックログを追加しました！"
+          expect(List.count).to eq 0
+        end
       end
     end
   end

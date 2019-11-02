@@ -1,3 +1,4 @@
+<% @list = list %>
 <% @dish = Dish.find(list.dish_id) %>
 <% user = User.find(list.from_user_id) %>
 <li id="list-<%= @dish.id %>">
