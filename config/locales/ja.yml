@@ -10,6 +10,7 @@ ja:
       user: ユーザー
       dish: 料理
       memo: メモ
+      log: クックログ
     attributes:
       user:
         id: ID
@@ -36,6 +37,9 @@ ja:
         user_id: メモ投稿者のID
         dish_id: メモされた料理のID
         content: メモ
+      log:
+        dish_id: クックログをつける料理のID
+        content: クックログ
   date:
     abbr_day_names:
     - 日

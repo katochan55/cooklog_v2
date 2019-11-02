@@ -1,0 +1,12 @@
+<%= form_for(@log) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= hidden_field_tag :dish_id, @dish.id %>
+  <div class="row">
+    <div class="field">
+      <%= f.label :content %>（ <%= "#{@dish.logs.count}" %> ）
+      <%= f.text_area :content, placeholder: "クックメモを追加..." %>
+    </div>
+  <div class="col-md-3">
+    <%= f.submit "クックログを追加", class: "btn btn-primary" %>
+  </div>
+<% end %>

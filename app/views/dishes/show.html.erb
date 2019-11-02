@@ -23,6 +23,10 @@
     参照URL：<%= @dish.reference %><br>
     所要時間：<%= @dish.required_time %><br>分
     人気度：<%= @dish.popularity %>
+    <span class="log">
+      <%= render "logs/new" %>
+
+    </span>
     <span class="memo">
       <%= render "memos/new" %>
       <%= render "memos/feed_memos" %>
