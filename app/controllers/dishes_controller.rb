@@ -39,7 +39,7 @@ class DishesController < ApplicationController
   def destroy
     @dish.destroy
     flash[:success] = "お料理が削除されました"
-    redirect_to (request.referrer == user_url(@dish.user)) ? user_url(@dish.user) : root_url
+    redirect_to request.referrer == user_url(@dish.user) ? user_url(@dish.user) : root_url
   end
 
   private

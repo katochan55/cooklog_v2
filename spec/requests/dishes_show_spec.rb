@@ -24,11 +24,11 @@ RSpec.describe "料理個別ページ", type: :request do
 
   context "別アカウントのユーザーの場合" do
     it "フォロワーであれば正常に表示されること" do
-      puts "※※後で実装※※"
+      puts "※※後で実装1※※"
     end
 
     it "フォロワーでなければトップページにリダイレクトすること" do
-      puts "※※後で実装※※"
+      puts "※※後で実装2※※"
     end
   end
 end

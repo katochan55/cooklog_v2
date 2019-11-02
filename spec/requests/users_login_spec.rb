@@ -12,7 +12,7 @@ RSpec.describe "ログイン", type: :request do
   it "有効なユーザーでログイン＆ログアウト" do
     get login_path
     post login_path, params: { session: { email: user.email,
-                                       password: user.password } }
+                                          password: user.password } }
     redirect_to user
     follow_redirect!
     expect(response).to render_template('users/show')
@@ -27,7 +27,7 @@ RSpec.describe "ログイン", type: :request do
   it "無効なユーザーでログイン" do
     get login_path
     post login_path, params: { session: { email: "xxx@example.com",
-                                       password: user.password } }
+                                          password: user.password } }
     expect(is_logged_in?).not_to be_truthy
   end
 end

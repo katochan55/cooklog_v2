@@ -33,8 +33,8 @@ RSpec.describe "ユーザー一覧ページ", type: :request do
     login_for_request(user)
     expect(user.admin).to be_falsey
     patch user_path(user), params: { user: { password: user.password,
-                                                    password_confirmation: user.password,
-                                                    admin: true } }
+                                             password_confirmation: user.password,
+                                             admin: true } }
     expect(user.reload.admin).to be_falsey
   end
 end
