@@ -1,5 +1,6 @@
 class LogsController < ApplicationController
   before_action :logged_in_user
+  before_action :correct_user
 
   def create
     @dish = Dish.find(params[:dish_id])
@@ -18,4 +19,13 @@ class LogsController < ApplicationController
     end
     redirect_to dish_url(@dish)
   end
+
+  private
+
+    def correct_user
+      # 現在のユーザーが対象の料理を保有しているかどうか確認
+      id = params[:dish_id] || params[:id]
+      dish = current_user.dishes.find_by(id: id)
+      redirect_to root_url if dish.nil?
+    end
 end

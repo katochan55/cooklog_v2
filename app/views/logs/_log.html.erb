@@ -1,8 +1,7 @@
 <li id="log-<%= log.id %>">
   <div>
-    <%  log_user = User.find(log.dish.user_id) %>
-    <%= link_to gravatar_for(log_user, size: 30), log_user %>
-    <span class="user"><%= link_to log_user.name, log_user %></span>
+    <span class="cook_times"><%= @logs.count - log_counter %>回目</span>
+    <span class="created_at"><%= log.created_at.strftime("%Y/%m/%d(%a)") %></span>
     <span class="log"><%= log.content %></span>
     <% if current_user.id == log.dish.user_id %>
       <%= link_to "削除", log_path(log), method: :delete,

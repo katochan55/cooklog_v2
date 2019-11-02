@@ -32,6 +32,10 @@
     <%= f.label :popularity %> [1~5]
     <%= f.text_field :popularity, class: 'form-control', id: 'dish_popularity' %>
   </div>
+  <div class = 'form-group'>
+    <%= f.label :cook_memo %>
+    <%= f.text_field :cook_memo, class: 'form-control', id: 'dish_cook_memo' %>
+  </div>
   <%= f.submit nil, class: 'btn btn-primary' %>
 <% end %>
 

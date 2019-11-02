@@ -24,7 +24,11 @@ end
                reference: "https://cookpad.com/recipe/2798655",
                required_time: 30,
                popularity: 5,
+               cook_memo: "初めて作った割にはうまくできた！",
                user_id: 1)
+  dish = Dish.first
+  Log.create!(dish_id: dish.id,
+              content: dish.cook_memo)
 end
 
 # リレーションシップ

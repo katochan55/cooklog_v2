@@ -33,6 +33,7 @@ ja:
         popularity: 人気度
         user_id: 作成者のID
         picture: 料理の写真
+        cook_memo: クックメモ
       memo:
         user_id: メモ投稿者のID
         dish_id: メモされた料理のID

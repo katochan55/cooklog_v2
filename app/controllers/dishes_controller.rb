@@ -17,6 +17,7 @@ class DishesController < ApplicationController
     @memo = Memo.new
     if @dish.save
       flash[:success] = "お料理が登録されました！"
+      Log.create(dish_id: @dish.id, content: @dish.cook_memo)
       redirect_to dish_url(@dish)
     else
       render 'dishes/new'
@@ -47,7 +48,7 @@ class DishesController < ApplicationController
 
     def dish_params
       params.require(:dish).permit(:name, :description, :portion, :tips,
-                                   :reference, :required_time, :popularity, :picture)
+                                   :reference, :required_time, :popularity, :picture, :cook_memo)
     end
 
     def correct_user
