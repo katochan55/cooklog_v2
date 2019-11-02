@@ -13,6 +13,7 @@
   <span class="required_time">所要時間：<%= dish.required_time %>分　</span>
   <span class="popularity">人気度：<%= dish.popularity %></span><br>
   <span class="reference"><%= link_to "作り方", dish.reference, target: :_blank %></span>
+  <%= render "logs/new_form_mini" %>
   <span class="timestamp">
     <%= time_ago_in_words(dish.created_at) %>前に投稿
   </span>

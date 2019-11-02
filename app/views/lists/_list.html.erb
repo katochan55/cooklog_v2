@@ -1,6 +1,6 @@
-<% dish = Dish.find(list.dish_id) %>
+<% @dish = Dish.find(list.dish_id) %>
 <% user = User.find(list.from_user_id) %>
-<li id="list-<%= dish.id %>">
+<li id="list-<%= @dish.id %>">
   <div class ="list-dish">
     <%= list.created_at.strftime("%Y/%m/%d(%a) %H:%M") %> <br>
     <% if list.user_id == list.from_user_id %>
@@ -8,10 +8,10 @@
     <% else %>
       <%= link_to user.name, user_path(user) %>がこの料理を「食べたい！」と言っています。
     <% end %> <br>
-    <%= link_to((image_tag dish.picture.url, size: 150), dish_path(dish)) %>
-    <%= link_to dish.name, dish_path(dish) %>
-    <%= dish.description %> <br>
-    <p>料理を作る</p>
+    <%= link_to((image_tag @dish.picture.url, size: 150), dish_path(@dish)) %>
+    <%= link_to @dish.name, dish_path(@dish) %>
+    <%= @dish.description %> <br>
+    <%= render "logs/new_form_mini" %>
     <%= link_to "リストから削除", "/lists/#{list.id}/destroy",
                            method: :delete,
                            id: "unlist",
