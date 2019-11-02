@@ -1,0 +1,12 @@
+<li id="log-<%= log.id %>">
+  <div>
+    <%  log_user = User.find(log.dish.user_id) %>
+    <%= link_to gravatar_for(log_user, size: 30), log_user %>
+    <span class="user"><%= link_to log_user.name, log_user %></span>
+    <span class="log"><%= log.content %></span>
+    <% if current_user.id == log.dish.user_id %>
+      <%= link_to "削除", log_path(log), method: :delete,
+                                    data: { confirm: "本当に削除しますか？" } %>
+    <% end %>
+  </div>
+</li>

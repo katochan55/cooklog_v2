@@ -1,5 +1,6 @@
 <% provide(:title, "お料理情報") %>
 <% @memos  = @dish.feed_memo(@dish.id) %>
+<% @logs  = @dish.feed_log(@dish.id) %>
 <h1>お料理情報</h1>
 <div class="row">
   <aside class="col-md-4">
@@ -25,7 +26,7 @@
     人気度：<%= @dish.popularity %>
     <span class="log">
       <%= render "logs/new" %>
-
+      <%= render "logs/feed_logs" %>
     </span>
     <span class="memo">
       <%= render "memos/new" %>
