@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_01_113336) do
+ActiveRecord::Schema.define(version: 2019_11_02_050809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,14 @@ ActiveRecord::Schema.define(version: 2019_11_01_113336) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "from_user_id"
+  end
+
+  create_table "logs", force: :cascade do |t|
+    t.integer "dish_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dish_id"], name: "index_logs_on_dish_id"
   end
 
   create_table "memos", force: :cascade do |t|
