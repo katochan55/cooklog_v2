@@ -1,5 +1,5 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
+// @import "bootstrap-sprockets";
+// @import "bootstrap";
 
 // ミックスイン
 @mixin box_sizing {
@@ -7,58 +7,58 @@
   -webkit-box-sizing: border-box;
   box-sizing:         border-box;
 }
-
-// 全ページ共通
-body {
-  padding-top: 60px;
-}
-
-section {
-  overflow: auto;
-}
-
-textarea {
-  resize: vertical;
-}
-
-.center {
-  text-align: center;
-  h1 {
-    margin-bottom: 10px;
-  }
-}
-
-// テキストの見栄え
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1;
-}
-
-h1 {
-  font-size: 3em;
-  letter-spacing: -2px;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-h2 {
-  font-size: 1.2em;
-  letter-spacing: -1px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: normal;
-  color: #777;
-}
-
-p {
-  font-size: 1.1em;
-  line-height: 1.7em;
-}
-
-// ヘッダー
-.navbar ul{
-  margin-top: 12px;
-  margin-bottom: 12px;
-}
+//
+// // 全ページ共通
+// body {
+//   padding-top: 60px;
+// }
+//
+// section {
+//   overflow: auto;
+// }
+//
+// textarea {
+//   resize: vertical;
+// }
+//
+// .center {
+//   text-align: center;
+//   h1 {
+//     margin-bottom: 10px;
+//   }
+// }
+//
+// // テキストの見栄え
+// h1, h2, h3, h4, h5, h6 {
+//   line-height: 1;
+// }
+//
+// h1 {
+//   font-size: 3em;
+//   letter-spacing: -2px;
+//   margin-bottom: 30px;
+//   text-align: center;
+// }
+//
+// h2 {
+//   font-size: 1.2em;
+//   letter-spacing: -1px;
+//   margin-bottom: 30px;
+//   text-align: center;
+//   font-weight: normal;
+//   color: #777;
+// }
+//
+// p {
+//   font-size: 1.1em;
+//   line-height: 1.7em;
+// }
+//
+// // ヘッダー
+// .navbar ul{
+//   margin-top: 12px;
+//   margin-bottom: 12px;
+// }
 
 #logo {
   float: left;
@@ -69,16 +69,16 @@ p {
   }
 }
 
-// フッター
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #777;
-  small {
-    float: left;
-  }
-}
+// // フッター
+// footer {
+//   margin-top: 45px;
+//   padding-top: 5px;
+//   border-top: 1px solid #eaeaea;
+//   color: #777;
+//   small {
+//     float: left;
+//   }
+// }
 
 // デバッグ情報など
 .debug_dump {

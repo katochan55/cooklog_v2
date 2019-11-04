@@ -1,0 +1,38 @@
+<nav class="fh5co-nav" role="navigation">
+  <div class="top-menu">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-2">
+          <div id="fh5co-logo">
+            <%= link_to(image_tag("header_logo.jpg", :alt => ""), root_url, id: 'logo') %>
+          </div>
+        </div>
+        <div class="col-xs-10 text-right menu-1">
+          <ul>
+            <li><%= link_to 'クックログとは？', about_path %></li>
+            <% if logged_in? %>
+            <% if current_user.notification == true %>
+              <li class="new_notification"><%= link_to "通知", notifications_path %></li>
+            <% else %>
+              <li class="no_notification"><%= link_to "通知", notifications_path %></li>
+            <% end %>
+              <li><%= link_to 'お気に入り', favorites_path %></li>
+              <li><%= link_to 'リスト', lists_path %></li>
+              <li class="has-dropdown">
+								<a href="#">アカウント</a>
+								<ul class="dropdown">
+                  <li><%= link_to "マイページ", current_user %></li>
+                  <li class="divider"></li>
+                  <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
+								</ul>
+							</li>
+            <% else %>
+              <li><%= link_to 'ユーザー登録(無料)', signup_path %></li>
+              <li><%= link_to 'ログイン', login_path, class: 'btn-cta' %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
