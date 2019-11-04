@@ -19,6 +19,6 @@
   <span class="timestamp">
     <%= time_ago_in_words(dish.created_at) %>前に投稿
   </span>
-  <%= link_to "削除する", dish_path(dish), method: :delete,
+  <%= link_to "料理を削除", dish_path(dish), method: :delete,
                          data: { confirm: "本当に削除しますか？" } %>
 </li>

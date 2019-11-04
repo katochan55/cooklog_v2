@@ -9,13 +9,18 @@
     <div class="fh5co-loader"></div>
     <div id="page">
       <%= render 'layouts/navigation' %>
-    <!-- <div class="container"> -->
+			<div class="container">
+				<% flash.each do |message_type, message| %>
+	        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+	      <% end %>
+    	</div>
       <%= yield %>
-    <!-- </div> -->
     </div>
     <div class="gototop js-top">
       <a href="#" class="js-gotop"><i class="icon-arrow-up22"></i></a>
     </div>
+		<%= render 'layouts/footer' %>
+    <%= debug(params) if Rails.env.development? %>
 		<%= render 'layouts/js' %>
   </body>
 </html>
