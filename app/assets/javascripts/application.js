@@ -12,12 +12,12 @@
 //
 //= require rails-ujs
 //= require modernizr-2.6.2.min
-//= require jquery.min
-//= require jquery.easing.1.3
-//= require bootstrap.min
-//= require jquery.waypoints.min
-//= require jquery.flexslider-min
-//= require main
+// require jquery.min
+// require jquery.easing.1.3
+// require bootstrap.min
+// require jquery.waypoints.min
+// require jquery.flexslider-min
+// require main
 //= require respond.min
 //= require activestorage
 //= require turbolinks
