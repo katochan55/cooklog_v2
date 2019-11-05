@@ -1,14 +1,41 @@
-// ミックスイン
+//// ミックスイン ////
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
   -webkit-box-sizing: border-box;
   box-sizing:         border-box;
 }
-// ヘッダー
+
+//// ヘッダー ////
 .menu-1 a:hover {
   text-decoration: none;
 }
-//
+
+// 上下幅
+.fh5co-nav .top-menu {
+  padding: 18px 0;
+}
+
+#logo {
+  img {
+    width: 100%;
+    margin: auto 0;
+  }
+}
+
+// ロゴの上下位置調整
+.fh5co-nav #fh5co-logo {
+  font-size: 0px;
+}
+
+//// ページボディ部 ////
+#fh5co-portfolio {
+  padding: 3em 0;
+  h1 {
+    text-align: center;
+  }
+}
+
+//// old css ////
 // // 全ページ共通
 // body {
 //   padding-top: 60px;
@@ -55,20 +82,6 @@
 //   line-height: 1.7em;
 // }
 //
-// // ヘッダー
-// .navbar ul{
-//   margin-top: 12px;
-//   margin-bottom: 12px;
-// }
-
-#logo {
-  float: left;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  img {
-    width: 150px;
-  }
-}
 
 // // フッター
 // footer {
