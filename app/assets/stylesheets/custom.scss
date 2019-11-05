@@ -50,6 +50,31 @@
   }
 }
 
+// トップページのアイコン
+.row-icon {
+  height: 50px;
+}
+
+.fa-carrot {
+  color: fuchsia;
+  float: right;
+}
+
+.fa-hamburger {
+  color: brown;
+  float: left;
+}
+
+.fa-fish {
+  color: blue;
+  float: right;
+}
+
+.fa-pizza-slice {
+  color: orange;
+  float: left;
+}
+
 //// フォーム ////
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
@@ -179,7 +204,7 @@ span.picture {
 }
 
 // 新しい通知があるときは赤文字にする
-.navbar-nav > li.new_notification > a {
+li.new_notification > a > span {
   color: red;
 }
 
