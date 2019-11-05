@@ -65,7 +65,7 @@ RSpec.describe "Users", type: :system do
     before do
       login_for_system(user)
       visit user_path(user)
-      click_link "プロフィールを編集する"
+      click_link "プロフィール編集"
     end
 
     context "ページレイアウト" do
@@ -104,37 +104,39 @@ RSpec.describe "Users", type: :system do
     end
   end
 
-  describe "マイ(ユーザー詳細)ページ" do
+  describe "プロフィールページ" do
     context "ページレイアウト" do
       before do
         create_list(:dish, 10, user: user)
         visit user_path(user)
       end
 
-      it "「マイページ」の文字列が存在することを確認" do
-        expect(page).to have_content 'マイページ'
+      it "「プロフィール」の文字列が存在することを確認" do
+        expect(page).to have_content 'プロフィール'
       end
 
       it "正しいタイトルが表示されることを確認" do
-        expect(page).to have_title full_title('マイページ')
+        expect(page).to have_title full_title('プロフィール')
       end
 
       it "ユーザー情報が表示されることを確認" do
         expect(page).to have_content user.name
         expect(page).to have_content user.introduction
         expect(page).to have_content user.sex
+        expect(page).to have_content "#{user.following.count}人をフォロー"
+        expect(page).to have_content "#{user.followers.count}人のフォロワー"
       end
 
       it "プロフィール編集ページへのリンクが表示されていることを確認" do
-        expect(page).to have_link 'プロフィールを編集する', href: edit_user_path(user)
+        expect(page).to have_link 'プロフィール編集', href: edit_user_path(user)
       end
 
       it "アカウントの削除リンクが表示されていることを確認" do
-        expect(page).to have_link 'アカウントを削除する', href: user_path(user)
+        expect(page).to have_link 'アカウント削除', href: user_path(user)
       end
 
       it "料理の件数が表示されていることを確認" do
-        expect(page).to have_content "料理 #{user.dishes.count}件"
+        expect(page).to have_content "料理 (#{user.dishes.count})"
       end
 
       it "料理の情報が表示されていることを確認" do

@@ -1,33 +1,48 @@
-<% provide(:title, "マイページ") %>
+<% provide(:title, "プロフィール") %>
 <div id="fh5co-portfolio">
   <div class="container">
-    <h1>マイページ</h1>
-    <div class="row">
-      <aside class="col-md-4">
-        <%= gravatar_for @user, size: 100 %>
-      </aside>
-      <section class="stats">
-        <%= render 'shared/stats' %>
-      </section>
-      <%= render 'follow_form' if logged_in? %>
-      <div class="col-md-8">
-        <section class="user_name_info">
-          <%= @user.name %>
-        </section>
-        <%= link_to "プロフィールを編集する", edit_user_path(@user) %>
-        <%= link_to "アカウントを削除する", user_path(@user), method: :delete,
-                                      data: { confirm: "本当に削除しますか？" } %>
-        <%= @user.introduction %>
-        <%= @user.sex %>
+    <div class="row profile">
+      <div class="col-md-9">
+        <h3 class="title-profile">プロフィール</h3>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="user-picture-box">
+              <%= gravatar_for @user, size: 120, cl: "gravatar user-picture" %>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <h4 class="show-user-name"><%= @user.name %></h4>　<%= @user.sex %>
+            <div class="show-user-introduction">
+              <%= @user.introduction %>
+            </div>
+            <section class="stats">
+              <%= render 'shared/stats' %>
+            </section>
+            <%= link_to "プロフィール編集", edit_user_path(@user) %>　
+            <%= link_to "アカウント削除", user_path(@user), method: :delete,
+                                          data: { confirm: "本当に削除しますか？" } %>
+            <br>
+            <%= render 'follow_form' if logged_in? %>
+          </div>
+        </div>
       </div>
-      <div class="col-md-8">
+    </div>
+    <div class="row">
+      <div class="col-md-9">
         <% if @user.dishes.any? %>
-          <h3>料理 <%= @user.dishes.count %>件</h3>
+          <h3>料理 (<%= @user.dishes.count %>)</h3>
           <ol class="dishes">
             <%= render @dishes %>
           </ol>
           <%= will_paginate @dishes %>
         <% end %>
+      </div>
+      <div class="col-md-3">
+        <p><%= link_to "新しい料理を作る", record_dish_path, class: "btn btn-primary btn-lg btn-demo btn-record" %></p>
+        <br>
+        <p><%= link_to "みんなの料理をCSV出力", '#', class: "btn btn-primary btn-lg btn-demo btn-csv" %></p>
+        <br>
+        <p><%= link_to "自分の料理をCSV出力", '#', class: "btn btn-primary btn-lg btn-demo btn-csv" %></p>
       </div>
     </div>
   </div>

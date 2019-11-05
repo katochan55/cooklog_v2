@@ -62,10 +62,11 @@ RSpec.describe "Sessions", type: :system do
         fill_in "user_password", with: user.password
         click_button "ログイン"
 
-        expect(page).to have_content 'クックログとは？'
+        expect(page).to have_content '通知'
         expect(page).to have_content 'お気に入り'
-        expect(page).to have_content 'リスト'
-        expect(page).to have_content 'マイページ'
+        expect(page).to have_content '作る予定リスト'
+        expect(page).to have_content 'プロフィール'
+        expect(page).to have_content 'クックログとは？'
         expect(page).to have_content 'ログアウト'
         expect(page).not_to have_content 'ログイン'
       end

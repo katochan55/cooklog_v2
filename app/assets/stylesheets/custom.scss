@@ -20,8 +20,20 @@ $main-yellow: #fee856;
 
 #logo {
   img {
-    width: 100%;
-    margin: auto 0;
+    max-width: 100%;
+  	height: auto;
+    box-sizing: border-box;
+  }
+}
+
+// スマホ用：ヘッダーメニューが横棒三本になるところを境にロゴを拡大
+@media screen and (max-width: 768px) {
+  #logo {
+    img {
+      max-width: 400%;
+    	height: auto;
+      box-sizing: border-box;
+    }
   }
 }
 
@@ -53,7 +65,8 @@ $main-yellow: #fee856;
   }
 }
 
-// トップページのアイコン
+//// トップページ（ログイン前） ////
+// アイコン
 .row-icon {
   height: 50px;
 }
@@ -106,7 +119,6 @@ $main-yellow: #fee856;
 }
 
 .dish-user {
-  // margin-right: 0;
   float: right;
 }
 .user-picture .user-name {
@@ -121,6 +133,36 @@ h2.dish-name {
 
 .add-cooklog {
   font-weight: bold;
+}
+
+//// プロフィールページ ////
+.profile {
+  margin-bottom: 2em;
+}
+
+.title-profile {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.user-picture img {
+  max-width: 100%;
+	height: auto;
+  box-sizing: border-box;
+}
+
+.user-picture-box {
+  margin-top: 0.5em;
+  margin-left: 1em;
+}
+
+.show-user-name {
+  display: inline-block;
+}
+
+// フォロー、フォロワー数表示部
+.stats {
+  margin: 5px 0;
 }
 
 //// フォーム ////

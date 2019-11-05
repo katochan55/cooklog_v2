@@ -3,7 +3,7 @@
 <li id="dish-<%= dish.id %>">
   <div class="row">
     <div class="col-md-4">
-      <span class="dish-picture">
+      <span>
         <%= link_to((image_tag dish.picture.thumb200.url), dish_path(dish.id), class: 'dish-picture') if dish.picture.url.present? %>
       </span>
       <%= render 'users/favorite_form' %>
