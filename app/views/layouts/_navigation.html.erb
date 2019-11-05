@@ -1,4 +1,4 @@
-<nav class="fh5co-nav" role="navigation">
+<nav class="fh5co-nav navbar-fixed-top" role="navigation">
   <div class="top-menu">
     <div class="container">
       <div class="row">
@@ -28,7 +28,7 @@
                   <span class="fas fa-cog"></span> <span>設定</span>
                 <% end %>
 								<ul class="dropdown">
-                  <li><%= link_to '登録情報', current_user %></li>
+                  <li><%= link_to 'マイページ', current_user %></li>
                   <li><%= link_to 'クックログとは？', about_path %></li>
                   <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
 								</ul>

@@ -1,3 +1,6 @@
+$main-magenta: #dd356e;
+$main-yellow: #fee856;
+
 //// ミックスイン ////
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -44,7 +47,7 @@
 
 //// ページボディ部 ////
 #fh5co-portfolio {
-  padding: 3em 0;
+  padding: 7em 0;
   h1 {
     text-align: center;
   }
@@ -73,6 +76,35 @@
 .fa-pizza-slice {
   color: orange;
   float: left;
+}
+
+//// トップページ（ログイン後） ////
+// 「新しい料理を作る」ボタン
+.btn-record {
+  width: 100%;
+  margin-top: 3em;
+  color: black;
+  background-color: $main-yellow;
+  border-color: $main-yellow;
+}
+
+.dish-record {
+  text-align: center;
+  display: inline-block;
+}
+
+// 「CSV出力」ボタン
+.btn-csv {
+  width: 100%;
+  margin-top: 2em;
+  color: black;
+  background-color: palegreen;
+  border-color: palegreen;
+}
+
+.dish-csv {
+  text-align: center;
+  display: inline-block;
 }
 
 //// フォーム ////
