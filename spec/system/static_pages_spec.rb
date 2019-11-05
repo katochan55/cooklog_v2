@@ -31,15 +31,21 @@ RSpec.describe "StaticPages", type: :system do
       it "料理のぺージネーションが表示されること" do
         create_list(:dish, 6, user: user)
         visit root_path
+        expect(page).to have_content "みんなの料理 (#{user.dishes.count})"
         expect(page).to have_css "div.pagination"
         Dish.take(5).each do |d|
           expect(page).to have_link d.name, href: dish_path(d)
         end
       end
 
+      it "「新しい料理を作る」リンクが表示されること" do
+        visit root_path
+        expect(page).to have_link "新しい料理を作る", href: record_dish_path
+      end
+
       it "料理を削除後、削除成功のフラッシュが表示されること" do
         visit root_path
-        click_on '料理を削除'
+        click_on '削除'
         page.driver.browser.switch_to.alert.accept
         expect(page).to have_content 'お料理が削除されました'
       end

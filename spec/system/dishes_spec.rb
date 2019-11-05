@@ -190,7 +190,7 @@ RSpec.describe "Dishes", type: :system do
           login_for_system(user)
           visit dish_path(dish)
           fill_in "クックログ", with: "ログ投稿テスト"
-          click_button "クックログを追加"
+          click_button "作る"
           within find("#log-#{Log.first.id}") do
             expect(page).to have_selector 'span', text: "#{dish.logs.count}回目"
             expect(page).to have_selector 'span', text: %Q{#{Log.last.created_at.strftime("%Y/%m/%d(%a)")}}
@@ -205,7 +205,7 @@ RSpec.describe "Dishes", type: :system do
         it "別ユーザーの料理ログにはログ登録フォームが無いこと" do
           login_for_system(other_user)
           visit dish_path(dish)
-          expect(page).not_to have_button "クックログを追加"
+          expect(page).not_to have_button "作る"
         end
       end
 
@@ -214,7 +214,7 @@ RSpec.describe "Dishes", type: :system do
           login_for_system(user)
           visit root_path
           fill_in "log_content", with: "ログ投稿テスト"
-          click_button "クックログを追加"
+          click_button "作る"
           expect(Log.first.content).to eq 'ログ投稿テスト'
           expect(page).to have_content "クックログを追加しました！"
         end
@@ -225,7 +225,7 @@ RSpec.describe "Dishes", type: :system do
           user.follow(other_user)
           visit root_path
           within find("#dish-#{Dish.first.id}") do
-            expect(page).not_to have_button "クックログを追加"
+            expect(page).not_to have_button "作る"
           end
         end
       end
@@ -235,7 +235,7 @@ RSpec.describe "Dishes", type: :system do
           login_for_system(user)
           visit user_path(user)
           fill_in "log_content", with: "ログ投稿テスト"
-          click_button "クックログを追加"
+          click_button "作る"
           expect(Log.first.content).to eq 'ログ投稿テスト'
           expect(page).to have_content "クックログを追加しました！"
         end
@@ -248,7 +248,7 @@ RSpec.describe "Dishes", type: :system do
           visit lists_path
           expect(page).to have_content dish.name
           fill_in "log_content", with: "ログ投稿テスト"
-          click_button "クックログを追加"
+          click_button "作る"
           expect(Log.first.content).to eq 'ログ投稿テスト'
           expect(page).to have_content "クックログを追加しました！"
           expect(List.count).to eq 0

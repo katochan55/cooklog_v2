@@ -2,18 +2,14 @@
 	<div id="fh5co-portfolio">
 		<div class="container">
 			<div class="col-md-3 col-md-push-9">
-				<div class="dish-record">
-					<%= link_to "新しい料理を作る", record_dish_path, class: "btn btn-primary btn-lg btn-record" %>
-				</div>
-				<div class="dish-csv">
-					<%= link_to "みんなの料理をCSV出力", "#", class: "btn btn-primary btn-lg btn-csv" %>
-				</div>
-				<div class="dish-csv">
-					<%= link_to "自分の料理をCSV出力", "#", class: "btn btn-primary btn-lg btn-csv" %>
-				</div>
+				<p><%= link_to "新しい料理を作る", record_dish_path, class: "btn btn-primary btn-lg btn-demo btn-record" %></p>
+				<br>
+				<p><%= link_to "みんなの料理をCSV出力", '#', class: "btn btn-primary btn-lg btn-demo btn-csv" %></p>
+				<br>
+				<p><%= link_to "自分の料理をCSV出力", '#', class: "btn btn-primary btn-lg btn-demo btn-csv" %></p>
 		  </div>
 		  <div class="col-md-9 col-md-pull-3">
-		    <h3>みんなの料理</h3>
+		    <h3>みんなの料理 (<%= @feed_items.count %>)</h3>
 		    <%= render 'shared/feed' %>
 		  </div>
 		</div>

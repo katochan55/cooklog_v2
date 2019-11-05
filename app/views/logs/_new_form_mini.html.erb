@@ -1,16 +1,20 @@
 <%= form_for(@log) do |f| %>
   <%= hidden_field_tag :dish_id, @dish.id %>
   <%= hidden_field_tag :list_id, @list.id if @list.present? %>
+  <p class="add-cooklog">この料理を作る〜クックログの追加〜</p>
   <div class="row">
-    <div class="field">
-      <%= f.text_area :content, placeholder: "クックメモを追加..." %>
+    <div class="col-md-9">
+      <div class="field">
+        <%= f.text_area :content, placeholder: "メモ" %>
+      </div>
     </div>
-  <div class="col-md-3">
-    <% if @list.present? %>
-      <%= f.submit "クックログを追加", class: "btn btn-primary",
-                                    data: { confirm: "クックログへの追加を行いますか？ 追加すると、リストからは削除されます。" } %>
-    <% else %>
-      <%= f.submit "クックログを追加", class: "btn btn-primary" %>
-    <% end %>
+    <div class="col-md-3">
+      <% if @list.present? %>
+        <%= f.submit "作る", class: "btn btn-primary",
+                                      data: { confirm: "この料理を作り、リストから削除しますか？" } %>
+      <% else %>
+        <%= f.submit "作る", class: "btn btn-primary" %>
+      <% end %>
+    </div>
   </div>
 <% end %>

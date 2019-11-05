@@ -81,30 +81,42 @@ $main-yellow: #fee856;
 //// トップページ（ログイン後） ////
 // 「新しい料理を作る」ボタン
 .btn-record {
-  width: 100%;
   margin-top: 3em;
   color: black;
   background-color: $main-yellow;
   border-color: $main-yellow;
 }
 
-.dish-record {
-  text-align: center;
-  display: inline-block;
-}
-
 // 「CSV出力」ボタン
 .btn-csv {
-  width: 100%;
-  margin-top: 2em;
   color: black;
   background-color: palegreen;
   border-color: palegreen;
 }
 
-.dish-csv {
-  text-align: center;
+// 料理一覧
+.dish-picture img {
+  max-width: 100%;
+	height: auto;
+  box-sizing: border-box;
+}
+
+.dish-user {
+  // margin-right: 0;
+  float: right;
+}
+.user-picture .user-name {
   display: inline-block;
+}
+
+h2.dish-name {
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.add-cooklog {
+  font-weight: bold;
 }
 
 //// フォーム ////

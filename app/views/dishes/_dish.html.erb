@@ -1,24 +1,39 @@
 <% @dish = dish %>
 
 <li id="dish-<%= dish.id %>">
-  <%= link_to gravatar_for(dish.user, size: 50), dish.user %>
-  <span class="name"><%= link_to dish.name, dish_path(dish) %></span>
-  <span class="picture">
-    <%= link_to((image_tag dish.picture.thumb200.url), dish_path(dish.id)) if dish.picture.url.present? %>
-  </span>
-  <%= render 'users/favorite_form' %>
-  <%= render 'users/list_form' %>
-  <span class="description"><%= dish.description %></span><br>
-  <span class="cook_times">作った回数：<%= dish.logs.count %>回　</span>
-  <span class="required_time">所要時間：<%= dish.required_time %>分　</span>
-  <span class="popularity">人気度：<%= dish.popularity %></span><br>
-  <span class="reference"><%= link_to "作り方", dish.reference, target: :_blank %></span>
-  <% if current_user == dish.user %>
-    <%= render "logs/new_form_mini" %>
-  <% end %>
-  <span class="timestamp">
-    <%= time_ago_in_words(dish.created_at) %>前に投稿
-  </span>
-  <%= link_to "料理を削除", dish_path(dish), method: :delete,
-                         data: { confirm: "本当に削除しますか？" } %>
+  <div class="row">
+    <div class="col-md-4">
+      <span class="dish-picture">
+        <%= link_to((image_tag dish.picture.thumb200.url), dish_path(dish.id), class: 'dish-picture') if dish.picture.url.present? %>
+      </span>
+      <%= render 'users/favorite_form' %>
+      <%= render 'users/list_form' %>
+    </div>
+    <div class="col-md-8">
+      <h2 class="dish-name"><%= link_to dish.name, dish_path(dish) %></h2>
+      <div class="dish-description"><%= dish.description %></div>
+      <div class="dish-user">cooked by <%= link_to dish.user.name, user_path(dish.user) %></div>
+      <br><br>
+      <div class="dish-other-info">
+        <span class="cook_times">作った回数：<%= dish.logs.count %>回　</span>
+        <span class="required_time">所要時間：<%= dish.required_time %>分　</span>
+        <span class="popularity">人気度：<%= dish.popularity %></span>
+      </div>
+      <br>
+      <% if current_user == dish.user %>
+        <%= render "logs/new_form_mini" %>
+      <% end %>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="timestamp">
+            <%= time_ago_in_words(dish.created_at) %>前に投稿
+          </div>
+        </div>
+        <div class="col-md-6">
+          <%= link_to "削除", dish_path(dish), method: :delete,
+                             data: { confirm: "本当に削除しますか？" } %>
+        </div>
+      </div>
+    </div>
+  </div>
 </li>

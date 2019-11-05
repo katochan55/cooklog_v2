@@ -141,9 +141,10 @@ RSpec.describe "Users", type: :system do
         Dish.take(5).each do |dish|
           expect(page).to have_link dish.name
           expect(page).to have_content dish.description
+          expect(page).to have_content dish.user.name
+          expect(page).to have_content dish.logs.count
           expect(page).to have_content dish.required_time
           expect(page).to have_content dish.popularity
-          expect(page).to have_link "作り方", href: dish.reference
         end
       end
 
@@ -156,7 +157,9 @@ RSpec.describe "Users", type: :system do
       it "削除成功のフラッシュが表示されることを確認" do
         login_for_system(user)
         visit user_path(user)
-        click_on '料理を削除'
+        within find("#dish-#{dish.id}") do
+          click_on '削除'
+        end
         page.driver.browser.switch_to.alert.accept
         expect(page).to have_content 'お料理が削除されました'
       end
