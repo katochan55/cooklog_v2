@@ -9,26 +9,40 @@
         </div>
         <div class="col-xs-10 text-right menu-1">
           <ul>
-            <li id='header-link'><%= link_to 'クックログとは？', about_path %></li>
             <% if logged_in? %>
               <% if current_user.notification == true %>
-                <li class="new_notification"><%= link_to "通知", notifications_path %></li>
+                <li class="new_notification header-link">
               <% else %>
-                <li class="no_notification"><%= link_to "通知", notifications_path %></li>
+                <li class="no_notification header-link">
               <% end %>
-              <li><%= link_to 'お気に入り', favorites_path %></li>
-              <li><%= link_to 'リスト', lists_path %></li>
+                  <%= link_to notifications_path do %><span class="fa fa-bell"> 通知</span><% end %>
+                </li>
+              <li class="header-link">
+                <%= link_to favorites_path do %><span class="fa fa-heart"> お気に入り</span><% end %>
+              </li>
+              <li class="header-link">
+                <%= link_to lists_path do %><span class="fa fa-list-alt"> 作る予定リスト</span><% end %>
+              </li>
               <li class="has-dropdown">
-								<a href="#">アカウント</a>
+                <%= link_to current_user do %>
+                  <span class="fa fa-cog"> 設定</span>
+                <% end %>
 								<ul class="dropdown">
-                  <li><%= link_to "マイページ", current_user %></li>
-                  <li class="divider"></li>
+                  <li><%= link_to '登録情報', current_user %></li>
+                  <li><%= link_to 'クックログとは？', about_path %></li>
                   <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
 								</ul>
 							</li>
             <% else %>
-              <li><%= link_to 'ユーザー登録(無料)', signup_path %></li>
-              <li><%= link_to 'ログイン', login_path %></li>
+              <li class="header-link">
+                <%= link_to about_path do %><span class="fa fa-question-circle"> クックログとは？</span><% end %>
+              </li>
+              <li class="header-link">
+                <%= link_to signup_path do %><span class="fa fa-user-plus"> ユーザー登録(無料)</span><% end %>
+              </li>
+              <li class="header-link btn-cta">
+                <%= link_to login_path do %><span> ログイン</span><% end %>
+              </li>
             <% end %>
           </ul>
         </div>
