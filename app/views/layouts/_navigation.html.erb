@@ -9,13 +9,13 @@
         </div>
         <div class="col-xs-10 text-right menu-1">
           <ul>
-            <li><%= link_to 'クックログとは？', about_path %></li>
+            <li id='header-link'><%= link_to 'クックログとは？', about_path %></li>
             <% if logged_in? %>
-            <% if current_user.notification == true %>
-              <li class="new_notification"><%= link_to "通知", notifications_path %></li>
-            <% else %>
-              <li class="no_notification"><%= link_to "通知", notifications_path %></li>
-            <% end %>
+              <% if current_user.notification == true %>
+                <li class="new_notification"><%= link_to "通知", notifications_path %></li>
+              <% else %>
+                <li class="no_notification"><%= link_to "通知", notifications_path %></li>
+              <% end %>
               <li><%= link_to 'お気に入り', favorites_path %></li>
               <li><%= link_to 'リスト', lists_path %></li>
               <li class="has-dropdown">
@@ -28,7 +28,7 @@
 							</li>
             <% else %>
               <li><%= link_to 'ユーザー登録(無料)', signup_path %></li>
-              <li><%= link_to 'ログイン', login_path, class: 'btn-cta' %></li>
+              <li><%= link_to 'ログイン', login_path %></li>
             <% end %>
           </ul>
         </div>

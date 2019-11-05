@@ -12,15 +12,8 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
-Rails.application.config.assets.precompile += %w( animate.css )
-Rails.application.config.assets.precompile += %w( icomoon.css )
-Rails.application.config.assets.precompile += %w( bootstrap.css )
-Rails.application.config.assets.precompile += %w( flexslider.css )
-Rails.application.config.assets.precompile += %w( style.css )
-Rails.application.config.assets.precompile += %w( modernizr-2.6.2.min.js )
-Rails.application.config.assets.precompile += %w( jquery.min.js )
-Rails.application.config.assets.precompile += %w( jquery.easing.1.3.js )
-Rails.application.config.assets.precompile += %w( bootstrap.min.js )
-Rails.application.config.assets.precompile += %w( jquery.waypoints.min.js )
-Rails.application.config.assets.precompile += %w( jquery.flexslider-min.js )
-Rails.application.config.assets.precompile += %w( main.js )
+Rails.application.config.assets.precompile += %w( animate.css icomoon.css bootstrap.css flexslider.css \
+                                                  style.css magnific-popup.css \
+                                                  modernizr-2.6.2.min.js jquery.min.js jquery.easing.1.3.js \
+                                                  bootstrap.min.js jquery.waypoints.min.js main.js \
+                                                  jquery.flexslider-min.js custom.js)
