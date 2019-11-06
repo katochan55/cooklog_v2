@@ -1,5 +1,10 @@
+<div class="row">
+  <div class="col-md-12">
+    <h3 class="title-cooklog">クックログ (<%= @logs.count %>)</h3>
+  </div>
+</div>
 <% if @logs.any? %>
-  <ol class="logs">
+  <ul class="logs">
     <%= render @logs %>
-  </ol>
+  </ul>
 <% end %>

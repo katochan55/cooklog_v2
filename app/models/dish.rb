@@ -10,7 +10,7 @@ class Dish < ApplicationRecord
   validates :tips, length: { maximum: 50 }
   validate  :picture_size
 
-  # 料理に付属するメモのフィードを作成
+  # 料理に付属するコメントのフィードを作成
   def feed_memo(dish_id)
     Memo.where("dish_id = ?", dish_id)
   end

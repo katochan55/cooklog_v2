@@ -9,7 +9,7 @@ ja:
     models:
       user: ユーザー
       dish: 料理
-      memo: メモ
+      memo: コメント
       log: クックログ
     attributes:
       user:
@@ -35,12 +35,12 @@ ja:
         picture: 料理の写真
         cook_memo: クックメモ
       memo:
-        user_id: メモ投稿者のID
-        dish_id: メモされた料理のID
-        content: メモ
+        user_id: コメント投稿者のID
+        dish_id: コメントされた料理のID
+        content: コメント
       log:
         dish_id: クックログをつける料理のID
-        content: クックログ
+        content: メモ
   date:
     abbr_day_names:
     - 日

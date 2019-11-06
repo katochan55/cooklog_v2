@@ -1,5 +1,10 @@
+<div class="row">
+  <div class="col-md-12">
+    <h3 class="title-comment">コメント (<%= "#{@dish.memos.count}" %>)</h3>
+  </div>
+</div>
 <% if @memos.any? %>
-  <ol class="memos">
+  <ul class="memos">
     <%= render @memos %>
-  </ol>
+  </ul>
 <% end %>

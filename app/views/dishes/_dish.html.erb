@@ -10,7 +10,7 @@
       <%= render 'users/list_form' %>
     </div>
     <div class="col-md-8">
-      <h2 class="dish-name"><%= link_to dish.name, dish_path(dish) %></h2>
+      <h3 class="dish-name"><%= link_to dish.name, dish_path(dish) %></h3>
       <div class="dish-description"><%= dish.description %></div>
       <div class="dish-user">cooked by <%= link_to dish.user.name, user_path(dish.user) %></div>
       <br><br>

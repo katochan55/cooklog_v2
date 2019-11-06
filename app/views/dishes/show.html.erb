@@ -1,40 +1,49 @@
-<% provide(:title, "お料理情報") %>
+<% provide(:title, "#{@dish.name}") %>
 <% @memos  = @dish.feed_memo(@dish.id) %>
 <% @logs  = @dish.feed_log(@dish.id) %>
 <div id="fh5co-portfolio">
   <div class="container">
-    <h1>お料理情報</h1>
     <div class="row">
-      <aside class="col-md-4">
-        <%= gravatar_for @dish.user, size: 100 %>
-      </aside>
-      <div class="col-md-8">
-        <section class="dish_name_info">
-          <%= @dish.name %>
-        </section>
-        <%= link_to "お料理情報を編集する", edit_dish_path(@dish) %>
-        <%= link_to "お料理情報を削除する", dish_path(@dish), method: :delete,
-                                      data: { confirm: "本当に削除しますか？" } %><br><br>
+      <div class="col-md-4">
         <span class="picture">
-          <%= link_to((image_tag @dish.picture.url), dish_path(@dish.id)) if @dish.picture.url.present? %>
+          <%= link_to((image_tag @dish.picture.url), dish_path(@dish.id), class: 'dish-picture') if @dish.picture.url.present? %>
         </span>
         <%= render 'users/favorite_form' %>
         <%= render 'users/list_form' %>
-        <%= @dish.description %><br>
-        分量：<%= @dish.portion %>人分<br>
-        コツ・ポイント：<%= @dish.tips %><br>
-        参照URL：<%= @dish.reference %><br>
-        所要時間：<%= @dish.required_time %><br>分
-        人気度：<%= @dish.popularity %>
+      </div>
+      <div class="col-md-8">
+        <h2 class="dish-name"><%= @dish.name %></h2>　　
+        <div class="change-dish">
+          <%= link_to "編集", edit_dish_path(@dish), class: 'edit-dish' %>　
+          <%= link_to "削除", dish_path(@dish), method: :delete, class: 'delete-dish',
+                                        data: { confirm: "本当に削除しますか？" } %>
+        </div>
+        <h4><%= @dish.description %></h4>
+        <h4 class="dish-reference">作り方：<%= link_to "#{@dish.reference}", @dish.reference, target: "_blank" %></h4>
+        <div class="tips">
+          <h5 class="title-tips">コツ・ポイント</h5>
+          <h5><%= @dish.tips %></h5>
+        </div>
+        <div class="dish-other-info">
+          <div class="dish-info">
+            <h5>作った回数：</h5><h4><%= @dish.logs.count %></h4><h5> 回</h5>
+          </div>
+          <div class="dish-info">
+            <h5>所要時間：</h5><h4><%= @dish.required_time %></h4><h5> 分</h5>
+          </div>
+          <div class="dish-info">
+            <h5>人気度：</h5><h4><%= @dish.popularity %></h4><h5></h5>
+          </div>
+        </div>
         <% if current_user == @dish.user %>
           <div class="log">
-            <%= render "logs/new" %>
             <%= render "logs/feed_logs" %>
+            <%= render "logs/new" %>
           </div>
         <% end %>
         <div class="memo">
-          <%= render "memos/new" %>
           <%= render "memos/feed_memos" %>
+          <%= render "memos/new" %>
         </div>
       </div>
     </div>

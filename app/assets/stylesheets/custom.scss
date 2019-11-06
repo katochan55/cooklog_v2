@@ -121,11 +121,12 @@ $main-yellow: #fee856;
 .dish-user {
   float: right;
 }
+
 .user-picture .user-name {
   display: inline-block;
 }
 
-h2.dish-name {
+h3.dish-name {
   font-size: 20px;
   margin-top: 0;
   margin-bottom: 5px;
@@ -163,6 +164,101 @@ h2.dish-name {
 // フォロー、フォロワー数表示部
 .stats {
   margin: 5px 0;
+}
+
+//// 料理個別ページ ////
+.dish-user-name {
+  display: inline-block;
+}
+
+h2.dish-name {
+  color: crimson;
+  font-size: 30px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.change-dish {
+  display: inline-block;
+}
+
+.edit-dish .delete-dish {
+  font-size: 15px;
+}
+
+.dish-reference {
+  margin-top: 30px;
+}
+
+.tips {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  h5 {
+    font-size: 17px;
+  }
+}
+
+.title-tips {
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.dish-other-info {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.dish-info {
+  h5 {
+    font-size: 16px;
+    display: inline-block;
+  }
+  h4 {
+    font-size: 20px;
+    color: $main-magenta;
+    display: inline-block;
+  }
+}
+
+h3.add-cooklog {
+  font-size: 17px;
+}
+
+.title-cooklog {
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.logs {
+  list-style: none;
+  li {
+    font-size: 16px;
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+    .delete {
+      font-size: 14px;
+    }
+  }
+}
+
+.title-comment {
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.memos {
+  list-style: none;
+  li {
+    font-size: 14px;
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+    .memo {
+      font-size: 16px;
+    }
+  }
 }
 
 //// フォーム ////
@@ -300,24 +396,6 @@ li.new_notification > a > span {
 
 //// リスト ////
 .lists {
-  list-style: none;
-  li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
-  }
-}
-
-//// メモ ////
-.memos {
-  list-style: none;
-  li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
-  }
-}
-
-//// ログ ////
-.logs {
   list-style: none;
   li {
     padding: 10px 0;

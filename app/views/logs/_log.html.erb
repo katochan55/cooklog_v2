@@ -1,11 +1,19 @@
 <li id="log-<%= log.id %>">
-  <div>
-    <span class="cook_times"><%= @logs.count - log_counter %>回目</span>
-    <span class="created_at"><%= log.created_at.strftime("%Y/%m/%d(%a)") %></span>
-    <span class="log"><%= log.content %></span>
-    <% if current_user.id == log.dish.user_id %>
-      <%= link_to "削除", log_path(log), method: :delete,
-                                    data: { confirm: "本当に削除しますか？" } %>
-    <% end %>
+  <div class="row">
+    <div class="col-md-2">
+      <span class="cook_times"><%= @logs.count - log_counter %>回目</span>
+    </div>
+    <div class="col-md-3">
+      <span class="created_at"><%= log.created_at.strftime("%Y/%m/%d(%a)") %></span>
+    </div>
+    <div class="col-md-5">
+      <span class="content"><%= log.content %></span>
+    </div>
+    <div class="col-md-2">
+      <% if current_user.id == log.dish.user_id %>
+        <%= link_to "削除", log_path(log), method: :delete, class: 'delete',
+                                      data: { confirm: "本当に削除しますか？" } %>
+      <% end %>
+    </div>
   </div>
 </li>

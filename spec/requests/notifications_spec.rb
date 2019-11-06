@@ -39,7 +39,7 @@ RSpec.describe "通知機能", type: :request do
         expect(other_user.reload.notification).to be_truthy
       end
 
-      it "メモによって通知が作成されること" do
+      it "コメントによって通知が作成されること" do
         post memos_path, params: { dish_id: other_dish.id,
                                    memo: { content: "最高です！" } }
         expect(user.reload.notification).to be_falsey
@@ -53,7 +53,7 @@ RSpec.describe "通知機能", type: :request do
         expect(user.reload.notification).to be_falsey
       end
 
-      it "メモによって通知が作成されないこと" do
+      it "コメントによって通知が作成されないこと" do
         post memos_path, params: { dish_id: dish.id,
                                    memo: { content: "最高です！" } }
         expect(user.reload.notification).to be_falsey

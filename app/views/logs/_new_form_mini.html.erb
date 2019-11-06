@@ -1,11 +1,11 @@
 <%= form_for(@log) do |f| %>
   <%= hidden_field_tag :dish_id, @dish.id %>
   <%= hidden_field_tag :list_id, @list.id if @list.present? %>
-  <p class="add-cooklog">この料理を作る〜クックログの追加〜</p>
+  <p class="add-cooklog">この料理を作る 〜クックログの追加〜</p>
   <div class="row">
     <div class="col-md-9">
       <div class="field">
-        <%= f.text_area :content, placeholder: "メモ" %>
+        <%= f.text_area :content, placeholder: "クックメモ" %>
       </div>
     </div>
     <div class="col-md-3">

@@ -66,7 +66,7 @@ RSpec.describe "Dishes", type: :system do
     before do
       login_for_system(user)
       visit dish_path(dish)
-      click_link "お料理情報を編集する"
+      click_link "編集"
     end
 
     context "ページレイアウト" do
@@ -79,7 +79,7 @@ RSpec.describe "Dishes", type: :system do
       it "有効な更新" do
         dish = create(:dish, :picture, user: user)
         visit dish_path(dish)
-        click_link "お料理情報を編集する"
+        click_link "編集"
         fill_in "料理名", with: "編集：イカの塩焼き"
         fill_in "説明", with: "編集：冬に食べたくなる、身体が温まる料理です"
         fill_in "分量", with: 3
@@ -110,7 +110,7 @@ RSpec.describe "Dishes", type: :system do
 
     context "料理の削除処理", js: true do
       it "削除成功のフラッシュが表示されること" do
-        click_on '料理を削除する'
+        click_on '削除'
         page.driver.browser.switch_to.alert.accept
         expect(page).to have_content 'お料理が削除されました'
       end
@@ -124,18 +124,13 @@ RSpec.describe "Dishes", type: :system do
         visit dish_path(dish)
       end
 
-      it "「お料理情報」の文字列が存在すること" do
-        expect(page).to have_content 'お料理情報'
-      end
-
       it "正しいタイトルが表示されること" do
-        expect(page).to have_title full_title('お料理情報')
+        expect(page).to have_title full_title("#{dish.name}")
       end
 
       it "料理情報が表示されること" do
         expect(page).to have_content dish.name
         expect(page).to have_content dish.description
-        expect(page).to have_content dish.portion
         expect(page).to have_content dish.tips
         expect(page).to have_content dish.reference
         expect(page).to have_content dish.required_time
@@ -143,7 +138,7 @@ RSpec.describe "Dishes", type: :system do
       end
 
       it "料理の編集リンクが表示されていること" do
-        expect(page).to have_link 'お料理情報を編集する', href: edit_dish_path(dish)
+        expect(page).to have_link '編集', href: edit_dish_path(dish)
       end
     end
 
@@ -151,26 +146,28 @@ RSpec.describe "Dishes", type: :system do
       it "削除成功のフラッシュが表示されること" do
         login_for_system(user)
         visit dish_path(dish)
-        click_on 'お料理情報を削除する'
+        within find('.change-dish') do
+          click_on '削除'
+        end
         page.driver.browser.switch_to.alert.accept
         expect(page).to have_content 'お料理が削除されました'
       end
     end
 
-    context "メモの登録＆削除" do
-      it "自分の料理に対するメモの登録＆削除が正常に完了すること" do
+    context "コメントの登録＆削除" do
+      it "自分の料理に対するコメントの登録＆削除が正常に完了すること" do
         login_for_system(user)
         visit dish_path(dish)
-        fill_in "メモ", with: "今日の味付けは大成功"
-        click_button "メモを投稿"
+        fill_in "memo_content", with: "今日の味付けは大成功"
+        click_button "コメント"
         within find("#memo-#{Memo.last.id}") do
           expect(page).to have_selector 'span', text: user.name
           expect(page).to have_selector 'span', text: '今日の味付けは大成功'
         end
-        expect(page).to have_content "メモを追加しました！"
+        expect(page).to have_content "コメントを追加しました！"
         click_link "削除", href: memo_path(Memo.last)
         expect(page).not_to have_selector 'span', text: '今日の味付けは大成功'
-        expect(page).to have_content "メモを削除しました"
+        expect(page).to have_content "コメントを削除しました"
       end
 
       it "別ユーザーの料理のコメントには削除リンクが無いこと" do
@@ -189,8 +186,8 @@ RSpec.describe "Dishes", type: :system do
         it "自分の料理に対するログ登録＆削除が正常に完了すること" do
           login_for_system(user)
           visit dish_path(dish)
-          fill_in "クックログ", with: "ログ投稿テスト"
-          click_button "作る"
+          fill_in "log_content", with: "ログ投稿テスト"
+          click_button "ログ追加"
           within find("#log-#{Log.first.id}") do
             expect(page).to have_selector 'span', text: "#{dish.logs.count}回目"
             expect(page).to have_selector 'span', text: %Q{#{Log.last.created_at.strftime("%Y/%m/%d(%a)")}}

@@ -275,9 +275,9 @@ RSpec.describe "Users", type: :system do
           expect(page).to have_content other_dish.created_at.strftime("%Y/%m/%d(%a) %H:%M")
         end
 
-        it "メモによって通知が作成されること" do
-          fill_in "メモ", with: "メモしました"
-          click_button "メモを投稿"
+        it "コメントによって通知が作成されること" do
+          fill_in "memo_content", with: "コメントしました"
+          click_button "コメント"
           expect(page).to have_css 'li.no_notification'
           logout
           login_for_system(other_user)
@@ -285,7 +285,7 @@ RSpec.describe "Users", type: :system do
           visit notifications_path
           expect(page).to have_css 'li.no_notification'
           expect(page).to have_content "あなたの料理に#{user.name}さんがコメントしました。"
-          expect(page).to have_content '「メモしました」'
+          expect(page).to have_content '「コメントしました」'
           expect(page).to have_content other_dish.name
           expect(page).to have_content other_dish.description
           expect(page).to have_content other_dish.created_at.strftime("%Y/%m/%d(%a) %H:%M")
@@ -308,13 +308,13 @@ RSpec.describe "Users", type: :system do
           expect(page).not_to have_content dish.created_at
         end
 
-        it "メモによって通知が作成されないこと" do
-          fill_in "メモ", with: "メモしました"
-          click_button "メモを投稿"
+        it "コメントによって通知が作成されないこと" do
+          fill_in "memo_content", with: "自分でコメント"
+          click_button "コメント"
           expect(page).to have_css 'li.no_notification'
           visit notifications_path
           expect(page).not_to have_content 'コメントしました。'
-          expect(page).not_to have_content 'メモしました'
+          expect(page).not_to have_content '自分でコメント'
           expect(page).not_to have_content other_dish.name
           expect(page).not_to have_content other_dish.description
           expect(page).not_to have_content other_dish.created_at

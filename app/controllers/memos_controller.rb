@@ -6,7 +6,7 @@ class MemosController < ApplicationController
     @user = User.find(@dish.user_id)
     @memo = @dish.memos.build(user_id: current_user.id, content: params[:memo][:content])
     if !@dish.nil? && @memo.save
-      flash[:success] = "メモを追加しました！"
+      flash[:success] = "コメントを追加しました！"
       # 自分以外のユーザーからコメントがあったときのみ通知を作成
       if @user != current_user
         @user.notifications.create(dish_id: @dish.id, variety: 2,
@@ -15,7 +15,7 @@ class MemosController < ApplicationController
         @user.update_attribute(:notification, true)
       end
     else
-      flash[:danger] = "空のメモは投稿できません。"
+      flash[:danger] = "空のコメントは投稿できません。"
     end
     redirect_to request.referrer || root_url
   end
@@ -25,7 +25,7 @@ class MemosController < ApplicationController
     @dish = Dish.find(@memo.dish_id)
     if current_user.id == @memo.user_id
       @memo.destroy
-      flash[:success] = "メモを削除しました"
+      flash[:success] = "コメントを削除しました"
     end
     redirect_to dish_url(@dish)
   end
