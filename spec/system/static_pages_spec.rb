@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "StaticPages", type: :system do
   describe "トップページ" do
-    context "ヘッダー" do
+    context "ページ全体" do
       before do
         visit root_path
       end
@@ -13,10 +13,6 @@ RSpec.describe "StaticPages", type: :system do
 
       it "正しいタイトルが表示されることを確認" do
         expect(page).to have_title full_title
-      end
-
-      it "ヘッダーに「クックログとは？」ページへのリンクがあることを確認" do
-        expect(page).to have_link 'クックログとは？', href: about_path
       end
     end
 

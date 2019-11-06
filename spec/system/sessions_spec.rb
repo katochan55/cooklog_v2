@@ -53,22 +53,23 @@ RSpec.describe "Sessions", type: :system do
       end
 
       it "有効なユーザーでログインする前後でヘッダーが正しく表示されていることを確認" do
-        expect(page).to have_content 'クックログとは？'
-        expect(page).to have_content 'ユーザー登録(無料)'
-        expect(page).to have_content 'ログイン'
-        expect(page).not_to have_content 'ログアウト'
+        expect(page).to have_link 'クックログとは？', href: about_path
+        expect(page).to have_link 'ユーザー登録(無料)', href: signup_path
+        expect(page).to have_link 'ログイン', href: login_path
+        expect(page).not_to have_link 'ログアウト', href: logout_path
 
         fill_in "user_email", with: user.email
         fill_in "user_password", with: user.password
         click_button "ログイン"
 
-        expect(page).to have_content '通知'
-        expect(page).to have_content 'お気に入り'
-        expect(page).to have_content '作る予定リスト'
-        expect(page).to have_content 'プロフィール'
-        expect(page).to have_content 'クックログとは？'
-        expect(page).to have_content 'ログアウト'
-        expect(page).not_to have_content 'ログイン'
+        expect(page).to have_link '通知', href: notifications_path
+        expect(page).to have_link 'お気に入り', href: favorites_path
+        expect(page).to have_link '作る予定リスト', href: lists_path
+        expect(page).to have_link 'プロフィール', href: user_path(user)
+        expect(page).to have_link 'ユーザー一覧', href: users_path
+        expect(page).to have_link 'クックログとは？', href: about_path
+        expect(page).to have_link 'ログアウト', href: logout_path
+        expect(page).not_to have_link 'ログイン', href: login_path
       end
     end
   end

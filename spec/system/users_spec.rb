@@ -33,10 +33,6 @@ RSpec.describe "Users", type: :system do
       it "正しいタイトルが表示されることを確認" do
         expect(page).to have_title full_title('ユーザー登録')
       end
-
-      it "ヘッダーにユーザー登録ページへのリンクがあることを確認" do
-        expect(page).to have_link 'ユーザー登録(無料)', href: signup_path
-      end
     end
 
     context "ユーザー登録処理" do
