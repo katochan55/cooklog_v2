@@ -1,6 +1,6 @@
 <%= link_to "/favorites/#{@dish.id}/destroy",
             method: :delete,
-            id: 'unlike',
+            class: 'unlike',
             remote: true do %>
-  <span class="fa fa-heart like-btn-unlike"></span>
+  <div class="like-btn-unlike"><i class="fa fa-heart"></i> お気に入りに登録済み</div>
 <% end %>

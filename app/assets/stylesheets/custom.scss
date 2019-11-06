@@ -261,6 +261,10 @@ h3.add-cooklog {
   }
 }
 
+.memo-create-at {
+  color: grey;
+}
+
 //// フォーム ////
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
@@ -362,10 +366,16 @@ span.picture {
 //// お気に入り ////
 .like-btn-unlike {
   color: red;
+  margin: 10px 0;
 }
 
 .like-btn-like {
   color: grey;
+  margin: 10px 0;
+}
+
+a.like, a.unlike {
+  text-decoration: none;
 }
 
 .favorites {
@@ -395,6 +405,20 @@ li.new_notification > a > span {
 }
 
 //// リスト ////
+.list-btn-unlist {
+  color: red;
+  margin: 10px 0;
+}
+
+.list-btn-list {
+  color: grey;
+  margin: 10px 0;
+}
+
+a.list, a.unlist {
+  text-decoration: none;
+}
+
 .lists {
   list-style: none;
   li {

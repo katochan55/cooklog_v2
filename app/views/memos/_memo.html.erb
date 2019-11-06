@@ -4,17 +4,19 @@
       <% memo_user = User.find(memo.user_id) %>
       <span class="user"><%= link_to memo_user.name, memo_user %></span>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-8">
       <span class="memo"><%= memo.content %></span>
-    </div>
-    <div class="col-md-2">
-      <%= time_ago_in_words(memo.created_at) %>前
     </div>
     <div class="col-md-2">
       <% if current_user.id == memo.user_id %>
         <%= link_to "削除", memo_path(memo), method: :delete,
                                       data: { confirm: "本当に削除しますか？" } %>
       <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2, col-md-offset-3">
+      <span class="memo-create-at"><%= time_ago_in_words(memo.created_at) %>前</span>
     </div>
   </div>
 </li>

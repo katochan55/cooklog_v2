@@ -1,7 +1,7 @@
 <%= form_for(@log) do |f| %>
   <%= hidden_field_tag :dish_id, @dish.id %>
   <%= hidden_field_tag :list_id, @list.id if @list.present? %>
-  <p class="add-cooklog">この料理を作る 〜クックログの追加〜</p>
+  <p class="add-cooklog"><i class="fas fa-utensils"></i> クックログを追加する</p>
   <div class="row">
     <div class="col-md-9">
       <div class="field">
@@ -10,10 +10,10 @@
     </div>
     <div class="col-md-3">
       <% if @list.present? %>
-        <%= f.submit "作る", class: "btn btn-primary",
-                                      data: { confirm: "この料理を作り、リストから削除しますか？" } %>
+        <%= f.submit "追加", class: "btn btn-primary",
+                                      data: { confirm: "クックログを追加し、リストから削除しますか？" } %>
       <% else %>
-        <%= f.submit "作る", class: "btn btn-primary" %>
+        <%= f.submit "追加", class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>
