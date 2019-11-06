@@ -5,7 +5,9 @@ class UsersController < ApplicationController
   # before_action :admin_user,     only: :index
 
   def index
-    @users = User.paginate(page: params[:page])
+    # @users = User.paginate(page: params[:page])
+    @q = User.paginate(page: params[:page]).ransack(params[:q])
+    @users = @q.result(distinct: true)
   end
 
   def show

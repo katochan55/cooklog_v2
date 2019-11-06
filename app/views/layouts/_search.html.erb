@@ -1,0 +1,14 @@
+<div class="row">
+  <%= search_form_for @q do |f| %>
+    <div class="col-md-10">
+      <div class='form-group'>
+        <%= f.search_field :name_cont, placeholder: "料理名で検索...", class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class='form-group'>
+        <%= f.submit nil, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+</div>

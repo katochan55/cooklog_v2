@@ -2,6 +2,13 @@ class DishesController < ApplicationController
   before_action :logged_in_user, only: [:show, :new, :create, :edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update, :destroy]
 
+  def index
+    # @dishes = Dish.paginate(page: params[:page])
+    @q = Dish.paginate(page: params[:page]).ransack(params[:q])
+    @dishes = @q.result(distinct: true)
+    @log = Log.new
+  end
+
   def show
     @dish = Dish.find(params[:id])
     @memo = Memo.new

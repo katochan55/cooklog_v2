@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     end
   end
   get :record_dish,  to: 'dishes#new'
-  resources :dishes, only: [:show, :new, :create, :edit, :update, :destroy]
+  resources :dishes#, only: [:show, :new, :create, :edit, :update, :destroy]
   resources :relationships, only: [:create, :destroy]
   get :favorites, to: 'favorites#index'
   post   "favorites/:dish_id/create"  => "favorites#create"
