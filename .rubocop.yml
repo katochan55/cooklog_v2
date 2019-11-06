@@ -55,3 +55,15 @@ Airbnb/RiskyActiverecordInvocation:
 
 Style/MixinUsage:
   Enabled: false
+
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
+Layout/MultilineArrayBraceLayout:
+  Enabled: false
+
+Airbnb/ContinuationSlash:
+  Enabled: false
+
+Layout/AlignParameters:
+  Enabled: false
