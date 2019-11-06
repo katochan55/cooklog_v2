@@ -2,20 +2,28 @@
 <% @dish = Dish.find(list.dish_id) %>
 <% user = User.find(list.from_user_id) %>
 <li id="list-<%= @dish.id %>">
-  <div class ="list-dish">
-    <%= list.created_at.strftime("%Y/%m/%d(%a) %H:%M") %> <br>
+  <div class="list-dish">
+    <p><%= list.created_at.strftime("%Y/%m/%d(%a) %H:%M") %> </p>
     <% if list.user_id == list.from_user_id %>
-      この料理を作る予定リストに追加しました。
+      <p class="list-message">この料理を作る予定リストに追加しました。</p>
     <% else %>
-      <%= link_to user.name, user_path(user) %>がこの料理を「食べたい！」と言っています。
-    <% end %> <br>
-    <%= link_to((image_tag @dish.picture.url, size: 150), dish_path(@dish)) %>
-    <%= link_to @dish.name, dish_path(@dish) %>
-    <%= @dish.description %> <br>
-    <%= render "logs/new_form_mini" %>
-    <%= link_to "リストから削除", "/lists/#{list.id}/destroy",
-                           method: :delete,
-                           id: "unlist",
-                           data: { confirm: "本当に削除しますか？" } %>
+      <p class="list-message"><%= link_to user.name, user_path(user) %>さんがこの料理に食べたいリクエストをしました。</p>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <%= link_to((image_tag @dish.picture.url), dish_path(@dish), class: 'dish-picture') %>
+    </div>
+    <div class="col-md-7">
+      <p><%= link_to @dish.name, dish_path(@dish) %></p>
+      <p class="dish-description"><%= @dish.description %></p>
+      <%= render "logs/new_form_mini" %>
+    </div>
+    <div class="col-md-3">
+      <%= link_to "リストから削除", "/lists/#{list.id}/destroy",
+                             method: :delete,
+                             class: "unlist",
+                             data: { confirm: "本当にリストから削除しますか？" } %>
+    </div>
   </div>
 </li>

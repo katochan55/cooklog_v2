@@ -232,6 +232,10 @@ h3.add-cooklog {
   font-size: 17px;
 }
 
+.dish-created-at {
+  color: grey;
+}
+
 .logs {
   list-style: none;
   li {
@@ -386,6 +390,10 @@ a.like, a.unlike {
   }
 }
 
+.cook-user {
+  margin-bottom: 20px;
+}
+
 ////通知 ////
 .notifications {
   list-style: none;
@@ -397,6 +405,10 @@ a.like, a.unlike {
     margin-right: 10px;
     margin-top: -5px;
   }
+}
+
+.notification-message {
+  font-size: 16px;
 }
 
 // 新しい通知があるときは赤文字にする
@@ -425,6 +437,14 @@ a.list, a.unlist {
     padding: 10px 0;
     border-top: 1px solid #e8e8e8;
   }
+}
+
+.list-message {
+  font-size: 16px;
+}
+
+.dish-description {
+  margin-bottom: 20px;
 }
 
 //// old css ////

@@ -1,5 +1,10 @@
 <div id="fh5co-portfolio">
   <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>　作る予定リスト (<%= @lists.count %>)</h3>
+      </div>
+    </div>
     <% if @lists.present? %>
       <ol class="lists">
         <%= render @lists %>

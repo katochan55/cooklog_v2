@@ -7,9 +7,12 @@ Rails:
 
 AllCops:
   Exclude:
+    - 'app/assets/**/*'
     - 'bin/**'
     - 'config/**'
     - 'db/**/*'
+    - 'vendor/**/**/*'
+    - 'vendor/**/**/**/*'
 
 Style/TrailingCommaInHashLiteral:
   Enabled: false

@@ -1,10 +1,17 @@
-<% dish = Dish.find(favorite.dish_id) %>
-<% user = User.find(dish.user_id) %>
+<% @dish = Dish.find(favorite.dish_id) %>
+<% user = @dish.user %>
 <li id="favorite-<%= favorite.id %>">
-  <div class ="favorite-dish">
-    <%= link_to((image_tag dish.picture.url, size: 150), dish_path(dish)) %>
-    <%= link_to dish.name, dish_path(dish) %>
-    <%= dish.description %> <br>
-    cooked by <%= link_to user.name, user_path(user) %>
+  <div class="row favorite-dish">
+    <div class="col-md-2">
+      <%= link_to((image_tag @dish.picture.url), dish_path(@dish), class: 'dish-picture') %>
+    </div>
+    <div class="col-md-7">
+      <p><%= link_to @dish.name, dish_path(@dish) %></p>
+      <p><%= @dish.description %></p>
+      <p class="cook-user">cooked by <%= link_to user.name, user_path(user) %></p>
+      <% if user == current_user %>
+        <%= render "logs/new_form_mini" %>
+      <% end %>
+    </div>
   </div>
 </li>

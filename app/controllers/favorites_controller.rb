@@ -3,6 +3,7 @@ class FavoritesController < ApplicationController
 
   def index
     @favorites = Favorite.where("user_id = ?", current_user.id)
+    @log = Log.new
   end
 
   def create

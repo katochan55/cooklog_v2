@@ -211,7 +211,7 @@ RSpec.describe "Dishes", type: :system do
           login_for_system(user)
           visit root_path
           fill_in "log_content", with: "ログ投稿テスト"
-          click_button "作る"
+          click_button "追加"
           expect(Log.first.content).to eq 'ログ投稿テスト'
           expect(page).to have_content "クックログを追加しました！"
         end
@@ -227,12 +227,12 @@ RSpec.describe "Dishes", type: :system do
         end
       end
 
-      context "マイページから" do
+      context "プロフィールページから" do
         it "自分の料理に対するログ登録が正常に完了すること" do
           login_for_system(user)
           visit user_path(user)
           fill_in "log_content", with: "ログ投稿テスト"
-          click_button "作る"
+          click_button "追加"
           expect(Log.first.content).to eq 'ログ投稿テスト'
           expect(page).to have_content "クックログを追加しました！"
         end
@@ -245,7 +245,7 @@ RSpec.describe "Dishes", type: :system do
           visit lists_path
           expect(page).to have_content dish.name
           fill_in "log_content", with: "ログ投稿テスト"
-          click_button "作る"
+          click_button "追加"
           expect(Log.first.content).to eq 'ログ投稿テスト'
           expect(page).to have_content "クックログを追加しました！"
           expect(List.count).to eq 0

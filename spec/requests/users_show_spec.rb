@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "マイ(ユーザー個別)ページ", type: :request do
+RSpec.describe "プロフィールページ", type: :request do
   let!(:user) { create(:user) }
 
   it "レスポンスが正常に表示されること" do
