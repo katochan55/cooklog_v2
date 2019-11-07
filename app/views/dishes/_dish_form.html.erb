@@ -16,6 +16,31 @@
     <%= f.label :portion %> [人分]
     <%= f.text_field :portion, class: 'form-control', id: 'dish_portion' %>
   </div>
+  <%= f.fields_for :ingredients do |i| %>
+    <div class="row">
+      <div class="col-md-9">
+        <div class = 'form-group'>
+          <%= i.label :name %>
+          <%= i.text_field :name, class: 'form-control ingredient_name' %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class = 'form-group'>
+          <%= i.label :quantity %>
+          <%= i.text_field :quantity, class: 'form-control ingredient_quantitiy' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= render partial: "ingredient_form", locals: {f: f} %>
+  <%= render partial: "ingredient_form", locals: {f: f} %>
+  <%= render partial: "ingredient_form", locals: {f: f} %>
+  <%= render partial: "ingredient_form", locals: {f: f} %>
+  <%= render partial: "ingredient_form", locals: {f: f} %>
+  <%= render partial: "ingredient_form", locals: {f: f} %>
+  <%= render partial: "ingredient_form", locals: {f: f} %>
+  <%= render partial: "ingredient_form", locals: {f: f} %>
+  <%= render partial: "ingredient_form", locals: {f: f} %>
   <div class = 'form-group'>
     <%= f.label :tips %>
     <%= f.text_field :tips, size: "30x4", class: 'form-control', id: 'dish_tips' %>

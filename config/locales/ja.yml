@@ -11,6 +11,7 @@ ja:
       dish: 料理
       memo: コメント
       log: クックログ
+      ingredient: 材料
     attributes:
       user:
         id: ID
@@ -41,6 +42,10 @@ ja:
       log:
         dish_id: クックログをつける料理のID
         content: メモ
+      ingredient:
+        dish_id: 紐づいた料理のID
+        name: 材料（10種類まで登録可）
+        quantity: 量
   date:
     abbr_day_names:
     - 日
