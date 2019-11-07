@@ -19,7 +19,7 @@ RSpec.describe "静的ページ", type: :request do
 
   describe "利用規約ページ" do
     it "正常なレスポンスを返すこと" do
-      get root_path
+      get use_of_terms_path
       expect(response).to be_success
       expect(response).to have_http_status "200"
     end
