@@ -294,6 +294,11 @@ h3.add-cooklog {
   color: grey;
 }
 
+//// 材料 ////
+.title-ingredient-name, .title-ingredient-quantity {
+  font-weight: bold;
+}
+
 //// フォーム ////
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;

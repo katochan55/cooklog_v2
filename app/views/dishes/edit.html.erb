@@ -11,10 +11,6 @@
             <%= image_tag(@dish.picture.url) if @dish.picture.url.present? %>
             <p></p>
           </span>
-          <div class="gravatar_edit">
-            <%= gravatar_for(@dish.user, size: 40) %>
-            <%= @dish.name %>
-          </div>
           <p></p>
           <div class = 'form-group'>
             <%= f.label :name %>
@@ -28,6 +24,28 @@
             <%= f.label :portion %>
             <%= f.text_field :portion, class: 'form-control', id: 'dish_portion' %>
           </div>
+          <div class="row">
+            <div class="col-md-9">
+              <p class="title-ingredient-name">材料名（10個まで登録可）</p>
+            </div>
+            <div class="col-md-3">
+              <p class="title-ingredient-quantity">量</p>
+            </div>
+          </div>
+          <%= f.fields_for :ingredients do |i| %>
+            <div class="row">
+              <div class="col-md-9">
+                <div class = 'form-group'>
+                  <%= i.text_field :name, class: 'form-control ingredient_name' %>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class = 'form-group'>
+                  <%= i.text_field :quantity, class: 'form-control ingredient_quantitiy' %>
+                </div>
+              </div>
+            </div>
+          <% end %>
           <div class = 'form-group'>
             <%= f.label :tips %>
             <%= f.text_field :tips, size: "30x4", class: 'form-control', id: 'dish_tips' %>
