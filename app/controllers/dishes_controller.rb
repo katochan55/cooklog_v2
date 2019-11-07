@@ -3,9 +3,6 @@ class DishesController < ApplicationController
   before_action :correct_user,   only: [:edit, :update, :destroy]
 
   def index
-    # @dishes = Dish.paginate(page: params[:page])
-    @q = Dish.paginate(page: params[:page]).ransack(params[:q])
-    @dishes = @q.result(distinct: true)
     @log = Log.new
   end
 

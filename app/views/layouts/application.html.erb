@@ -9,12 +9,12 @@
     <div class="fh5co-loader"></div>
     <div id="page">
       <%= render 'layouts/navigation' %>
-			<div id="fh5co-portfolio">
+			<div id="fh5co-wireframe">
 				<div class="container">
 					<% flash.each do |message_type, message| %>
 		        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
 		      <% end %>
-					<%= render 'layouts/search' %>
+					<%= render 'layouts/search' if logged_in? %>
 				</div>
     	</div>
       <%= yield %>

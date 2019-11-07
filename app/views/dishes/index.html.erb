@@ -1,8 +1,11 @@
 <% provide(:title, '料理一覧') %>
 <div id="fh5co-portfolio">
   <div class="container">
-    <h1>料理一覧</h1>
-    <%= will_paginate %>
+    <% if @search_word.present? %>
+      <h3>”<%= @search_word[:name_cont] %>”の検索結果：<%= @dishes.count %>件</h3>
+    <% else %>
+      <h3>料理一覧</h3>
+    <% end %>
     <ul class="dishes">
       <%= render @dishes %>
     </ul>

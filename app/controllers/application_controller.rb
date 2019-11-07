@@ -1,6 +1,16 @@
 class ApplicationController < ActionController::Base
+  before_action :set_search
   protect_from_forgery with: :exception
   include SessionsHelper
+
+  # フィードから検索条件に該当する料理を検索
+  def set_search
+    if logged_in?
+      @search_word = params[:q]
+      @q = current_user.feed.paginate(page: params[:page], per_page: 5).ransack(params[:q])
+      @dishes = @q.result(distinct: true)
+    end
+  end
 
   private
 

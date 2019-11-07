@@ -44,6 +44,7 @@ $main-yellow: #fee856;
 
 //// フッター ////
 #fh5co-footer {
+  margin-top: 3em;
   padding: 1em 0;
   border-top: 1px solid #eaeaea;
 }
@@ -59,10 +60,19 @@ $main-yellow: #fee856;
 
 //// ページボディ部 ////
 #fh5co-portfolio {
-  padding: 7em 0;
-  h1 {
-    text-align: center;
+  padding: 0;
+  h3 {
+    text-align: left;
   }
+}
+
+#fh5co-about {
+  padding: 0;
+}
+
+#fh5co-wireframe {
+  padding-top: 7em;
+  padding-bottom: 0;
 }
 
 //// トップページ（ログイン前） ////
