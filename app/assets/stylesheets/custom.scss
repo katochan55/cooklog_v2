@@ -144,8 +144,17 @@ $main-yellow: #fee856;
 }
 
 .dish-user {
-  float: right;
+  // float: right;
+  text-align: right;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
+
+// .escape-float.clearfix:after{
+//   content: "";
+//   clear: both;
+//   display: block;
+// }
 
 .user-picture .user-name {
   display: inline-block;
@@ -231,9 +240,14 @@ h2.dish-name {
   margin-bottom: 0;
 }
 
-.dish-other-info {
+.show-dish-other-info {
   margin-top: 30px;
   margin-bottom: 30px;
+}
+
+.dish-other-info {
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .dish-info {
@@ -327,6 +341,20 @@ table.ingredient th, table.ingredient td{
 
 table.ingredient tr:nth-child(odd){
   background-color: #eee
+}
+
+.dish-ingredient {
+  margin: 15px 0;
+}
+
+.title-ingredient-mini {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+// 料理一覧表示(_dish)
+.dish-description {
+  margin-top: 10px;
 }
 
 //// フォーム ////
@@ -503,7 +531,7 @@ a.list, a.unlist {
   font-size: 16px;
 }
 
-.dish-description {
+.list-dish-description {
   margin-bottom: 20px;
 }
 
