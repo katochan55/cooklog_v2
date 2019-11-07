@@ -299,6 +299,36 @@ h3.add-cooklog {
   font-weight: bold;
 }
 
+.ingredients {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  h5 {
+    font-size: 17px;
+  }
+}
+
+.title-ingredients {
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+table.ingredient {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table.ingredient th, table.ingredient td{
+  padding: 10px 0;
+  text-align: center;
+}
+
+table.ingredient tr:nth-child(odd){
+  background-color: #eee
+}
+
 //// フォーム ////
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;

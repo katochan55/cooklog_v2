@@ -20,6 +20,21 @@
         </div>
         <h4><%= @dish.description %></h4>
         <h4 class="dish-reference">作り方：<%= link_to "#{@dish.reference}", @dish.reference, target: "_blank" %></h4>
+        <div class="ingredients">
+          <h5 class="title-ingredients">材料</h5>
+          <div class="row">
+            <div class="col-md-8">
+              <table class="ingredient">
+                <% @dish.ingredients.each do |i| %>
+                  <tr>
+                    <td><%= i.name %></td>
+                    <td><%= i.quantity %></td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
+          </div>
+        </div>
         <div class="tips">
           <h5 class="title-tips">コツ・ポイント</h5>
           <h5><%= @dish.tips %></h5>
