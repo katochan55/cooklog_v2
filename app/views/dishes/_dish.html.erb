@@ -16,7 +16,9 @@
       <div class="dish-ingredient">
         <p class="title-ingredient-mini">【材料】</p>
         <% dish.ingredients.each_with_index do |ing, i| %>
-          <%= ing.name %>: <%= ing.quantity %><%= "｜" unless i == (dish.ingredients.count - 1) %>
+          <% if ing.name.present? %>
+            <%= "｜" unless i == 0 %><%= ing.name %>: <%= ing.quantity %>
+          <% end %>
         <% end %>
       </div>
       <div class="dish-other-info">

@@ -29,7 +29,7 @@ ja:
         description: 説明
         portion: 分量
         tips: コツ・ポイント
-        reference: 作り方の参照URL
+        reference: 作り方参照用URL
         required_time: 所要時間
         popularity: 人気度
         user_id: 作成者のID

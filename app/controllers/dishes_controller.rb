@@ -15,6 +15,9 @@ class DishesController < ApplicationController
   def new
     @dish = Dish.new
     @dish.ingredients.build
+    # @dish.ingredients.each do |i|
+    #   i.build unless i.name.empty?
+    # end
   end
 
   def create

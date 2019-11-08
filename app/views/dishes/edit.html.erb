@@ -21,12 +21,12 @@
             <%= f.text_field :description, size: "60x4", class: 'form-control', id: 'dish_description' %>
           </div>
           <div class = 'form-group'>
-            <%= f.label :portion %>
+            <%= f.label :portion %> [人分]
             <%= f.text_field :portion, class: 'form-control', id: 'dish_portion' %>
           </div>
           <div class="row">
             <div class="col-md-9">
-              <p class="title-ingredient-name">材料名（10個まで登録可）</p>
+              <p class="title-ingredient-name">材料（10種類まで登録可）</p>
             </div>
             <div class="col-md-3">
               <p class="title-ingredient-quantity">量</p>
@@ -41,7 +41,7 @@
               </div>
               <div class="col-md-3">
                 <div class = 'form-group'>
-                  <%= i.text_field :quantity, class: 'form-control ingredient_quantitiy' %>
+                  <%= i.text_field :quantity, class: 'form-control ingredient_quantity' %>
                 </div>
               </div>
             </div>
@@ -55,11 +55,11 @@
             <%= f.text_field :reference, class: 'form-control', id: 'dish_reference' %>
           </div>
           <div class = 'form-group'>
-            <%= f.label :required_time %>
+            <%= f.label :required_time %> [分]
             <%= f.text_field :required_time, class: 'form-control', id: 'dish_required_time' %>
           </div>
           <div class = 'form-group'>
-            <%= f.label :popularity %>
+            <%= f.label :popularity %> [1~5]
             <%= f.text_field :popularity, class: 'form-control', id: 'dish_popularity' %>
           </div>
           <%= f.submit "更新する", class: "btn btn-primary" %>

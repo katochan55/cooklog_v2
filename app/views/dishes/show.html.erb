@@ -26,10 +26,12 @@
             <div class="col-md-8">
               <table class="ingredient">
                 <% @dish.ingredients.each do |i| %>
-                  <tr>
-                    <td><%= i.name %></td>
-                    <td><%= i.quantity %></td>
-                  </tr>
+                  <% if i.name.present? %>
+                    <tr>
+                      <td><%= i.name %></td>
+                      <td><%= i.quantity %></td>
+                    </tr>
+                  <% end %>
                 <% end %>
               </table>
             </div>
