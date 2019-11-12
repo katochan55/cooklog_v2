@@ -1,5 +1,4 @@
 FROM ruby:2.5
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 
 # curlコマンドでgoogle chrome、chrome driverをインストール
 # apt-getコマンドでchromeと依存関係にある各種パッケージを追加
@@ -9,18 +8,25 @@ RUN dpkg -i google-chrome-stable_current_amd64.deb
 RUN curl -O https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip
 RUN unzip chromedriver_linux64.zip
 
-RUN mkdir /cooklog_v2
-WORKDIR /cooklog_v2
-COPY Gemfile /cooklog_v2/Gemfile
-COPY Gemfile.lock /cooklog_v2/Gemfile.lock
-RUN bundle install
-COPY . /cooklog_v2
+# ルート直下にmyappという名前で作業ディレクトリを作成（コンテナ内のアプリケーションディレクトリ）
+RUN mkdir /myapp
+WORKDIR /myapp
 
-# Add a script to be executed every time the container starts.
+# ホストのGemfileとGemfile.lockをコンテナにコピー
+COPY Gemfile /myapp/Gemfile
+COPY Gemfile.lock /myapp/Gemfile.lock
+
+# bundle installの実行
+RUN bundle install
+
+# ホストのアプリケーションディレクトリ内をすべてコンテナにコピー
+COPY . /myapp
+
+# コンテナ開始ごとに実行されるスクリプト
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
-# Start the main process.
+# Railsサーバー起動
 CMD ["rails", "server", "-b", "0.0.0.0"]
