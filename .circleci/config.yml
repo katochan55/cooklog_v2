@@ -38,8 +38,8 @@ jobs:
             - gemfiles-master-
       - run: bundle config --local path vendor/bundle
       - run:
-        name: bundler update
-        command: gem install bundler
+          name: bundler update
+          command: gem install bundler
       - run:
           name: bundle install
           command: bundle check || bundle install --jobs=8 --clean
