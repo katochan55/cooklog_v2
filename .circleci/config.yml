@@ -28,7 +28,7 @@ jobs:
   rubocop:
     working_directory: ~/cooklog_v2
     docker:
-      - image: circleci/ruby:2.5.1
+      - image: circleci/ruby:2.5.7
     steps:
       - checkout
       - restore_cache:
@@ -37,6 +37,9 @@ jobs:
             - gemfiles-{{ .Branch }}-
             - gemfiles-master-
       - run: bundle config --local path vendor/bundle
+      - run:
+        name: bundler update
+        command: gem install bundler
       - run:
           name: bundle install
           command: bundle check || bundle install --jobs=8 --clean
