@@ -52,7 +52,7 @@ jobs:
       - run:
           name: Yarn Install
           command: |
-            npm install -g yarn
+            brew install yarn
             yarn install --cache-folder ~/.cache/yarn
       # Store yarn / webpacker cache
       - save_cache:
