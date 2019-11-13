@@ -1,7 +1,56 @@
 version: 2
 jobs:
-  build:
+  rspec:
+    working_directory: ~/cooklog_v2
     docker:
-      - image: circleci/golang:1.11.2
+      - image: circleci/ruby
     steps:
-      - run: echo "hello world"
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Setup environment variable
+          command: |
+            echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
+      - run:
+          name: Start containers and verify it is working
+          command: |
+            set -x
+            docker-compose up -d
+            docker exec cooklog_v2_app curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3001
+      - run:
+          name: Setup database
+          command: |
+            docker-compose exec cooklog_v2 bash -c 'yes n | bundle exec rails db:migrate | bundle exec rails db:seed'
+      - run:
+          name: Run rspec
+          command: docker-compose exec web rspec
+
+  rubocop:
+    working_directory: ~/cooklog_v2
+    docker:
+      - image: circleci/ruby:2.5.1
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - gemfiles-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gemfiles-{{ .Branch }}-
+            - gemfiles-master-
+      - run: bundle config --local path vendor/bundle
+      - run:
+          name: bundle install
+          command: bundle check || bundle install --jobs=8 --clean
+      - run:
+          name: Run rubocop
+          command: bundle exec rubocop --parallel
+      - save_cache:
+          key: gemfiles-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - rspec
+      - rubocop
