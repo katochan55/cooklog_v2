@@ -10,7 +10,8 @@ references:
       BUNDLE_JOBS: 3
       BUNDLE_RETRY: 3
       BUNDLE_PATH: vendor/bundle
-      PGHOST: 127.0.0.1
+      # PGHOST: 127.0.0.1
+      PGHOST: 3001
       PGUSER: circleci-demo-ruby
       PGPASSWORD: ""
       RAILS_ENV: test
@@ -87,7 +88,7 @@ jobs:
       # dockerizeユーティリティを使用して、データベースサービスが使用可能になるまで待機
       - run:
           name: Wait for DB
-          command: dockerize -wait tcp://localhost:3001 -timeout 1m
+          command: dockerize -wait tcp://localhost:3000 -timeout 1m
       # DBをセットアップ
       - run:
           name: Database setup
