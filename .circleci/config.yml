@@ -51,20 +51,20 @@ jobs:
           paths:
             - vendor/bundle
       # アプリケーションでYarnを他の何らかの方法で使用する場合にのみ必要
-      - restore_cache:
-          keys:
-            - rails-demo-yarn-{{ checksum "yarn.lock" }}
-            - rails-demo-yarn-
-      - run:
-          name: Yarn Install
-          command: |
-            brew install yarn
-            yarn install --cache-folder ~/.cache/yarn
+      # - restore_cache:
+      #     keys:
+      #       - rails-demo-yarn-{{ checksum "yarn.lock" }}
+      #       - rails-demo-yarn-
+      # - run:
+      #     name: Yarn Install
+      #     command: |
+      #       brew install yarn
+      #       yarn install --cache-folder ~/.cache/yarn
       # Yarnのキャッシュを保存
-      - save_cache:
-          key: rails-demo-yarn-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+      # - save_cache:
+      #     key: rails-demo-yarn-{{ checksum "yarn.lock" }}
+      #     paths:
+      #       - ~/.cache/yarn
   # テストデータベースを設定
   test:
     parallelism: 3
@@ -80,10 +80,10 @@ jobs:
       - run:
           name: Bundle Install
           command: bundle check || bundle install
-      - restore_cache:
-          keys:
-            - rails-demo-yarn-{{ checksum "yarn.lock" }}
-            - rails-demo-yarn-
+      # - restore_cache:
+      #     keys:
+      #       - rails-demo-yarn-{{ checksum "yarn.lock" }}
+      #       - rails-demo-yarn-
       # dockerizeユーティリティを使用して、データベースサービスが使用可能になるまで待機
       - run:
           name: Wait for DB
