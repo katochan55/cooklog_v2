@@ -1,8 +1,11 @@
 version: 2
 
 references:
+  # Ruby実行するdockerを定義
   default_docker_ruby_executor: &default_docker_ruby_executor
-    image: circleci/ruby:2.5.7
+    # Docker Hubからプルするプライマリコンテナ、言語イメージ
+    image: circleci/ruby:2.5.7-stretch-node-browsers-legacy
+    # 必要な環境変数を指定
     environment:
       BUNDLE_JOBS: 3
       BUNDLE_RETRY: 3
@@ -11,7 +14,9 @@ references:
       PGUSER: circleci-demo-ruby
       PGPASSWORD: ""
       RAILS_ENV: test
+  # DB(PostgreSQL)のdockerを定義
   postgres: &postgres
+    # Alpine Linux 上で実行され、PostgreSQL 9.5 をインストールするサービスイメージ
     image: circleci/postgres:9.5-alpine
     environment:
       POSTGRES_USER: circleci-demo-ruby
@@ -23,12 +28,13 @@ jobs:
     docker:
       - *default_docker_ruby_executor
     steps:
+      # プロジェクトコードを作業ディレクトリにチェックアウトするように CircleCI に指示
       - checkout
-      # Which version of bundler?
+      # bundlerのバージョンを確認
       - run:
           name: Which bundler?
           command: bundle -v
-      # bundle cache
+      # バンドルのキャッシュを復元
       - restore_cache:
           keys:
             - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
@@ -39,12 +45,12 @@ jobs:
       - run:
           name: Bundle Install
           command: bundle check || bundle install
-      # Store bundle cache
+      # バンドルのキャッシュを保存
       - save_cache:
           key: rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-      # Only necessary if app uses webpacker or yarn in some other way
+      # アプリケーションでYarnを他の何らかの方法で使用する場合にのみ必要
       - restore_cache:
           keys:
             - rails-demo-yarn-{{ checksum "yarn.lock" }}
@@ -54,11 +60,12 @@ jobs:
           command: |
             brew install yarn
             yarn install --cache-folder ~/.cache/yarn
-      # Store yarn / webpacker cache
+      # Yarnのキャッシュを保存
       - save_cache:
           key: rails-demo-yarn-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
+  # テストデータベースを設定
   test:
     parallelism: 3
     docker:
@@ -77,18 +84,21 @@ jobs:
           keys:
             - rails-demo-yarn-{{ checksum "yarn.lock" }}
             - rails-demo-yarn-
+      # dockerizeユーティリティを使用して、データベースサービスが使用可能になるまで待機
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:3001 -timeout 1m
+      # DBをセットアップ
       - run:
           name: Database setup
           command: bundle exec rails db:schema:load --trace
-      # Run rspec in parallel
+      # RSpecテストを並列実行
       - run:
           command: |
             mkdir /tmp/test-results
             TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
             bundle exec rspec $TESTFILES --profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --format progress
+      # テスト結果を保存
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:
