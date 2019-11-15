@@ -12,6 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/.DS_Store
 
 # Ignore uploaded files in development
 /storage/*
@@ -27,6 +28,8 @@
 /config/master.key
 /.ssh
 
-# Picture
+# Ignore unnecessary pictures
 /public/uploads/*
-/app/assets/images/dish*
+
+# Ignore default test
+/test
