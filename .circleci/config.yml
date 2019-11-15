@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    # docker-composeがインストール済みの仮想マシンをプル
     machine:
       image: circleci/classic:edge
     steps:
@@ -30,7 +31,7 @@ jobs:
       - run:
           name: Rubocopテスト実行
           # command: docker-compose run web rspec
-          command: docker-compose exec web bundle exec bin/rubocop
+          command: docker-compose exec web bundle exec rubocop
       - run:
           name: Docker停止
           command: docker-compose down
