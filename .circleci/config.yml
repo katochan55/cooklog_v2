@@ -5,10 +5,11 @@ jobs:
       image: circleci/classic:edge
     database:
       pre:
-        - mv config/database.ci.yml config/database.yml
-      override:
-        - bundle exec rake db:create db:schema:load RAILS_ENV=test
-        - bundle exec rake db:migrate RAILS_ENV=test
+        - rm ./config/database.yml
+        - mv ./config/database.ci.yml ./config/database.yml
+      # override:
+      #   - bundle exec rake db:create db:schema:load RAILS_ENV=test
+      #   - bundle exec rake db:migrate RAILS_ENV=test
     steps:
       - checkout
       - run:
@@ -17,13 +18,13 @@ jobs:
       - run:
           name: docker-compose up
           command: docker-compose up -d
-      # - run:
-      #     name: sleep for waiting launch db
-      #     command: sleep 1
-      # - run:
-      #     name: "before_test: setup db"
+      - run:
+          name: sleep for waiting launch db
+          command: sleep 1
+      - run:
+          name: "before_test: setup db"
           # command: docker-compose run web rails db:create db:migrate
-          # command: docker-compose exec web bundle exec rails db:create db:migrate
+          command: docker-compose exec web bundle exec rails db:create db:migrate RAILS_ENV=test
       - run:
           name: test
           # command: docker-compose run web rspec
