@@ -8,7 +8,7 @@
 			<div class="col-md-3">
 				<p><%= link_to "新しい料理を作る", record_dish_path, class: "btn btn-primary btn-lg btn-demo btn-record" %></p>
 				<br>
-				<p><%= link_to "みんなの料理をCSV出力", '#', class: "btn btn-primary btn-lg btn-demo btn-csv" %></p>
+				<p><%= link_to "みんなの料理をCSV出力", dishes_path(format: :csv), class: "btn btn-primary btn-lg btn-demo btn-csv" %></p>
 				<br>
 				<p><%= link_to "自分の料理をCSV出力", '#', class: "btn btn-primary btn-lg btn-demo btn-csv" %></p>
 		  </div>

@@ -4,6 +4,12 @@ class DishesController < ApplicationController
 
   def index
     @log = Log.new
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data render_to_string,
+                   filename: "dishes-#{Time.zone.now.strftime('%Y%m%d%S')}.csv" }
+    end
   end
 
   def show
