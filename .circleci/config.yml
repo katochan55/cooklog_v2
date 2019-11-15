@@ -3,15 +3,20 @@ jobs:
   build:
     machine:
       image: circleci/classic:edge
-    database:
-      pre:
-        - rm ./config/database.yml
-        - mv ./config/database.ci.yml ./config/database.yml
-      override:
-        - bundle exec rake db:create db:schema:load RAILS_ENV=test
-        - bundle exec rake db:migrate RAILS_ENV=test
+    # database:
+    #   pre:
+    #     - rm ./config/database.yml
+    #     - mv ./config/database.ci.yml ./config/database.yml
+    #   override:
+    #     - bundle exec rake db:create db:schema:load RAILS_ENV=test
+    #     - bundle exec rake db:migrate RAILS_ENV=test
     steps:
       - checkout
+      - run:
+          name: replace database.yml
+          command: |
+            rm ./config/database.yml
+            mv ./config/database.ci.yml ./config/database.yml
       - run:
           name: docker-compose build
           command: docker-compose build
