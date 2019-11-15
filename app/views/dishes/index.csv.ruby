@@ -28,16 +28,16 @@ CSV.generate do |csv|
     # 初期値を9にしておき、nameが空の材料が見つかったらその配列番号に置き換える
     number_of_ingredients = 9
     dish.ingredients.each_with_index do |ing, index|
-      if ing.name.empty? then
+      if ing.name.empty?
         number_of_ingredients = index
         break
       end
     end
     # 材料の数だけカラムを追加する
     i = 0
-    while i <= number_of_ingredients do
+    while i <= number_of_ingredients
       csv_column_values.push(dish.ingredients[i].name, dish.ingredients[i].quantity)
-      i = i + 1
+      i += 1
     end
     # 最終的なcsv_column_valuesをcsvのセルに追加
     csv << csv_column_values
