@@ -22,7 +22,7 @@ RSpec.describe "お料理編集", type: :request do
                                                picture: picture2,
                                                ingredients_attributes: [
                                                  name: "編集-じゃがいも",
-                                                 quantity: "編集-2個" ] } }
+                                                 quantity: "編集-2個"] } }
       redirect_to dish
       follow_redirect!
       expect(response).to render_template('dishes/show')
@@ -65,7 +65,7 @@ RSpec.describe "お料理編集", type: :request do
                                                popularity: 5,
                                                ingredients_attributes: [
                                                  name: "編集-じゃがいも",
-                                                 quantity: "編集-2個" ] } }
+                                                 quantity: "編集-2個"] } }
       expect(response).to have_http_status "302"
       expect(response).to redirect_to root_path
     end

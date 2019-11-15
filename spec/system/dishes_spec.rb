@@ -27,8 +27,10 @@ RSpec.describe "Dishes", type: :system do
         expect(page).to have_content '料理名'
         expect(page).to have_content '説明'
         expect(page).to have_content '分量 [人分]'
-        expect(page).to have_css 'label[for=dish_ingredients_attributes_0_name]', text: '材料（10種類まで登録可）', count: 1
-        expect(page).to have_css 'label[for=dish_ingredients_attributes_0_quantity]', text: '量', count: 1
+        expect(page).to have_css 'label[for=dish_ingredients_attributes_0_name]',
+                                 text: '材料（10種類まで登録可）', count: 1
+        expect(page).to have_css 'label[for=dish_ingredients_attributes_0_quantity]',
+                                 text: '量', count: 1
         expect(page).to have_content 'コツ・ポイント'
         expect(page).to have_content '作り方参照用URL'
         expect(page).to have_content '所要時間 [分]'
