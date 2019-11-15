@@ -1,9 +1,38 @@
-machine:
-  timezone:
-    Asia/Tokyo
-  ruby:
-    version: 2.5.7
-
-dependencies:
-  pre:
-    - sudo pip install awscli
+version: 2
+jobs:
+  build:
+    machine:
+      image: circleci/classic:edge
+    database:
+      pre:
+        - mv config/database.ci.yml config/database.yml
+      override:
+        - bundle exec rake db:create db:schema:load RAILS_ENV=test
+        - bundle exec rake db:migrate RAILS_ENV=test
+    steps:
+      - checkout
+      - run:
+          name: docker-compose build
+          command: docker-compose build
+      - run:
+          name: docker-compose up
+          command: docker-compose up -d
+      # - run:
+      #     name: sleep for waiting launch db
+      #     command: sleep 1
+      # - run:
+      #     name: "before_test: setup db"
+          # command: docker-compose run web rails db:create db:migrate
+          # command: docker-compose exec web bundle exec rails db:create db:migrate
+      - run:
+          name: test
+          # command: docker-compose run web rspec
+          command: docker-compose exec web bundle exec rspec
+      - run:
+          name: docker-compose down
+          command: docker-compose down
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
