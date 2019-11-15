@@ -37,6 +37,20 @@ reference = "https://cookpad.com/recipe/2798655"
 required_time = 30
 popularity = 5
 cook_memo = "初めて作った割にはうまくできた！"
+ing_name = "じゃがいも"
+ing_quantity = "2個"
+ingredients_attributes = [
+                          { name: ing_name, quantity: ing_quantity },
+                          { name: "", quantity: "" },
+                          { name: "", quantity: "" },
+                          { name: "", quantity: "" },
+                          { name: "", quantity: "" },
+                          { name: "", quantity: "" },
+                          { name: "", quantity: "" },
+                          { name: "", quantity: "" },
+                          { name: "", quantity: "" },
+                          { name: "", quantity: "" }
+                        ]
 
 6.times do |n|
   Dish.create!(
@@ -51,6 +65,7 @@ cook_memo = "初めて作った割にはうまくできた！"
         required_time: required_time,
         popularity: popularity,
         cook_memo: cook_memo,
+        ingredients_attributes: ingredients_attributes,
       },
       {
         name: Faker::Food.dish,
@@ -62,12 +77,10 @@ cook_memo = "初めて作った割にはうまくできた！"
         required_time: required_time,
         popularity: popularity,
         cook_memo: cook_memo,
+        ingredients_attributes: ingredients_attributes,
       }
     ]
   )
-   # dish = Dish.first
-   # Log.create!(dish_id: dish.id,
-   #             content: dish.cook_memo)
 end
 
 2.times do |n|
@@ -83,6 +96,7 @@ end
         required_time: required_time,
         popularity: popularity,
         cook_memo: cook_memo,
+        ingredients_attributes: ingredients_attributes,
       },
       {
         name: dish_name_2,
@@ -94,6 +108,7 @@ end
         required_time: required_time,
         popularity: popularity,
         cook_memo: cook_memo,
+        ingredients_attributes: ingredients_attributes,
       },
       {
         name: dish_name_1,
@@ -105,6 +120,7 @@ end
         required_time: required_time,
         popularity: popularity,
         cook_memo: cook_memo,
+        ingredients_attributes: ingredients_attributes,
       },
       {
         name: dish_name_2,
@@ -116,9 +132,16 @@ end
         required_time: required_time,
         popularity: popularity,
         cook_memo: cook_memo,
+        ingredients_attributes: ingredients_attributes,
       }
     ]
   )
+end
+
+# ログ
+Dish.all.each do |dish|
+  Log.create!(dish_id: dish.id,
+              content: dish.cook_memo)
 end
 
 # リレーションシップ

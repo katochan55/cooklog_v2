@@ -5,10 +5,11 @@ class DishesController < ApplicationController
   def index
     @log = Log.new
 
+    # CSV出力時のファイル名指定
     respond_to do |format|
       format.html
       format.csv { send_data render_to_string,
-                   filename: "dishes-#{Time.zone.now.strftime('%Y%m%d%S')}.csv" }
+                   filename: "みんなの料理一覧_#{Time.current.strftime('%Y%m%d_%H%M')}.csv" }
     end
   end
 
@@ -21,9 +22,6 @@ class DishesController < ApplicationController
   def new
     @dish = Dish.new
     @dish.ingredients.build
-    # @dish.ingredients.each do |i|
-    #   i.build unless i.name.empty?
-    # end
   end
 
   def create
