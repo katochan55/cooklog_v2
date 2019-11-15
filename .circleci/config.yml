@@ -1,13 +1,12 @@
 version: 2
-
 references:
   default_docker_ruby_executor: &default_docker_ruby_executor
     # docker-composeがインストール済みの仮想マシンをプル
-    machine:
-      image: circleci/classic:edge
+    # machine:
+    image: circleci/classic:edge
 jobs:
   build:
-    docker: *default_docker_ruby_executor
+    machine: *default_docker_ruby_executor
     steps:
       - checkout
       - restore_cache:
@@ -37,7 +36,7 @@ jobs:
 
   test:
     parallelism: 3
-    docker:
+    machine:
       - *default_docker_ruby_executor
     steps:
       - checkout
