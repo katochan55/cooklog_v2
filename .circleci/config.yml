@@ -1,20 +1,11 @@
 version: 2
-references:
-  default_docker_ruby_executor: &default_docker_ruby_executor
-    # docker-composeがインストール済みの仮想マシンをプル
-    # machine:
-    image: circleci/classic:edge
 jobs:
   build:
-    machine: *default_docker_ruby_executor
+    # docker-composeがインストール済みの仮想マシンをプル
+    machine:
+      image: circleci/classic:edge
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - gemfiles-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - gemfiles-{{ .Branch }}-
-            - gemfiles-master-
-      - run: bundle config --local path vendor/bundle
       - run:
           name: database.ymlの再設定
           command: |
@@ -29,41 +20,12 @@ jobs:
       - run:
           name: データベースのセットアップ
           command: docker-compose exec web bundle exec rails db:create db:migrate RAILS_ENV=test
-      - save_cache:
-          key: gemfiles-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-
-  test:
-    parallelism: 3
-    machine:
-      - *default_docker_ruby_executor
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - gemfiles-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - gemfiles-{{ .Branch }}-
-            - gemfiles-master-
       - run:
           name: RSpecテスト実行
           command: docker-compose exec web bundle exec bin/rspec
       - run:
           name: Rubocopテスト実行
           command: docker-compose exec web bundle exec rubocop
-      - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
       - run:
           name: Dockerコンテナの停止
           command: docker-compose down
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
