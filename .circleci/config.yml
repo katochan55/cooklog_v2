@@ -6,6 +6,7 @@ jobs:
       image: circleci/classic:edge
     steps:
       - checkout
+      # キャッシュを復元しているか確認
       - restore_cache:
           keys:
             - gemfiles-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
