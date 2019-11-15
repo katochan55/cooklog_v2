@@ -22,6 +22,21 @@ class Dish < ApplicationRecord
     Log.where("dish_id = ?", dish_id)
   end
 
+  # CSV出力するカラムを指定
+  def self.csv_attributes
+    ["name", "description"]
+  end
+
+  # 料理データをCSV出力する
+  def self.generate_csv
+    CSV.generate(headers: true) do |csv|
+      csv << csv_attributes
+      all.each do |dish|
+        csv << csv_attributes.map{ |attr| dish.send(attr) }
+      end
+    end
+  end
+
   private
 
   # アップロードされた画像のサイズを制限する
