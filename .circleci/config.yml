@@ -6,37 +6,36 @@ jobs:
       image: circleci/classic:edge
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - gemfiles-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gemfiles-{{ .Branch }}-
+            - gemfiles-master-
+      - run: bundle config --local path vendor/bundle
       - run:
           name: database.ymlの再設定
           command: |
             rm ./config/database.yml
             mv ./config/database.ci.yml ./config/database.yml
       - run:
-          name: Dockerビルド
+          name: Dockerコンテナのビルド
           command: docker-compose build
       - run:
-          name: Docker起動
+          name: Dockerコンテナの起動
           command: docker-compose up -d
-      # - run:
-      #     name: sleep for waiting launch db
-      #     command: sleep 1
       - run:
           name: データベースのセットアップ
-          # command: docker-compose run web rails db:create db:migrate
           command: docker-compose exec web bundle exec rails db:create db:migrate RAILS_ENV=test
       - run:
           name: RSpecテスト実行
-          # command: docker-compose run web rspec
           command: docker-compose exec web bundle exec bin/rspec
       - run:
           name: Rubocopテスト実行
-          # command: docker-compose run web rspec
           command: docker-compose exec web bundle exec rubocop
+      - save_cache:
+          key: gemfiles-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
       - run:
-          name: Docker停止
+          name: Dockerコンテナの停止
           command: docker-compose down
-# workflows:
-#   version: 2
-#   build:
-#     jobs:
-#       - build
