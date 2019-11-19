@@ -2,6 +2,8 @@ class Dish < ApplicationRecord
   belongs_to :user
   default_scope -> { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
+  has_many :favorites, dependent: :destroy
+  has_many :lists, dependent: :destroy
   has_many :memos, dependent: :destroy
   has_many :logs, dependent: :destroy
   has_many :ingredients, dependent: :destroy
