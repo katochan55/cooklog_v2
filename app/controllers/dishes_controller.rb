@@ -1,7 +1,6 @@
 class DishesController < ApplicationController
   before_action :logged_in_user
   before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: :destroy
 
   def index
     @log = Log.new
@@ -55,9 +54,14 @@ class DishesController < ApplicationController
 
   def destroy
     @dish = Dish.find(params[:id])
-    @dish.destroy
-    flash[:success] = "料理が削除されました"
-    redirect_to request.referrer == user_url(@dish.user) ? user_url(@dish.user) : root_url
+    if current_user.admin? || current_user?(@dish.user)
+      @dish.destroy
+      flash[:success] = "料理が削除されました"
+      redirect_to request.referrer == user_url(@dish.user) ? user_url(@dish.user) : root_url
+    else
+      flash[:danger] = "他人の料理は削除できません"
+      redirect_to root_url
+    end
   end
 
   private
@@ -72,10 +76,5 @@ class DishesController < ApplicationController
       # 現在のユーザーが削除対象の料理を保有しているかどうか確認
       @dish = current_user.dishes.find_by(id: params[:id])
       redirect_to root_url if @dish.nil?
-    end
-
-    # 管理者ユーザーかどうか確認
-    def admin_user
-      redirect_to(root_url) unless current_user.admin?
     end
 end

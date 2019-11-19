@@ -103,6 +103,7 @@ RSpec.describe "Users", type: :system do
   describe "プロフィールページ" do
     context "ページレイアウト" do
       before do
+        login_for_system(user)
         create_list(:dish, 10, user: user)
         visit user_path(user)
       end
@@ -142,7 +143,7 @@ RSpec.describe "Users", type: :system do
           expect(page).to have_content dish.user.name
           expect(page).to have_content dish.logs.count
           expect(page).to have_content dish.required_time
-          expect(page).to have_content dish.popularity
+          expect(page).to have_content "★" * dish.popularity + "☆" * (5 - dish.popularity)
           dish.ingredients.each do |i|
             expect(page).to have_content i.name
             expect(page).to have_content i.quantity

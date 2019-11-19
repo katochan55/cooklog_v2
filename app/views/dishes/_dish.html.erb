@@ -24,7 +24,11 @@
       <div class="dish-other-info">
         <span class="cook_times">作った回数：<%= dish.logs.count %>回　</span>
         <span class="required_time">所要時間：<%= dish.required_time %>分　</span>
-        <span class="popularity">人気度：<%= dish.popularity %></span>
+        <span class="popularity">人気度：
+          <% if @dish.popularity.present? %>
+            <%= "★" * dish.popularity %><%= "☆" * (5 - dish.popularity) %>
+          <% end %>
+        </span>
       </div>
       <% if current_user == dish.user %>
         <%= render "logs/new_form_mini" %>

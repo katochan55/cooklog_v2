@@ -42,6 +42,18 @@ RSpec.describe Dish, type: :model do
       dish.valid?
       expect(dish.errors[:user_id]).to include("を入力してください")
     end
+
+    it "人気度が1以上でなければ無効な状態であること" do
+      dish = build(:dish, popularity: 0)
+      dish.valid?
+      expect(dish.errors[:popularity]).to include("は1以上の値にしてください")
+    end
+
+    it "人気度が5以下でなければ無効な状態であること" do
+      dish = build(:dish, popularity: 6)
+      dish.valid?
+      expect(dish.errors[:popularity]).to include("は5以下の値にしてください")
+    end
   end
 
   context "並び順" do
