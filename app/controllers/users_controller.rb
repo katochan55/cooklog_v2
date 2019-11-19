@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy,
                                         :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
-  # before_action :admin_user,     only: :index
 
   def index
     @users = User.paginate(page: params[:page])
@@ -55,6 +54,7 @@ class UsersController < ApplicationController
       flash[:success] = "アカウントを削除しました"
       redirect_to root_url
     else
+      flash[:danger] = "他人のアカウントは削除できません"
       redirect_to root_url
     end
   end

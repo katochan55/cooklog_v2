@@ -18,9 +18,13 @@
             <section class="stats">
               <%= render 'shared/stats' %>
             </section>
-            <%= link_to "プロフィール編集", edit_user_path(@user) %>　
-            <%= link_to "アカウント削除", user_path(@user), method: :delete,
-                                          data: { confirm: "本当に削除しますか？" } %>
+            <% if current_user == @user %>
+              <div class="account-edit"><%= link_to "プロフィール編集", edit_user_path(@user) %></div>
+            <% end %>
+            <% if current_user.admin? || (current_user == @user) %>
+              <div class="account-delete"><%= link_to "アカウント削除", user_path(@user), method: :delete,
+                                            data: { confirm: "本当に削除しますか？" } %></div>
+            <% end %>
             <br>
             <%= render 'follow_form' if logged_in? %>
           </div>
