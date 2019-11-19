@@ -1,6 +1,7 @@
 class DishesController < ApplicationController
   before_action :logged_in_user
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update]
+  before_action :admin_user, only: :destroy
 
   def index
     @log = Log.new
@@ -30,7 +31,7 @@ class DishesController < ApplicationController
     @dish = current_user.dishes.build(dish_params)
     @memo = Memo.new
     if @dish.save
-      flash[:success] = "お料理が登録されました！"
+      flash[:success] = "料理が登録されました！"
       Log.create(dish_id: @dish.id, content: @dish.cook_memo)
       redirect_to dish_url(@dish)
     else
@@ -45,7 +46,7 @@ class DishesController < ApplicationController
   def update
     @dish = Dish.find(params[:id])
     if @dish.update_attributes(dish_params)
-      flash[:success] = "お料理情報が更新されました！"
+      flash[:success] = "料理情報が更新されました！"
       redirect_to @dish
     else
       render 'edit'
@@ -53,8 +54,9 @@ class DishesController < ApplicationController
   end
 
   def destroy
+    @dish = Dish.find(params[:id])
     @dish.destroy
-    flash[:success] = "お料理が削除されました"
+    flash[:success] = "料理が削除されました"
     redirect_to request.referrer == user_url(@dish.user) ? user_url(@dish.user) : root_url
   end
 
@@ -70,5 +72,10 @@ class DishesController < ApplicationController
       # 現在のユーザーが削除対象の料理を保有しているかどうか確認
       @dish = current_user.dishes.find_by(id: params[:id])
       redirect_to root_url if @dish.nil?
+    end
+
+    # 管理者ユーザーかどうか確認
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
     end
 end

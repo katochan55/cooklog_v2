@@ -14,9 +14,13 @@
       <div class="col-md-8">
         <h2 class="dish-name"><%= @dish.name %></h2>　　
         <div class="change-dish">
-          <%= link_to "編集", edit_dish_path(@dish), class: 'edit-dish' %>　
-          <%= link_to "削除", dish_path(@dish), method: :delete, class: 'delete-dish',
-                                        data: { confirm: "本当に削除しますか？" } %>
+          <% if current_user == @dish.user %>
+            <%= link_to "編集", edit_dish_path(@dish), class: 'edit-dish' %>　
+          <% end %>
+          <% if current_user.admin? || (current_user == @dish.user) %>
+            <%= link_to "削除", dish_path(@dish), method: :delete, class: 'delete-dish',
+                                          data: { confirm: "本当に削除しますか？" } %>
+          <% end %>
         </div>
         <h4><%= @dish.description %></h4>
         <h4 class="dish-reference">作り方：<%= link_to "#{@dish.reference}", @dish.reference, target: "_blank" %></h4>

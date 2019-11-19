@@ -14,19 +14,19 @@
         </div>
         <p></p>
         <div class = 'form-group'>
-          <%= f.label :name %>
+          <%= f.label :name %>　<span class="input-need">※必須</span>
           <%= f.text_field :name, class: 'form-control', id: 'user_name' %>
         </div>
         <div class = 'form-group'>
-          <%= f.label :email %>
+          <%= f.label :email %>　<span class="input-need">※必須</span>
           <%= f.text_field :email, class: 'form-control', id: 'user_email' %>
         </div>
         <div class = 'form-group'>
-          <%= f.label :introduction %>
+          <%= f.label :introduction %>　<span class="input-unneed">※任意</span>
           <%= f.text_area :introduction, size: "60x4", class: 'form-control', id: 'user_introduction' %>
         </div>
         <div class = 'form-group'>
-          <%= f.label :sex %>
+          <%= f.label :sex %>　<span class="input-unneed">※任意</span>
           <%= f.text_field :sex, class: 'form-control', id: 'user_sex' %>
           <!-- select_tag(:select_sex, options_for_select([ ['未選択', 0], ['男性', 1], ['女性', 2] ]) ) -->
         </div>

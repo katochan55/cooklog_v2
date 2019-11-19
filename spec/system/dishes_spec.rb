@@ -7,19 +7,19 @@ RSpec.describe "Dishes", type: :system do
   let!(:memo) { create(:memo, dish: dish, user_id: user.id) }
   let!(:log) { create(:log, dish: dish) }
 
-  describe "お料理登録ページ" do
+  describe "料理登録ページ" do
     before do
       login_for_system(user)
       visit record_dish_path
     end
 
     context "ページレイアウト" do
-      it "「お料理登録」の文字列が存在すること" do
-        expect(page).to have_content 'お料理登録'
+      it "「料理登録」の文字列が存在すること" do
+        expect(page).to have_content '料理登録'
       end
 
       it "正しいタイトルが表示されること" do
-        expect(page).to have_title full_title('お料理登録')
+        expect(page).to have_title full_title('料理登録')
       end
 
       it "入力部分に適切なラベルが表示されること" do
@@ -48,8 +48,8 @@ RSpec.describe "Dishes", type: :system do
       end
     end
 
-    context "お料理登録処理" do
-      it "有効な情報でお料理登録を行うとお料理登録成功のフラッシュが表示されること" do
+    context "料理登録処理" do
+      it "有効な情報で料理登録を行うと料理登録成功のフラッシュが表示されること" do
         fill_in "料理名", with: "イカの塩焼き"
         fill_in "説明", with: "冬に食べたくなる、身体が温まる料理です"
         fill_in "分量", with: 1.5
@@ -61,7 +61,7 @@ RSpec.describe "Dishes", type: :system do
         fill_in "dish[ingredients_attributes][0][quantity]", with: "2個"
         attach_file "dish[picture]", "#{Rails.root}/spec/fixtures/test_dish.jpg"
         click_button "登録する"
-        expect(page).to have_content "お料理が登録されました！"
+        expect(page).to have_content "料理が登録されました！"
         expect(page).to have_link(href: dish_path(Dish.first))
       end
 
@@ -71,7 +71,7 @@ RSpec.describe "Dishes", type: :system do
         expect(page).to have_link(href: dish_path(Dish.first))
       end
 
-      it "無効な情報でお料理登録を行うとお料理登録失敗のフラッシュが表示されること" do
+      it "無効な情報で料理登録を行うと料理登録失敗のフラッシュが表示されること" do
         fill_in "料理名", with: ""
         fill_in "説明", with: "冬に食べたくなる、身体が温まる料理です"
         fill_in "分量", with: 1.5
@@ -85,7 +85,7 @@ RSpec.describe "Dishes", type: :system do
     end
   end
 
-  describe "お料理編集ページ" do
+  describe "料理編集ページ" do
     before do
       login_for_system(user)
       visit dish_path(dish)
@@ -133,7 +133,7 @@ RSpec.describe "Dishes", type: :system do
         fill_in "dish[ingredients_attributes][0][quantity]", with: "編集-2個"
         attach_file "dish[picture]", "#{Rails.root}/spec/fixtures/test_dish2.jpg"
         click_button "更新する"
-        expect(page).to have_content "お料理情報が更新されました！"
+        expect(page).to have_content "料理情報が更新されました！"
         expect(dish.reload.name).to eq "編集：イカの塩焼き"
         expect(dish.reload.description).to eq "編集：冬に食べたくなる、身体が温まる料理です"
         expect(dish.reload.portion).to eq 3
@@ -158,12 +158,12 @@ RSpec.describe "Dishes", type: :system do
       it "削除成功のフラッシュが表示されること" do
         click_on '削除'
         page.driver.browser.switch_to.alert.accept
-        expect(page).to have_content 'お料理が削除されました'
+        expect(page).to have_content '料理が削除されました'
       end
     end
   end
 
-  describe "お料理詳細ページ" do
+  describe "料理詳細ページ" do
     context "ページレイアウト" do
       before do
         login_for_system(user)
@@ -200,7 +200,7 @@ RSpec.describe "Dishes", type: :system do
           click_on '削除'
         end
         page.driver.browser.switch_to.alert.accept
-        expect(page).to have_content 'お料理が削除されました'
+        expect(page).to have_content '料理が削除されました'
       end
     end
 
@@ -398,7 +398,7 @@ RSpec.describe "Dishes", type: :system do
     end
   end
 
-  describe "お料理一覧ページ" do
+  describe "料理一覧ページ" do
     context "CSV出力機能" do
       before do
         login_for_system(user)

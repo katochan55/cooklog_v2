@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "お料理編集", type: :request do
+RSpec.describe "料理編集", type: :request do
   let!(:user) { create(:user) }
   let!(:other_user) { create(:user) }
   let!(:dish) { create(:dish, user: user) }

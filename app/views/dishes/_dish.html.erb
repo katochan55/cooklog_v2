@@ -35,10 +35,12 @@
             <%= time_ago_in_words(dish.created_at) %>前に投稿
           </div>
         </div>
-        <div class="col-md-6">
-          <%= link_to "削除", dish_path(dish), method: :delete,
-                             data: { confirm: "本当に削除しますか？" } %>
-        </div>
+        <% if current_user.admin? || (current_user == dish.user) %>
+          <div class="col-md-6">
+            <%= link_to "削除", dish_path(dish), method: :delete,
+                               data: { confirm: "本当に削除しますか？" } %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

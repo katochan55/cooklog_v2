@@ -6,30 +6,30 @@
         <%= form_for(@dish) do |f| %>
           <%= render 'shared/error_messages', object: f.object %>
           <span class="picture">
-            <%= f.label :picture %>
+            <%= f.label :picture %>　<span class="input-unneed">※任意</span>
             <%= f.file_field :picture, accept: 'image/jpeg,image/png', class: 'form-control', id: 'dish_picture' %>
             <%= image_tag(@dish.picture.url) if @dish.picture.url.present? %>
             <p></p>
           </span>
           <p></p>
           <div class = 'form-group'>
-            <%= f.label :name %>
+            <%= f.label :name %>　<span class="input-need">※必須</span>
             <%= f.text_field :name, class: 'form-control', id: 'dish_name' %>
           </div>
           <div class = 'form-group'>
-            <%= f.label :description %>
+            <%= f.label :description %>　<span class="input-unneed">※任意</span>
             <%= f.text_field :description, size: "60x4", class: 'form-control', id: 'dish_description' %>
           </div>
           <div class = 'form-group'>
-            <%= f.label :portion %> [人分]
+            <%= f.label :portion %> [人分]　<span class="input-unneed">※任意</span>
             <%= f.text_field :portion, class: 'form-control', id: 'dish_portion' %>
           </div>
           <div class="row">
             <div class="col-md-9">
-              <p class="title-ingredient-name">材料（10種類まで登録可）</p>
+              <p class="title-ingredient-name">材料（10種類まで登録可）　<span class="input-unneed">※任意</span></p>
             </div>
             <div class="col-md-3">
-              <p class="title-ingredient-quantity">量</p>
+              <p class="title-ingredient-quantity">量　<span class="input-unneed">※任意</span></p>
             </div>
           </div>
           <%= f.fields_for :ingredients do |i| %>
@@ -47,19 +47,19 @@
             </div>
           <% end %>
           <div class = 'form-group'>
-            <%= f.label :tips %>
+            <%= f.label :tips %>　<span class="input-unneed">※任意</span>
             <%= f.text_field :tips, size: "30x4", class: 'form-control', id: 'dish_tips' %>
           </div>
           <div class = 'form-group'>
-            <%= f.label :reference %>
+            <%= f.label :reference %>　<span class="input-unneed">※任意</span>
             <%= f.text_field :reference, class: 'form-control', id: 'dish_reference' %>
           </div>
           <div class = 'form-group'>
-            <%= f.label :required_time %> [分]
+            <%= f.label :required_time %> [分]　<span class="input-unneed">※任意</span>
             <%= f.text_field :required_time, class: 'form-control', id: 'dish_required_time' %>
           </div>
           <div class = 'form-group'>
-            <%= f.label :popularity %> [1~5]
+            <%= f.label :popularity %> [1~5]　<span class="input-unneed">※任意</span>
             <%= f.text_field :popularity, class: 'form-control', id: 'dish_popularity' %>
           </div>
           <%= f.submit "更新する", class: "btn btn-primary" %>
