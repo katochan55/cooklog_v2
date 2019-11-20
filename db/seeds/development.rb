@@ -407,3 +407,41 @@ Dish.create!(
     }
   ]
 )
+
+dish3 = Dish.find(3)
+dish6 = Dish.find(6)
+dish12 = Dish.find(12)
+dish13 = Dish.find(13)
+dish14 = Dish.find(14)
+dish15 = Dish.find(15)
+
+# お気に入り登録
+user3.favorite(dish13)
+user3.favorite(dish14)
+user1.favorite(dish15)
+user2.favorite(dish12)
+
+# コメント
+dish15.memos.create(user_id: user1.id, content: "美味しそう！私も食べてみたい！")
+dish12.memos.create(user_id: user2.id, content: "また作ってー！")
+
+# 通知
+user3.notifications.create(user_id: user3.id, dish_id: dish15.id,
+                           from_user_id: user1.id, variety: 1)
+user3.notifications.create(user_id: user3.id, dish_id: dish15.id,
+                           from_user_id: user1.id, variety: 2, content: "美味しそう！私も食べてみたい！")
+user3.notifications.create(user_id: user3.id, dish_id: dish12.id,
+                           from_user_id: user2.id, variety: 1)
+user3.notifications.create(user_id: user3.id, dish_id: dish12.id,
+                           from_user_id: user2.id, variety: 2, content: "また作ってー！")
+# リスト
+user3.list(dish3)
+user1.list(dish15)
+user3.list(dish6)
+user2.list(dish12)
+
+# ログ
+Dish.all.each do |dish|
+  Log.create!(dish_id: dish.id,
+              content: dish.cook_memo)
+end
