@@ -17,21 +17,11 @@ User.create!(
   ]
 )
 
-# 98.times do |n|
-#   name  = Faker::Name.name
-#   email = "sample-#{n + 1}@example.com"
-#   password = "password"
-#   User.create!(name:  name,
-#                email: email,
-#                password:              password,
-#                password_confirmation: password)
-# end
-
 # 料理
 dish_name_1 = "季節の野菜と豚肉を使った野菜炒め"
 dish_name_2 = "かに玉"
 description = "冬に食べたくなる、身体が温まる料理です"
-portion = 1.5
+portion = 2
 tips = "ピリッと辛めに味付けするのがオススメ"
 reference = "https://cookpad.com/recipe/2798655"
 required_time = 30
@@ -52,36 +42,38 @@ ingredients_attributes = [
                           { name: "", quantity: "" }
                         ]
 
-6.times do |n|
-  Dish.create!(
-    [
-      {
-        name: "その他食べ物",
-        user_id: 1,
-        description: description,
-        portion: portion,
-        tips: tips,
-        reference: reference,
-        required_time: required_time,
-        popularity: popularity,
-        cook_memo: cook_memo,
-        ingredients_attributes: ingredients_attributes,
-      },
-      {
-        name: "その他食べ物",
-        user_id: 2,
-        description: description,
-        portion: portion,
-        tips: tips,
-        reference: reference,
-        required_time: required_time,
-        popularity: popularity,
-        cook_memo: cook_memo,
-        ingredients_attributes: ingredients_attributes,
-      }
-    ]
-  )
-end
+
+#
+# 6.times do |n|
+#   Dish.create!(
+#     [
+#       {
+#         name: "その他食べ物",
+#         user_id: 1,
+#         description: description,
+#         portion: portion,
+#         tips: tips,
+#         reference: reference,
+#         required_time: required_time,
+#         popularity: popularity,
+#         cook_memo: cook_memo,
+#         ingredients_attributes: ingredients_attributes,
+#       },
+#       {
+#         name: "その他食べ物",
+#         user_id: 2,
+#         description: description,
+#         portion: portion,
+#         tips: tips,
+#         reference: reference,
+#         required_time: required_time,
+#         popularity: popularity,
+#         cook_memo: cook_memo,
+#         ingredients_attributes: ingredients_attributes,
+#       }
+#     ]
+#   )
+# end
 
 2.times do |n|
   Dish.create!(
@@ -96,6 +88,7 @@ end
         required_time: required_time,
         popularity: popularity,
         cook_memo: cook_memo,
+        picture: open("#{Rails.root}/public/images/dish1.jpg"),
         ingredients_attributes: ingredients_attributes,
       },
       {
@@ -108,6 +101,7 @@ end
         required_time: required_time,
         popularity: popularity,
         cook_memo: cook_memo,
+        picture: open("#{Rails.root}/public/images/dish2.jpg"),
         ingredients_attributes: ingredients_attributes,
       },
       {
@@ -120,6 +114,7 @@ end
         required_time: required_time,
         popularity: popularity,
         cook_memo: cook_memo,
+        picture: open("#{Rails.root}/public/images/dish1.jpg"),
         ingredients_attributes: ingredients_attributes,
       },
       {
@@ -132,6 +127,7 @@ end
         required_time: required_time,
         popularity: popularity,
         cook_memo: cook_memo,
+        picture: open("#{Rails.root}/public/images/dish2.jpg"),
         ingredients_attributes: ingredients_attributes,
       }
     ]
