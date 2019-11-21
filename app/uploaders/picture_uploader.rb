@@ -1,6 +1,6 @@
 class PictureUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  process resize_to_limit: [400, 400]
+  # process resize_and_pad(600, 600, background = :transparent, gravity = 'Center')
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -28,10 +28,15 @@ class PictureUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
-  # サムネイル設定
-  # 一覧表示用サイズ
+  # 画像サイズ設定
+  # 詳細表示用：600 * 600の正方形に整形
+  version :thumb600 do
+    process resize_and_pad(600, 600, background = :transparent, gravity = 'Center')
+  end
+
+  # 一覧表示用：200 * 200の正方形に中央から切り抜き
   version :thumb200 do
-    process resize_to_limit: [200, 200]
+    process resize_to_fill: [200, 200, "Center"]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
