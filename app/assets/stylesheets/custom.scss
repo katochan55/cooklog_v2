@@ -96,6 +96,27 @@ $main-yellow: #fee856;
 }
 
 //// トップページ（ログイン前） ////
+.recruit-login {
+  background-color: lightyellow;
+  margin-bottom: 30px;
+  padding: 20px;
+  border: solid 3px #000000;
+}
+
+.title-form {
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.description-form {
+  margin-bottom: 20px;
+}
+
+.recruit-account {
+  margin-top: 20px;
+}
+
 // アイコン
 .row-icon {
   height: 50px;

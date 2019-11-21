@@ -13,30 +13,61 @@
 		</div>
 	</div>
 	<% else %>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2 text-center">
+				<div class="display-t js-fullheight">
+					<div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
+						<div class="row recruit-login">
+							<h3 class="title-form">【採用担当者様　専用ログインフォーム】</h3>
+							<h4 class="description-form">下記の「ログイン」ボタンを押していただければ、<br>すぐに専用アカウントでログインが可能です。</h4>
+							<div class="col-md-6 col-md-offset-3">
+								<%= form_for(:session, url: login_path, local: true) do |f| %>
+									<div class = 'form-group'>
+										<%= f.label 'メールアドレス' %>
+										<%= f.email_field :email, class: 'form-control', id: 'user_email', value: 'recruit@example.com' %>
+									</div>
+									<div class = 'form-group'>
+										<%= f.label 'パスワード' %>
+										<%= f.password_field :password, class: 'form-control', id: 'user_password', value: 'password' %>
+									</div>
+									<div class = 'form-group'>
+										<%= f.label :remember_me, class: "checkbox inline" do %>
+											<%= f.check_box :remember_me %>
+											<span>ログインしたままにする</span>
+										<% end %>
+									</div>
+									<%= f.submit 'ログイン', class: 'btn btn-primary' %>
+								<% end %>
+								<div class="recruit-account">
+									<p>＜採用担当者様　専用アカウント＞</p>
+									<p>メールアドレス：recruit@example.com</p>
+									<p>パスワード：password</p>
+									<p>※フォームに予め入力済</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner">
-	  <div class="overlay"></div>
-	  <div class="container">
-	    <div class="row">
-	      <div class="col-md-8 col-md-offset-2 text-center">
-	        <div class="display-t js-fullheight">
-	          <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
-							<!-- <div class="row row-icon">
-								<i class="fas fa-carrot fa-3x"></i>
-								<i class="fas fa-hamburger fa-3x"></i>
-							</div> -->
-	            <h1>毎日のお料理に、<br>写真やメモをつけて保存。</h1>
-	            <h2>今日のレシピ、もう迷わない！</h2>
-	            <p>
-	              <%= link_to 'クックログを始める', signup_path, class: "btn btn-primary btn-lg btn-demo" %>
-	            </p>
-							<!-- <div class="row row-icon">
-								<i class="fas fa-fish fa-3x"></i>
-								<i class="fas fa-pizza-slice fa-3x"></i>
-							</div> -->
-	          </div>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<div class="display-t js-fullheight">
+						<div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
+							<h1>毎日のお料理に、<br>写真やメモをつけて保存。</h1>
+							<h2>今日のレシピ、もう迷わない！</h2>
+							<p>
+								<%= link_to 'クックログを始める', signup_path, class: "btn btn-primary btn-lg btn-demo" %>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</header>
 <% end %>

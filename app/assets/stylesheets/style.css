@@ -7,7 +7,7 @@
 }
 /* =======================================================
 *
-* 	Template Style 
+* 	Template Style
 *
 * ======================================================= */
 body {
@@ -300,7 +300,7 @@ h1, h2, h3, h4, h5, h6, figure {
 
 #fh5co-header .display-tc,
 .fh5co-cover .display-tc {
-  display: table-cell !important;
+  /* display: table-cell !important; */
   vertical-align: middle;
 }
 #fh5co-header .display-tc h1, #fh5co-header .display-tc h2,
