@@ -20,16 +20,16 @@
 					<div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
 						<div class="row recruit-login">
 							<h3 class="title-form">【採用担当者様　専用ログインフォーム】</h3>
-							<h4 class="description-form">下記の「ログイン」ボタンを押していただければ、<br>すぐに専用アカウントでログインが可能です。</h4>
+							<h4 class="description-form">下記の「専用ログイン」ボタンを押していただければ、<br>すぐに専用アカウントでログインが可能です。</h4>
 							<div class="col-md-6 col-md-offset-3">
 								<%= form_for(:session, url: login_path, local: true) do |f| %>
 									<div class = 'form-group'>
 										<%= f.label 'メールアドレス' %>
-										<%= f.email_field :email, class: 'form-control', id: 'user_email', value: 'recruit@example.com' %>
+										<%= f.email_field :email, class: 'form-control', id: 'recruit_user_email', value: 'recruit@example.com' %>
 									</div>
 									<div class = 'form-group'>
 										<%= f.label 'パスワード' %>
-										<%= f.password_field :password, class: 'form-control', id: 'user_password', value: 'password' %>
+										<%= f.password_field :password, class: 'form-control', id: 'recruit_user_password', value: 'password' %>
 									</div>
 									<div class = 'form-group'>
 										<%= f.label :remember_me, class: "checkbox inline" do %>
@@ -37,7 +37,7 @@
 											<span>ログインしたままにする</span>
 										<% end %>
 									</div>
-									<%= f.submit 'ログイン', class: 'btn btn-primary' %>
+									<%= f.submit '専用ログイン', class: 'btn btn-primary' %>
 								<% end %>
 								<div class="recruit-account">
 									<p>＜採用担当者様　専用アカウント＞</p>

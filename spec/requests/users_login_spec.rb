@@ -15,7 +15,7 @@ RSpec.describe "ログイン", type: :request do
                                           password: user.password } }
     redirect_to user
     follow_redirect!
-    expect(response).to render_template('users/show')
+    expect(response).to render_template('static_pages/home')
     expect(is_logged_in?).to be_truthy
     delete logout_path
     expect(is_logged_in?).not_to be_truthy
