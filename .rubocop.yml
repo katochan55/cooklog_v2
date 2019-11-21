@@ -67,3 +67,7 @@ Airbnb/ContinuationSlash:
 
 Layout/AlignParameters:
   Enabled: false
+
+Lint/UselessAssignment:
+  Exclude:
+    - 'app/uploaders/*'
