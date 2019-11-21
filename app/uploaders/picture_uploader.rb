@@ -29,9 +29,9 @@ class PictureUploader < CarrierWave::Uploader::Base
   # end
 
   # 画像サイズ設定
-  # 詳細表示用：600 * 600の正方形に整形
-  version :thumb600 do
-    process resize_and_pad(600, 600, background = :transparent, gravity = 'Center')
+  # 詳細表示用：400 * 400の正方形に整形
+  version :thumb400 do
+    process resize_and_pad(400, 400, background = :transparent, gravity = 'Center')
   end
 
   # 一覧表示用：200 * 200の正方形に中央から切り抜き
