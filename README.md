@@ -1,5 +1,5 @@
 # アプリケーションの概要
-作った料理を記録して共有できる、料理投稿SNSサービス。 [https://www.cooklog.tk/](https://www.cooklog.tk/){:target="_blank"}  
+作った料理を記録して共有できる、料理投稿SNSサービス。 https://www.cooklog.tk/  
 
 # 技術的ポイント
 ・**AWS EC2/RDS**を用いたRails本番環境構築  
