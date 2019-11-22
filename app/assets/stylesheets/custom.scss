@@ -42,20 +42,10 @@ $main-yellow: #fee856;
   font-size: 0px;
 }
 
-// 検索
-// input.font-awesome {
-//   display: inline-block;
-//   font-family: 'Font Awesome 5 Free';
-//   font-style: normal;
-//   font-weight: normal;
-//   line-height: 1;
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-// }
-
-// input[type=search] {
-//   font-family: 'Font Awesome 5 Free';
-// }
+// スマホ閲覧時、横棒三本をページ上部に固定
+.fh5co-nav-toggle {
+  position: fixed;
+}
 
 //// フッター ////
 #fh5co-footer {
