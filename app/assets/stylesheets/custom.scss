@@ -232,32 +232,53 @@ ol.main-use li:after{
   border-bottom: solid 3px #F6A38B;
 }
 
+.use-content {
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
 ol.how-to-use {
-  counter-reset:list;
-  list-style-type:none;
+  counter-reset: list;
+  list-style-type: none;
   font: 14px/1.6 'arial narrow', sans-serif;
-  padding: 0 1.5em 1.5em 1.5em;
+  padding:0;
 }
 ol.how-to-use li{
   position:relative;
-  padding: 7px 5px 7px 40px;
-  margin: 7px 0 10px 10px;
+  padding: 0 0 0 20px;
+  margin: 7px 0 7px 0px;
   font-weight: bold;
   font-size:14px;
-  border-bottom:dashed 1px #F6A38B;
+  line-height: 30px;
+  border-bottom: dashed 1px #F6A38B;
 }
 ol.how-to-use li:before{
   counter-increment: list;
-  content: counter(list);
+  content: "";
+  display: block;
   position: absolute;
   left: 0px;
-  width: 25px;
-  height: 25px;
-  line-height: 25px;
-  text-align: center;
-  color: #fff;
-  background: #F6A38B;
+  height: 15px;
+  width: 15px;
   border-radius: 50%;
+  background: #F6A38B;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+ol.how-to-use li:after{
+  content: "";
+  display: block;
+  position: absolute;
+  left: 6px;
+  height: 0;
+  width: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 5px solid #fff;
   top: 50%;
   -moz-transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
@@ -268,6 +289,13 @@ ol.how-to-use li:before{
 
 .use-explanation {
   margin-left: 30px;
+}
+
+img.use-picture {
+  max-width: 100%;
+	height: auto;
+  box-sizing: border-box;
+  margin-bottom: 30px;
 }
 
 //// トップページ（ログイン後） ////
