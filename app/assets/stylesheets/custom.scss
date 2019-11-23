@@ -11,6 +11,7 @@ $main-yellow: #fee856;
 //// ヘッダー ////
 .menu-1 a:hover {
   text-decoration: none;
+  text-decoration-width: 1px;
 }
 
 // 上下幅
@@ -130,6 +131,143 @@ $main-yellow: #fee856;
 .fa-pizza-slice {
   color: orange;
   float: left;
+}
+
+//// クックログとは？ページ ////
+// クックログとは？
+.title-about {
+  padding: 0.5em;
+  // color: #F6A38B;
+  background: #fef6f3;
+  border-left: solid 5px #F6A38B;
+}
+
+// 主な使い方
+.title-use {
+  position: relative;
+  padding-left: 25px;
+  margin-top: 50px;
+}
+
+// 使い方A、B
+ol.main-use{
+  counter-reset:list;
+  list-style-type:none;
+  font: 14px/1.6 'arial narrow', sans-serif;
+  font-size: 18px;
+  padding: 1.5em 1.5em 0.5em 1.5em;
+}
+ol.main-use li{
+  position:relative;
+  line-height: 30px;
+  margin: 7px 0 10px 30px;
+  padding: 5px 0 5px 20px;
+  font-weight: bold;
+  background: #fef6f3;
+}
+ol.main-use li:before{
+  position: absolute;
+  left: -50px;
+  width: 40px;
+  height: 40px;
+  padding-top: 5px;
+  text-align: center;
+  color: #fff;
+  background: #F6A38B;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+ol.main-use li.A:before{
+  content: "A";
+}
+ol.main-use li.B:before{
+  content: "B";
+}
+ol.main-use li:after{
+  content:"";
+  display: block;
+  position: absolute;
+  left: -10px;
+  height: 0;
+  width: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 7px solid #F6A38B;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+// 中線
+.about-line {
+  border: dashed 1px #F6A38B;
+  margin: 2em 0;
+}
+
+// 各種機能
+.title-use:before {
+  position: absolute;
+  content: '';
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border: none;
+  border-left: solid 15px transparent;
+  border-bottom: solid 15px #F6A38B;
+}
+.title-use:after {
+  position: absolute;
+  content: '';
+  bottom: -3px;
+  left: 10px;
+  width: 100%;
+  border-bottom: solid 3px #F6A38B;
+}
+
+ol.how-to-use {
+  counter-reset:list;
+  list-style-type:none;
+  font: 14px/1.6 'arial narrow', sans-serif;
+  padding: 0 1.5em 1.5em 1.5em;
+}
+ol.how-to-use li{
+  position:relative;
+  padding: 7px 5px 7px 40px;
+  margin: 7px 0 10px 10px;
+  font-weight: bold;
+  font-size:14px;
+  border-bottom:dashed 1px #F6A38B;
+}
+ol.how-to-use li:before{
+  counter-increment: list;
+  content: counter(list);
+  position: absolute;
+  left: 0px;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  color: #fff;
+  background: #F6A38B;
+  border-radius: 50%;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.use-explanation {
+  margin-left: 30px;
 }
 
 //// トップページ（ログイン後） ////
