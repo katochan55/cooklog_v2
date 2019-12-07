@@ -2,13 +2,13 @@ class FavoritesController < ApplicationController
   before_action :logged_in_user
 
   def index
-    @favorites = Favorite.where("user_id = ?", current_user.id)
+    @favorites = current_user.favorites
     @log = Log.new
   end
 
   def create
     @dish = Dish.find(params[:dish_id])
-    @user = User.find(@dish.user_id)
+    @user = @dish.user
     current_user.favorite(@dish)
     respond_to do |format|
       format.html { redirect_to request.referrer || root_url }

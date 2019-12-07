@@ -3,7 +3,7 @@ class NotificationsController < ApplicationController
 
   def index
     # current_userに対する通知の集合を取得
-    @notifications = Notification.where("user_id = ?", current_user.id)
+    @notifications = current_user.notifications
     # 一度indexページを開いたら、ユーザーの「通知フラグ」を削除
     current_user.update_attribute(:notification, false)
   end

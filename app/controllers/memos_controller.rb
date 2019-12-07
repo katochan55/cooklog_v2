@@ -3,7 +3,7 @@ class MemosController < ApplicationController
 
   def create
     @dish = Dish.find(params[:dish_id])
-    @user = User.find(@dish.user_id)
+    @user = @dish.user
     @memo = @dish.memos.build(user_id: current_user.id, content: params[:memo][:content])
     if !@dish.nil? && @memo.save
       flash[:success] = "コメントを追加しました！"
@@ -22,7 +22,7 @@ class MemosController < ApplicationController
 
   def destroy
     @memo = Memo.find(params[:id])
-    @dish = Dish.find(@memo.dish_id)
+    @dish = @memo.dish
     if current_user.id == @memo.user_id
       @memo.destroy
       flash[:success] = "コメントを削除しました"

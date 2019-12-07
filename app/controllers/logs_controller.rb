@@ -15,7 +15,7 @@ class LogsController < ApplicationController
   def destroy
     @log = Log.find(params[:id])
     @dish = @log.dish
-    if current_user.id == @dish.user_id
+    if current_user == @dish.user
       @log.destroy
       flash[:success] = "クックログを削除しました"
     end
