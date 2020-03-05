@@ -98,7 +98,7 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     dry-inflector (0.2.0)
     erubi (1.9.0)
-    excon (0.68.0)
+    excon (0.71.0)
     execjs (2.7.0)
     factory_bot (4.10.0)
       activesupport (>= 3.0.0)
